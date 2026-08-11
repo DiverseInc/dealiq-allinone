@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center — DealIQ Pro</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#F8FAFC;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0;--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B}
+        .dark{--bg:#0F172A;--card:#1E293B;--text:#F1F5F9;--muted:#94A3B8;--border:#334155}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+        .container{max-width:800px;margin:60px auto;padding:0 24px}
+        .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+        .topbar h1{font-size:36px;font-weight:800}
+        .toggle-btn{background:var(--card);border:1px solid var(--border);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:14px;color:var(--text)}
+        .search{width:100%;padding:16px;border:1px solid var(--border);border-radius:12px;font-size:16px;margin-bottom:32px;background:var(--card);color:var(--text)}
+        .category{margin-bottom:32px}
+        .category h2{font-size:20px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--gold)}
+        .faq{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden}
+        .faq-header{padding:16px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+        .faq-header:hover{background:var(--bg)}
+        .faq-body{padding:0 20px 16px;display:none;color:var(--muted);line-height:1.7}
+        .faq.open .faq-body{display:block}
+        .faq.open .faq-header::after{content:'−'}
+        .faq-header::after{content:'+';font-size:20px;color:var(--muted)}
+        .contact{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center;margin-top:40px}
+        .contact h3{margin-bottom:8px}
+        .contact p{color:var(--muted);margin-bottom:16px}
+        .contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+        .contact-link{padding:12px 24px;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);font-weight:600;transition:all .2s}
+        .contact-link:hover{border-color:var(--teal);color:var(--teal)}
+        footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:14px;border-top:1px solid var(--border);margin-top:60px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <h1>❓ Help Center</h1>
+            <div style="display:flex;gap:8px">
+                <button class="toggle-btn" onclick="toggleDark()">🌙</button>
+                <a href="landing.html" class="toggle-btn" style="text-decoration:none">← Back</a>
+            </div>
+        </div>
+        
+        <input type="text" class="search" placeholder="🔍 Search for help..." id="searchInput" oninput="filterFAQs()">
+        
+        <div class="category">
+            <h2>🚀 Getting Started</h2>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I create an account?</div>
+                <div class="faq-body">Click "Open App" and select "admin" from the dropdown. Use password: admin123. You can change this in Settings after logging in.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I add my first deal?</div>
+                <div class="faq-body">Go to "My Deals" → Click "+ Add Deal" → Fill in the property details, price, ARV, and repairs → Click Save. Your deal is now tracked!</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I use the calculators?</div>
+                <div class="faq-body">Click "Calculators" in the navigation. Select a calculator, enter your numbers, and see instant results. Free users get 6 calculators; Pro users get all 13.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I print a form?</div>
+                <div class="faq-body">Go to Forms → Select a form → Fill in the details → Click "Print" button → Your browser's print dialog will open. You can save as PDF or print directly.</div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <h2>💰 Account & Billing</h2>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I upgrade to Pro?</div>
+                <div class="faq-body">Click the subscription badge in the top bar, or go to the Pricing page. Select Pro ($29/mo) and complete checkout with Stripe.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I cancel my subscription?</div>
+                <div class="faq-body">Contact support@dealiqpro.com with your account email. We'll cancel your subscription and you'll keep access until the end of your billing period.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">Do you offer refunds?</div>
+                <div class="faq-body">Yes! We offer a 14-day money-back guarantee. If you're not satisfied, contact us within 14 days for a full refund.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">What payment methods do you accept?</div>
+                <div class="faq-body">We accept all major credit cards (Visa, Mastercard, American Express) through Stripe. We also support Apple Pay and Google Pay.</div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <h2>🔧 Features & Tools</h2>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">What's the difference between Free and Pro?</div>
+                <div class="faq-body">Free includes 6 calculators, basic forms, and buyer list. Pro ($29/mo) unlocks all 13 calculators, unlimited AI generators, team management, analytics, and custom workflows.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How does the Deal Score work?</div>
+                <div class="faq-body">The Deal Score (1-100) analyzes profit margin, ROI, deal type, cash flow, and hold time. Scores 80+ are great deals, 60-79 are good, 40-59 are fair, below 40 are poor.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I export my data?</div>
+                <div class="faq-body">Go to My Deals → Click "Export All" to download a CSV file. You can also export individual deals as text files using the PDF button.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">Can I use this on my phone?</div>
+                <div class="faq-body">Yes! DealIQ Pro is fully responsive and works on all devices. You can also install it as a mobile app from your browser's menu.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I add team members?</div>
+                <div class="faq-body">Go to Team in the sidebar (Pro plan required). Click "+ Add Member" and enter their name, email, and role (Admin, Agent, or Assistant).</div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <h2>📤 Outreach & Marketing</h2>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I use the Direct Mail templates?</div>
+                <div class="faq-body">Go to Direct Mail → Select a template type (Cold, Follow-Up, Probate, etc.) → Replace [bracketed] items with your info → Click "Copy" → Paste into your mail merge software.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I manage my buyer list?</div>
+                <div class="faq-body">Go to Buyer List → Click "+ Add Buyer" → Enter their contact info, type, and budget → Save. You can search, filter, and export your list anytime.</div>
+            </div>
+            <div class="faq">
+                <div class="faq-header" onclick="toggleFAQ(this)">How do I send SMS/email templates?</div>
+                <div class="faq-body">Go to SMS & Email → Select a template → Copy the text → Paste into your messaging app. Replace [bracketed] items with the recipient's info.</div>
+            </div>
+        </div>
+        
+        <div class="contact">
+            <h3>Still need help?</h3>
+            <p>Our support team is here to help.</p>
+            <div class="contact-links">
+                <a href="mailto:support@dealiqpro.com" class="contact-link">📧 Email Support</a>
+                <a href="feedback.html" class="contact-link">💬 Send Feedback</a>
+                <a href="https://twitter.com/DealIQPro" class="contact-link" target="_blank">🐦 Twitter</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Diverse Industries Inc. All rights reserved.</p>
+    </footer>
+    
+    <script>
+    function toggleFAQ(el){el.parentElement.classList.toggle('open');}
+    function filterFAQs(){
+        const q=document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('.faq').forEach(faq=>{
+            const text=faq.textContent.toLowerCase();
+            faq.style.display=text.includes(q)?'block':'none';
+        });
+    }
+    function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dealiq_dark',document.body.classList.contains('dark'));}
+    if(localStorage.getItem('dealiq_dark')==='true')document.body.classList.add('dark');
+    </script>
+</body>
+</html>

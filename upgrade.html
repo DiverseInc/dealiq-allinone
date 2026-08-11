@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade to Pro — DealIQ Pro</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#F8FAFC;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0;--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+        .container{max-width:600px;margin:60px auto;padding:0 24px;text-align:center}
+        .icon{font-size:64px;margin-bottom:16px}
+        h1{font-size:36px;font-weight:800;margin-bottom:8px}
+        h1 span{color:var(--gold)}
+        .subtitle{color:var(--muted);margin-bottom:40px;font-size:18px}
+        .features{text-align:left;margin:32px 0}
+        .feature{display:flex;align-items:start;gap:12px;margin-bottom:16px}
+        .feature .check{font-size:20px;color:var(--teal)}
+        .feature .text h4{font-size:16px;font-weight:600}
+        .feature .text p{font-size:14px;color:var(--muted)}
+        .price-box{background:var(--card);border:2px solid var(--gold);border-radius:16px;padding:32px;margin:32px 0}
+        .price{font-size:48px;font-weight:800}
+        .price span{font-size:16px;font-weight:400;color:var(--muted)}
+        .btn{padding:16px 32px;border:none;border-radius:8px;font-weight:600;font-size:16px;cursor:pointer;transition:all .2s;width:100%;margin-bottom:12px}
+        .btn-primary{background:var(--gold);color:#fff}
+        .btn-primary:hover{opacity:0.9}
+        .btn-secondary{background:transparent;border:1px solid var(--border);color:var(--muted)}
+        .guarantee{margin-top:24px;padding:16px;background:#D1FAE5;border-radius:8px;color:#065F46;font-weight:600}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🚀</div>
+        <h1>Unlock <span>Pro</span></h1>
+        <p class="subtitle">Get the most out of DealIQ Pro with unlimited access.</p>
+        
+        <div class="features">
+            <div class="feature">
+                <span class="check">✓</span>
+                <div class="text">
+                    <h4>All 13 Calculators</h4>
+                    <p>Cap Rate, Cash-on-Cash, BRRRR, ARV, Comps, and more</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="check">✓</span>
+                <div class="text">
+                    <h4>Unlimited AI Generators</h4>
+                    <p>23 templates — listings, scripts, follow-ups, reports</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="check">✓</span>
+                <div class="text">
+                    <h4>Team Management</h4>
+                    <p>Up to 5 users with roles and permissions</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="check">✓</span>
+                <div class="text">
+                    <h4>Analytics Dashboard</h4>
+                    <p>Revenue tracking, conversion metrics, performance</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="check">✓</span>
+                <div class="text">
+                    <h4>Custom Workflows</h4>
+                    <p>Automated follow-ups and task assignments</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="check">✓</span>
+                <div class="text">
+                    <h4>White-Label Branding</h4>
+                    <p>Your logo and colors throughout the app</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="price-box">
+            <div class="price">$29<span>/mo</span></div>
+            <p style="color:var(--muted);margin:8px 0">Cancel anytime • No contracts</p>
+            <p style="font-size:14px;color:var(--gold);font-weight:600">Or save 2 months free with annual plan ($290/yr)</p>
+        </div>
+        
+        <button class="btn btn-primary" onclick="checkout()">Upgrade to Pro →</button>
+        <button class="btn btn-secondary" onclick="window.location.href='app.html'">Maybe Later</button>
+        
+        <div class="guarantee">
+            🛡️ 14-day money-back guarantee • No questions asked
+        </div>
+    </div>
+    
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const STRIPE_PK='pk_live_51PjsxWLPDj7DQPYf3B5PF2AtY4gjjyaZrQ00ZQZg8FLLiyyVvSpMRfg3mt5RzhvsJ9DfCTqYG125XPNRRFM8qaqT00igPilBWH';
+        async function checkout(){
+            try{
+                const res=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan:'pro'})});
+                const{sessionId}=await res.json();
+                if(sessionId){const stripe=Stripe(STRIPE_PK);await stripe.redirectToCheckout({sessionId});}
+                else{window.location.href='app.html';}
+            }catch(e){window.location.href='app.html';}
+        }
+    </script>
+</body>
+</html>

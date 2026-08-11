@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rehab / Rent (Mock) | DealIQ</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="rental">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:14px; line-height:1.1;">DealIQ</div>
+            <div style="font-size:12px; color:var(--muted); font-weight:700;">Rehab / Rent (Mock)</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="./index.html" data-nav="home">Home</a>
+          <a href="./max-offer.html" data-nav="max-offer">Max Offer</a>
+          <a href="./wholesale.html" data-nav="wholesale">Wholesaler</a>
+          <a href="./flip.html" data-nav="flip">Rehab / Flip</a>
+          <a href="./rental.html" data-nav="rental">Rehab / Rent</a>
+          <a href="./brrrr.html" data-nav="brrrr">BRRRR</a>
+          <a href="./development.html" data-nav="development">New Dev</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>Deal Analysis for Rehab / Rent</h1>
+        <p>Mock rental analysis: estimates rent + NOI and computes a DSCR-like score. Replace later with real rental comps.</p>
+      </section>
+
+      <section style="margin-top:16px;">
+        <div class="grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Deal Inputs</h2>
+                <div class="subtitle">Purchase + rehab + financing assumptions.</div>
+              </div>
+              <span class="badge">Instant • Mock</span>
+            </div>
+
+            <div class="panel-body">
+              <div class="form">
+                <div class="row">
+                  <div class="field">
+                    <label for="rent_purchase">Purchase Price ($)</label>
+                    <input id="rent_purchase" type="number" value="260000" min="0" step="500" />
+                  </div>
+                  <div class="field">
+                    <label for="rent_rehab">Rehab ($)</label>
+                    <input id="rent_rehab" type="number" value="35000" min="0" step="1000" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="field">
+                    <label for="rent_down">Down Payment (%)</label>
+                    <input id="rent_down" type="number" value="25" min="0" step="1" />
+                  </div>
+                  <div class="field">
+                    <label for="rent_rate">Interest Rate (% APR)</label>
+                    <input id="rent_rate" type="number" value="6.5" min="0" step="0.1" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="field">
+                    <label for="rent_years">Loan Term (years)</label>
+                    <input id="rent_years" type="number" value="30" min="1" step="1" />
+                  </div>
+                  <div class="field">
+                    <label for="rent_rent">Estimated Monthly Rent ($)</label>
+                    <input id="rent_rent" type="number" value="2650" min="0" step="50" />
+                  </div>
+                </div>
+
+                <div class="actions">
+                  <button class="btn primary" type="button" onclick="initRental()">Calculate</button>
+                  <button
+                    class="btn"
+                    type="button"
+                    onclick="
+                      document.getElementById('rent_purchase').value=260000;
+                      document.getElementById('rent_rehab').value=35000;
+                      document.getElementById('rent_down').value=25;
+                      document.getElementById('rent_rate').value=6.5;
+                      document.getElementById('rent_years').value=30;
+                      document.getElementById('rent_rent').value=2650;
+                      initRental();
+                    "
+                  >
+                    Reset
+                  </button>
+                </div>
+
+                <div class="small">
+                  Mock expense heuristic: NOI assumes <span class="mono">operating = rent × 0.65</span>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Results</h2>
+                <div class="subtitle">Score + NOI + payment estimate.</div>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="results">
+                <div class="kpis" style="grid-template-columns: 1fr 1fr;">
+                  <div class="kpi">
+                    <div class="label">DSCR-like Score (mock)</div>
+                    <div class="value" id="rent_result_dscr">0.00</div>
+                  </div>
+                  <div class="kpi" style="background: rgba(15,23,42,.45);">
+                    <div class="label">Monthly Mortgage Payment (mock)</div>
+                    <div class="value" id="rent_result_payment">$0</div>
+                  </div>
+                </div>
+
+                <hr class="sep" />
+
+                <div class="kpi" style="margin-bottom:10px; background: rgba(15,23,42,.35);">
+                  <div class="label">Estimated NOI (mock)</div>
+                  <div class="value" id="rent_result_noi">$0</div>
+                </div>
+
+                <div class="kpi" style="border-color: var(--border); background: rgba(2,6,23,.30);">
+                  <div class="label">Verdict (mock)</div>
+                  <div class="value" id="rent_result_verdict">—</div>
+                </div>
+              </div>
+
+              <div class="small" style="margin-top:14px;">
+                Later: replace with real rental comps by ZIP and property type.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        © <span id="year"></span> DealIQ
+      </footer>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

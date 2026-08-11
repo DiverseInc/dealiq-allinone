@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Mail Templates — DealIQ</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#F8FAFC;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0;--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B}
+        .dark{--bg:#0F172A;--card:#1E293B;--text:#F1F5F9;--muted:#94A3B8;--border:#334155}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);transition:all .3s}
+        .container{max-width:1000px;margin:40px auto;padding:0 24px}
+        .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+        .topbar h1{font-size:32px;font-weight:800}
+        .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s}
+        .btn-primary{background:var(--navy);color:#fff}
+        .btn-accent{background:var(--gold);color:#fff}
+        .btn-secondary{background:var(--border);color:var(--text)}
+        .toggle-btn{background:var(--card);border:1px solid var(--border);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:14px;color:var(--text)}
+        .tabs{display:flex;gap:4px;margin-bottom:24px;flex-wrap:wrap}
+        .tab{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;font-size:13px;font-weight:600;transition:all .2s}
+        .tab.active,.tab:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+        .template{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px;display:none}
+        .template.active{display:block}
+        .template h3{font-size:18px;font-weight:700;margin-bottom:8px}
+        .template .type{font-size:12px;color:var(--muted);margin-bottom:16px}
+        .letter{background:#fff;border:1px solid #ddd;padding:32px;font-family:Georgia,serif;font-size:14px;line-height:1.8;color:#333}
+        .letter .header{text-align:center;margin-bottom:24px;font-weight:700;font-size:18px;border-bottom:2px solid #0A1628;padding-bottom:12px}
+        .letter .body{margin-bottom:24px}
+        .letter .signature{margin-top:32px}
+        .postcard{background:#fff;border:2px dashed #ddd;padding:24px;text-align:center}
+        .postcard h4{font-size:24px;margin-bottom:8px}
+        .postcard p{font-size:16px;margin-bottom:16px}
+        .postcard .cta{background:#C8963E;color:#fff;padding:12px 24px;border-radius:8px;display:inline-block;font-weight:700}
+        .copy-btn{position:absolute;top:12px;right:12px;background:var(--navy);color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <h1>📬 Direct Mail Templates</h1>
+            <div style="display:flex;gap:8px">
+                <button class="toggle-btn" onclick="toggleDark()">🌙</button>
+                <a href="landing.html" class="toggle-btn" style="text-decoration:none">← Back</a>
+            </div>
+        </div>
+        <p style="color:var(--muted);margin-bottom:24px">Copy-paste templates for direct mail campaigns. Replace [bracketed] items.</p>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="showTemplate('cold')">Cold Letter</div>
+            <div class="tab" onclick="showTemplate('followup')">Follow-Up</div>
+            <div class="tab" onclick="showTemplate('probate')">Probate</div>
+            <div class="tab" onclick="showTemplate('preforeclosure')">Pre-Foreclosure</div>
+            <div class="tab" onclick="showTemplate('vacant')">Vacant</div>
+            <div class="tab" onclick="showTemplate('postcard')">Postcard</div>
+        </div>
+        
+        <div class="template active" id="tpl-cold">
+            <h3>Cold Letter — We Buy Houses</h3>
+            <div class="type">Best for: Absentee owners, tired landlords</div>
+            <div class="letter">
+                <div class="header">WE BUY HOUSES IN [CITY]</div>
+                <div class="body">
+                    <p>[DATE]</p>
+                    <br>
+                    <p>Dear [OWNER NAME],</p>
+                    <br>
+                    <p>I'm writing to you about your property at [ADDRESS]. I'm a local real estate investor and I'm actively looking to buy properties in [CITY].</p>
+                    <br>
+                    <p>I can offer you:</p>
+                    <p>• A fair cash offer within 24 hours</p>
+                    <p>• Close in as little as 7 days</p>
+                    <p>• No repairs needed — we buy as-is</p>
+                    <p>• No agent commissions or fees</p>
+                    <p>• No obligations — just a conversation</p>
+                    <br>
+                    <p>I understand you may not be ready to sell today, but I'd love to be your resource if you ever consider it. Even if you decide not to sell, I'm happy to provide a free no-obligation valuation of your property.</p>
+                    <br>
+                    <p>Please call or text me at [YOUR PHONE] or visit [YOUR WEBSITE].</p>
+                    <br>
+                    <p>Best regards,</p>
+                    <p>[YOUR NAME]</p>
+                    <p>[YOUR COMPANY]</p>
+                </div>
+            </div>
+            <button class="btn btn-accent" onclick="copyLetter('tpl-cold')" style="margin-top:16px">📋 Copy to Clipboard</button>
+        </div>
+        
+        <div class="template" id="tpl-followup">
+            <h3>Follow-Up Letter</h3>
+            <div class="type">Best for: 2nd touch after initial letter</div>
+            <div class="letter">
+                <div class="header">FOLLOWING UP</div>
+                <div class="body">
+                    <p>[DATE]</p>
+                    <br>
+                    <p>Dear [OWNER NAME],</p>
+                    <br>
+                    <p>I reached out a few weeks ago about your property at [ADDRESS]. I wanted to follow up and see if you've had any thoughts about selling.</p>
+                    <br>
+                    <p>I know selling a home is a big decision. Whether you're ready now or just exploring options, I'm here to help with no pressure.</p>
+                    <br>
+                    <p>If your situation has changed — or if you'd like a free property valuation — please don't hesitate to reach out.</p>
+                    <br>
+                    <p>Call or text: [YOUR PHONE]</p>
+                    <br>
+                    <p>Best,</p>
+                    <p>[YOUR NAME]</p>
+                </div>
+            </div>
+            <button class="btn btn-accent" onclick="copyLetter('tpl-followup')" style="margin-top:16px">📋 Copy to Clipboard</button>
+        </div>
+        
+        <div class="template" id="tpl-probate">
+            <h3>Probate Letter</h3>
+            <div class="type">Best for: Inherited properties, probate leads</div>
+            <div class="letter">
+                <div class="header">PROBATE PROPERTY ASSISTANCE</div>
+                <div class="body">
+                    <p>[DATE]</p>
+                    <br>
+                    <p>Dear [OWNER NAME],</p>
+                    <br>
+                    <p>I'm sorry for your loss. I understand this is a difficult time, and dealing with property matters can be overwhelming.</p>
+                    <br>
+                    <p>I specialize in helping families navigate inherited properties. If you're looking to sell [ADDRESS], I can help you with a straightforward, fair offer — no repairs needed, no commissions, and a quick closing.</p>
+                    <br>
+                    <p>Even if you're not ready to sell, I'm happy to provide guidance on your options. Please feel free to call me anytime.</p>
+                    <br>
+                    <p>Call or text: [YOUR PHONE]</p>
+                    <br>
+                    <p>With respect,</p>
+                    <p>[YOUR NAME]</p>
+                </div>
+            </div>
+            <button class="btn btn-accent" onclick="copyLetter('tpl-probate')" style="margin-top:16px">📋 Copy to Clipboard</button>
+        </div>
+        
+        <div class="template" id="tpl-preforeclosure">
+            <h3>Pre-Foreclosure Letter</h3>
+            <div class="type">Best for: Pre-foreclosure, default, Lis Pendens leads</div>
+            <div class="letter">
+                <div class="header">WE CAN HELP</div>
+                <div class="body">
+                    <p>[DATE]</p>
+                    <br>
+                    <p>Dear [OWNER NAME],</p>
+                    <br>
+                    <p>I understand you may be facing a challenging situation with your property at [ADDRESS]. I want you to know that you have options — and I'm here to help.</p>
+                    <br>
+                    <p>I can offer:</p>
+                    <p>• A cash offer to stop foreclosure</p>
+                    <p>• Close before your auction date</p>
+                    <p>• No fees or commissions</p>
+                    <p>• Cash in your pocket within days</p>
+                    <br>
+                    <p>The sooner we talk, the more options you have. I'm not here to take advantage — I'm here to help you avoid foreclosure and protect your credit.</p>
+                    <br>
+                    <p>Call me anytime: [YOUR PHONE]</p>
+                    <br>
+                    <p>Sincerely,</p>
+                    <p>[YOUR NAME]</p>
+                </div>
+            </div>
+            <button class="btn btn-accent" onclick="copyLetter('tpl-preforeclosure')" style="margin-top:16px">📋 Copy to Clipboard</button>
+        </div>
+        
+        <div class="template" id="tpl-vacant">
+            <h3>Vacant Property Letter</h3>
+            <div class="type">Best for: Vacant, abandoned, or neglected properties</div>
+            <div class="letter">
+                <div class="header">VACANT PROPERTY INQUIRY</div>
+                <div class="body">
+                    <p>[DATE]</p>
+                    <br>
+                    <p>Dear [OWNER NAME],</p>
+                    <br>
+                    <p>I noticed the property at [ADDRESS] appears to be vacant. I wanted to reach out and see if you'd be interested in selling.</p>
+                    <br>
+                    <p>Vacant properties can be a burden — they attract vandalism, depreciate, and cost you money in taxes and insurance. I can take that burden off your hands with a fair cash offer.</p>
+                    <br>
+                    <p>• No repairs needed</p>
+                    <p>• We handle everything</p>
+                    <p>• Close in 7-14 days</p>
+                    <br>
+                    <p>If you'd like to discuss your options, please call or text me at [YOUR PHONE].</p>
+                    <br>
+                    <p>Best,</p>
+                    <p>[YOUR NAME]</p>
+                </div>
+            </div>
+            <button class="btn btn-accent" onclick="copyLetter('tpl-vacant')" style="margin-top:16px">📋 Copy to Clipboard</button>
+        </div>
+        
+        <div class="template" id="tpl-postcard">
+            <h3>Postcard — Front & Back</h3>
+            <div class="type">Best for: High-volume direct mail campaigns</div>
+            <div class="postcard" style="margin-bottom:16px">
+                <h4>🏠 WE BUY HOUSES</h4>
+                <p>Cash • As-Is • Close Fast</p>
+                <div class="cta">CALL NOW: [YOUR PHONE]</div>
+            </div>
+            <div class="postcard">
+                <p style="font-size:14px;text-align:left">
+                    <strong>Hi [OWNER NAME],</strong>
+                </p>
+                <p style="font-size:14px;text-align:left">
+                    I'm interested in buying your property at [ADDRESS]. I can make a fair cash offer, close in as little as 7 days, and you won't need to make any repairs.
+                </p>
+                <p style="font-size:14px;text-align:left">
+                    Even if you're not ready to sell, I'd love to provide a free no-obligation property valuation.
+                </p>
+                <p style="font-size:14px;text-align:left;margin-top:16px">
+                    <strong>Call or text: [YOUR PHONE]</strong><br>
+                    [YOUR WEBSITE]
+                </p>
+            </div>
+            <button class="btn btn-accent" onclick="copyLetter('tpl-postcard')" style="margin-top:16px">📋 Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <script>
+    function showTemplate(id){
+        document.querySelectorAll('.template').forEach(t=>t.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+        document.getElementById('tpl-'+id).classList.add('active');
+        event.target.classList.add('active');
+    }
+    function copyLetter(id){
+        const el=document.getElementById(id);
+        const text=el.querySelector('.letter,.postcard').innerText;
+        navigator.clipboard.writeText(text).then(()=>alert('Copied to clipboard!'));
+    }
+    function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dealiq_dark',document.body.classList.contains('dark'));}
+    if(localStorage.getItem('dealiq_dark')==='true')document.body.classList.add('dark');
+    </script>
+</body>
+</html>

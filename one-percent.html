@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1% Rule Calculator — DealIQ</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .calculator { max-width: 600px; margin: 40px auto; }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .results { background: #f8f9fa; padding: 24px; border-radius: 12px; margin-top: 24px; }
+        .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .result-row:last-child { border-bottom: none; }
+        .result-row.highlight { font-size: 20px; padding: 16px 0; }
+        .result-row.highlight .value { font-size: 28px; }
+        .btn { background: #0A1628; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; }
+        .verdict { padding: 16px; border-radius: 8px; margin-top: 16px; font-weight: 600; text-align: center; }
+        .verdict.pass { background: #D1FAE5; color: #065F46; }
+        .verdict.fail { background: #FEE2E2; color: #991B1B; }
+        .progress-bar { width: 100%; height: 20px; background: #E5E7EB; border-radius: 10px; margin-top: 16px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 10px; transition: width 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>1% Rule Calculator</h1>
+        <p>Quick screening rule: monthly rent should be ≥ 1% of purchase price.</p>
+        
+        <div class="panel" style="margin-top: 24px;">
+            <div class="input-group">
+                <label>Purchase Price ($)</label>
+                <input type="number" id="price" value="200000" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Monthly Rent ($)</label>
+                <input type="number" id="rent" value="2200" oninput="calculate()">
+            </div>
+        </div>
+        
+        <div class="results" id="results">
+            <div class="result-row"><span class="label">Purchase Price</span><span class="value" id="priceDisplay">$200,000</span></div>
+            <div class="result-row"><span class="label">Monthly Rent</span><span class="value" id="rentDisplay">$2,200</span></div>
+            <div class="result-row"><span class="label">Rent-to-Price Ratio</span><span class="value" id="ratio">1.10%</span></div>
+            <div class="result-row highlight">
+                <span class="label">1% Rule</span>
+                <span class="value" id="verdict" style="color:#065F46;">✅ PASSES</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width:110%;background:#10B981;"></div>
+            </div>
+            <div class="verdict pass" id="verdictBox">This property passes the 1% rule — likely a good rental candidate.</div>
+        </div>
+        
+        <div style="margin-top: 24px;">
+            <a href="landing.html">← Back to All Calculators</a>
+        </div>
+    </div>
+    
+    <script>
+    function calculate(){
+        const price=parseFloat(document.getElementById('price').value)||0;
+        const rent=parseFloat(document.getElementById('rent').value)||0;
+        const ratio=price>0?((rent/price)*100):0;
+        document.getElementById('priceDisplay').textContent='$'+price.toLocaleString();
+        document.getElementById('rentDisplay').textContent='$'+rent.toLocaleString();
+        document.getElementById('ratio').textContent=ratio.toFixed(2)+'%';
+        const v=document.getElementById('verdict');
+        const vb=document.getElementById('verdictBox');
+        const p=document.getElementById('progress');
+        const pct=Math.min(150,ratio*100);
+        p.style.width=pct+'%';
+        if(ratio>=1){
+            v.textContent='✅ PASSES';v.style.color='#065F46';
+            p.style.background='#10B981';
+            vb.textContent='This property passes the 1% rule — likely a good rental candidate.';vb.className='verdict pass';
+        }else{
+            v.textContent='❌ FAILS';v.style.color='#991B1B';
+            p.style.background='#EF4444';
+            vb.textContent='This property fails the 1% rule — may not cash flow well.';vb.className='verdict fail';
+        }
+    }
+    calculate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "DealIQ Calculators",
+  "short_name": "DealIQ Calc",
+  "description": "9 real estate investment calculators in one place",
+  "start_url": "/landing.html",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#0A1628",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%230A1628'/%3E%3Ctext x='96' y='128' font-size='96' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%230A1628'/%3E%3Ctext x='256' y='340' font-size='256' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter — DealIQ Pro</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#F8FAFC;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0;--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B}
+        .dark{--bg:#0F172A;--card:#1E293B;--text:#F1F5F9;--muted:#94A3B8;--border:#334155}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+        .container{max-width:600px;margin:60px auto;padding:0 24px;text-align:center}
+        .icon{font-size:64px;margin-bottom:16px}
+        h1{font-size:36px;font-weight:800;margin-bottom:8px}
+        h1 span{color:var(--gold)}
+        .subtitle{color:var(--muted);margin-bottom:32px;font-size:18px;line-height:1.6}
+        .form{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;margin:32px 0}
+        .input-group{margin-bottom:16px;display:flex;gap:8px}
+        .input-group input{flex:1;padding:14px;border:1px solid var(--border);border-radius:8px;font-size:16px;background:var(--bg);color:var(--text)}
+        .btn{padding:14px 24px;border:none;border-radius:8px;font-weight:600;font-size:16px;cursor:pointer;transition:all .2s}
+        .btn-primary{background:var(--gold);color:#fff}
+        .btn-primary:hover{opacity:0.9}
+        .success{display:none;text-align:center;padding:40px}
+        .success .icon{font-size:64px;margin-bottom:16px}
+        .benefits{text-align:left;margin:32px 0}
+        .benefit{display:flex;align-items:start;gap:12px;margin-bottom:16px}
+        .benefit .check{font-size:20px;color:var(--teal)}
+        .benefit .text{font-size:14px}
+        .benefit .text strong{display:block;margin-bottom:2px}
+        .benefit .text span{color:var(--muted)}
+        .subscriber-count{margin-top:32px;font-size:14px;color:var(--muted)}
+        .subscriber-count strong{color:var(--text)}
+        footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:14px;border-top:1px solid var(--border);margin-top:60px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📬</div>
+        <h1>Real Estate <span>Insights</span></h1>
+        <p class="subtitle">Weekly tips, tools, and strategies for real estate investors and wholesalers. Join 2,000+ subscribers.</p>
+        
+        <div class="form" id="newsletterForm">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Enter your email address" required>
+                <button class="btn btn-primary" onclick="subscribe()">Subscribe</button>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin-top:8px">No spam. Unsubscribe anytime. We respect your privacy.</p>
+        </div>
+        
+        <div class="success" id="successMsg">
+            <div class="icon">🎉</div>
+            <h2>You're in!</h2>
+            <p style="color:var(--muted);margin:16px 0">Check your inbox for a welcome email. Your first issue arrives next Tuesday.</p>
+            <a href="landing.html" style="color:var(--teal);font-weight:600">← Back to DealIQ Pro</a>
+        </div>
+        
+        <div class="benefits">
+            <div class="benefit">
+                <span class="check">✓</span>
+                <div class="text">
+                    <strong>Weekly Deal Analysis</strong>
+                    <span>Real examples of deals, what worked, and lessons learned</span>
+                </div>
+            </div>
+            <div class="benefit">
+                <span class="check">✓</span>
+                <div class="text">
+                    <strong>Market Trends</strong>
+                    <span>What's happening in real estate investing right now</span>
+                </div>
+            </div>
+            <div class="benefit">
+                <span class="check">✓</span>
+                <div class="text">
+                    <strong>Tool Reviews</strong>
+                    <span>Honest reviews of tools and software for investors</span>
+                </div>
+            </div>
+            <div class="benefit">
+                <span class="check">✓</span>
+                <div class="text">
+                    <strong>Exclusive Templates</strong>
+                    <span>Free templates and resources only for subscribers</span>
+                </div>
+            </div>
+            <div class="benefit">
+                <span class="check">✓</span>
+                <div class="text">
+                    <strong>Early Access</strong>
+                    <span>Be the first to know about new DealIQ Pro features</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="subscriber-count">
+            Join <strong>2,000+</strong> real estate professionals already subscribed
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Diverse Industries Inc. All rights reserved.</p>
+    </footer>
+    
+    <script>
+    function subscribe(){
+        const email=document.getElementById('email').value;
+        if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
+        let subs=JSON.parse(localStorage.getItem('dealiq_subscribers')||'[]');
+        subs.push({email,subscribedAt:new Date().toISOString()});
+        localStorage.setItem('dealiq_subscribers',JSON.stringify(subs));
+        document.getElementById('newsletterForm').style.display='none';
+        document.getElementById('successMsg').style.display='block';
+    }
+    function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dealiq_dark',document.body.classList.contains('dark'));}
+    if(localStorage.getItem('dealiq_dark')==='true')document.body.classList.add('dark');
+    </script>
+</body>
+</html>

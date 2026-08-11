@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Feedback — DealIQ Pro</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#F8FAFC;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0;--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B}
+        .dark{--bg:#0F172A;--card:#1E293B;--text:#F1F5F9;--muted:#94A3B8;--border:#334155}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+        .container{max-width:600px;margin:60px auto;padding:0 24px}
+        .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+        .topbar h1{font-size:36px;font-weight:800}
+        .toggle-btn{background:var(--card);border:1px solid var(--border);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:14px;color:var(--text)}
+        .form{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px}
+        .input-group{margin-bottom:16px}
+        .input-group label{display:block;font-weight:600;margin-bottom:6px;font-size:13px;color:var(--muted)}
+        .input-group input,.input-group select,.input-group textarea{width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:15px;background:var(--bg);color:var(--text);font-family:inherit}
+        .input-group textarea{min-height:120px;resize:vertical}
+        .btn{padding:12px 24px;border:none;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;width:100%}
+        .btn-primary{background:var(--navy);color:#fff}
+        .success{display:none;text-align:center;padding:40px}
+        .success .icon{font-size:64px;margin-bottom:16px}
+        footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:14px;border-top:1px solid var(--border);margin-top:60px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <h1>💬 Feedback</h1>
+            <div style="display:flex;gap:8px">
+                <button class="toggle-btn" onclick="toggleDark()">🌙</button>
+                <a href="landing.html" class="toggle-btn" style="text-decoration:none">← Back</a>
+            </div>
+        </div>
+        
+        <div class="form" id="feedbackForm">
+            <h2 style="margin-bottom:8px">We'd love your feedback</h2>
+            <p style="color:var(--muted);margin-bottom:24px;font-size:14px">Help us improve DealIQ Pro. Your feedback matters!</p>
+            <div class="input-group">
+                <label>Feedback Type</label>
+                <select id="fb-type">
+                    <option>Bug Report</option>
+                    <option>Feature Request</option>
+                    <option>Improvement Suggestion</option>
+                    <option>General Feedback</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Your Name</label>
+                <input type="text" id="fb-name" placeholder="John Smith">
+            </div>
+            <div class="input-group">
+                <label>Your Email</label>
+                <input type="email" id="fb-email" placeholder="john@email.com">
+            </div>
+            <div class="input-group">
+                <label>Subject</label>
+                <input type="text" id="fb-subject" placeholder="Brief description">
+            </div>
+            <div class="input-group">
+                <label>Details</label>
+                <textarea id="fb-details" placeholder="Please describe your feedback in detail..."></textarea>
+            </div>
+            <div class="input-group">
+                <label>Rating</label>
+                <select id="fb-rating">
+                    <option>⭐⭐⭐⭐⭐ Excellent</option>
+                    <option>⭐⭐⭐⭐ Good</option>
+                    <option>⭐⭐⭐ Average</option>
+                    <option>⭐⭐ Below Average</option>
+                    <option>⭐ Poor</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" onclick="submitFeedback()">Send Feedback</button>
+        </div>
+        
+        <div class="success" id="successMsg">
+            <div class="icon">✅</div>
+            <h2>Thank you!</h2>
+            <p style="color:var(--muted);margin:16px 0">Your feedback has been recorded. We appreciate you helping us improve!</p>
+            <a href="landing.html" style="color:var(--teal);font-weight:600">← Back to DealIQ Pro</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Diverse Industries Inc. All rights reserved.</p>
+    </footer>
+    
+    <script>
+    function submitFeedback(){
+        const fb={
+            type:document.getElementById('fb-type').value,
+            name:document.getElementById('fb-name').value,
+            email:document.getElementById('fb-email').value,
+            subject:document.getElementById('fb-subject').value,
+            details:document.getElementById('fb-details').value,
+            rating:document.getElementById('fb-rating').value,
+            timestamp:new Date().toISOString()
+        };
+        let feedbacks=JSON.parse(localStorage.getItem('dealiq_feedback')||'[]');
+        feedbacks.push(fb);
+        localStorage.setItem('dealiq_feedback',JSON.stringify(feedbacks));
+        document.getElementById('feedbackForm').style.display='none';
+        document.getElementById('successMsg').style.display='block';
+    }
+    function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dealiq_dark',document.body.classList.contains('dark'));}
+    if(localStorage.getItem('dealiq_dark')==='true')document.body.classList.add('dark');
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DealIQ Pro — All-in-One Real Estate Platform</title>
+    <meta name="description" content="The complete platform for real estate brokers, wholesalers, and investors. CRM, calculators, AI tools, and more.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B;--bg:#F8FAFC;--text:#1E293B;--muted:#64748B}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+        nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #E2E8F0;z-index:100;padding:16px 24px}
+        .nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-size:20px;font-weight:800;color:var(--navy)}.logo span{color:var(--gold)}
+        .nav-links{display:flex;gap:24px;align-items:center}
+        .nav-links a{text-decoration:none;color:var(--muted);font-weight:500;font-size:14px}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+        .btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:#060F1C;transform:translateY(-1px)}
+        .btn-accent{background:var(--gold);color:#fff}
+        .btn-outline{background:transparent;border:2px solid var(--navy);color:var(--navy)}
+        .hero{padding:160px 24px 100px;text-align:center;background:linear-gradient(180deg,#fff 0%,var(--bg) 100%)}
+        .hero h1{font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.1;max-width:900px;margin:0 auto 24px}
+        .hero h1 span{color:var(--gold)}
+        .hero p{font-size:20px;color:var(--muted);max-width:600px;margin:0 auto 40px;line-height:1.6}
+        .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+        .section{padding:80px 24px;max-width:1200px;margin:0 auto}
+        .section h2{text-align:center;font-size:36px;font-weight:700;margin-bottom:16px}
+        .section .subtitle{text-align:center;color:var(--muted);margin-bottom:48px;font-size:18px}
+        .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+        .tool-card{background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:32px;transition:transform .2s,box-shadow .2s;text-decoration:none;color:var(--text)}
+        .tool-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+        .tool-card .icon{font-size:48px;margin-bottom:16px}
+        .tool-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
+        .tool-card p{color:var(--muted);line-height:1.6;font-size:14px}
+        .badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-top:8px}
+        .badge-free{background:#D1FAE5;color:#065F46}
+        .badge-pro{background:#FEF3C7;color:#92400E}
+        .pricing{padding:80px 24px;background:#fff}
+        .pricing h2{text-align:center;font-size:36px;font-weight:700;margin-bottom:16px}
+        .pricing .subtitle{text-align:center;color:var(--muted);margin-bottom:60px}
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1000px;margin:0 auto}
+        .price-card{border:2px solid #E2E8F0;border-radius:16px;padding:32px;text-align:center}
+        .price-card.featured{border-color:var(--gold);position:relative}
+        .price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700}
+        .price-card h3{font-size:24px;font-weight:700;margin-bottom:8px}
+        .price{font-size:48px;font-weight:800;margin:16px 0}
+        .price span{font-size:16px;font-weight:400;color:var(--muted)}
+        .price-features{text-align:left;margin:24px 0}
+        .price-features li{padding:8px 0;border-bottom:1px solid #F1F5F9;list-style:none;font-size:14px}
+        .price-features li::before{content:'✓';color:var(--teal);font-weight:700;margin-right:8px}
+        footer{padding:40px 24px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid #E2E8F0}
+        @media(max-width:768px){.nav-links{display:none}}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">Deal<span>IQ</span> Pro</div>
+            <div class="nav-links">
+                <a href="#tools">Tools</a>
+                <a href="#pricing">Pricing</a>
+                <a href="help.html">Help</a>
+                <a href="https://diverseindustriesinc.com" style="color:var(--muted);font-weight:500;font-size:14px;text-decoration:none;">Home</a>
+                <a href="/app" class="btn btn-primary">Open App</a>
+            </div>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <h1>The <span>All-in-One</span> Real Estate Platform</h1>
+        <p>CRM, deals pipeline, calculators, AI tools, forms, and more. Everything brokers, wholesalers, and investors need — in one place.</p>
+        <div class="hero-cta">
+            <a href="/app" class="btn btn-primary" style="padding:16px 32px;font-size:16px">Start Free</a>
+            <a href="#tools" class="btn btn-outline" style="padding:16px 32px;font-size:16px">See All Tools</a>
+        </div>
+    </section>
+    
+    <section class="section" id="tools">
+        <h2>Everything You Need</h2>
+        <p class="subtitle">One platform to run your entire real estate business.</p>
+        <div class="tools-grid">
+            <a href="/app" class="tool-card">
+                <div class="icon">📊</div>
+                <h3>Deals Pipeline</h3>
+                <p>Visual Kanban board to track deals from lead to close.</p>
+                <span class="badge badge-free">FREE</span>
+            </a>
+            <a href="/app" class="tool-card">
+                <div class="icon">🤖</div>
+                <h3>23 AI Generators</h3>
+                <p>Listings, scripts, follow-ups, market reports in seconds.</p>
+                <span class="badge badge-free">FREE</span>
+            </a>
+            <a href="/app" class="tool-card">
+                <div class="icon">👥</div>
+                <h3>CRM & Clients</h3>
+                <p>Manage contacts, track interactions, schedule follow-ups.</p>
+                <span class="badge badge-free">FREE</span>
+            </a>
+            <a href="index.html" class="tool-card">
+                <div class="icon">🧮</div>
+                <h3>13 Calculators</h3>
+                <p>Max Offer, BRRRR, Flip, Rental ROI, Cap Rate, and more.</p>
+                <span class="badge badge-free">FREE</span>
+            </a>
+            <a href="forms.html" class="tool-card">
+                <div class="icon">📋</div>
+                <h3>9 Forms</h3>
+                <p>Offer letters, inspection checklists, intake forms, and more.</p>
+                <span class="badge badge-free">FREE</span>
+            </a>
+            <a href="buyers.html" class="tool-card">
+                <div class="icon">👥</div>
+                <h3>Buyer List</h3>
+                <p>Manage your cash buyers database. Export to CSV.</p>
+                <span class="badge badge-free">FREE</span>
+            </a>
+            <a href="direct-mail.html" class="tool-card">
+                <div class="icon">📬</div>
+                <h3>Direct Mail</h3>
+                <p>6 letter templates for cold, probate, pre-foreclosure, vacant.</p>
+                <span class="badge badge-free">FREE</span>
+            </a>
+            <a href="sms-email.html" class="tool-card">
+                <div class="icon">💬</div>
+                <h3>SMS & Email</h3>
+                <p>6 outreach templates for texting and emailing leads.</p>
+                <span class="badge badge-free">FREE</span>
+            </a>
+            <a href="/app" class="tool-card">
+                <div class="icon">📈</div>
+                <h3>Analytics</h3>
+                <p>Revenue tracking, conversion metrics, performance dashboards.</p>
+                <span class="badge badge-pro">PRO</span>
+            </a>
+            <a href="/app" class="tool-card">
+                <div class="icon">🔗</div>
+                <h3>API & Integrations</h3>
+                <p>Zillow, Zapier, Google Calendar, webhooks.</p>
+                <span class="badge badge-pro">PRO</span>
+            </a>
+            <a href="/app" class="tool-card">
+                <div class="icon">⚡</div>
+                <h3>Custom Workflows</h3>
+                <p>Automated follow-ups, task assignments, pipeline automation.</p>
+                <span class="badge badge-pro">PRO</span>
+            </a>
+            <a href="/app" class="tool-card">
+                <div class="icon">🏢</div>
+                <h3>Team Management</h3>
+                <p>Multi-user roles, permissions, activity logs.</p>
+                <span class="badge badge-pro">PRO</span>
+            </a>
+        </div>
+    </section>
+    
+    <section class="pricing" id="pricing">
+        <h2>Simple Pricing</h2>
+        <p class="subtitle">Start free, upgrade when you're ready.</p>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Free</h3>
+                <div class="price">$0</div>
+                <ul class="price-features">
+                    <li>Deals Pipeline</li>
+                    <li>CRM & Clients</li>
+                    <li>6 Calculators</li>
+                    <li>9 Forms</li>
+                    <li>Buyer List</li>
+                    <li>Direct Mail Templates</li>
+                    <li>SMS & Email Templates</li>
+                    <li>5 AI generations/month</li>
+                </ul>
+                <a href="/app" class="btn btn-outline" style="width:100%;justify-content:center">Get Started</a>
+            </div>
+            <div class="price-card featured">
+                <h3>Pro</h3>
+                <div class="price">$29<span>/mo</span></div>
+                <p style="font-size:14px;color:var(--gold);font-weight:600;margin-bottom:8px">Save $58/yr with annual plan ($290/yr)</p>
+                <ul class="price-features">
+                    <li>Everything in Free</li>
+                    <li>13 Calculators (all)</li>
+                    <li>Unlimited AI generations</li>
+                    <li>Team Management (5 users)</li>
+                    <li>Analytics Dashboard</li>
+                    <li>Custom Workflows (3)</li>
+                    <li>White-label Branding</li>
+                    <li>Priority Support</li>
+                </ul>
+                <button class="btn btn-accent" style="width:100%;justify-content:center" onclick="checkout('pro')">Subscribe Now</button>
+            </div>
+            <div class="price-card">
+                <h3>Enterprise</h3>
+                <div class="price">$99<span>/mo</span></div>
+                <ul class="price-features">
+                    <li>Everything in Pro</li>
+                    <li>Unlimited Users</li>
+                    <li>Unlimited Workflows</li>
+                    <li>API Access</li>
+                    <li>Custom Domain</li>
+                    <li>Dedicated Support</li>
+                    <li>Custom Integrations</li>
+                    <li>SLA Guarantee</li>
+                </ul>
+                <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="checkout('enterprise')">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2026 DealIQ Pro. Built by Diverse Industries Inc.</p>
+        <p style="margin-top:8px">
+            <a href="/app" style="color:var(--muted)">App</a> · 
+            <a href="help.html" style="color:var(--muted)">Help</a> · 
+            <a href="changelog.html" style="color:var(--muted)">Changelog</a> · 
+            <a href="status.html" style="color:var(--muted)">Status</a> · 
+            <a href="terms.html" style="color:var(--muted)">Terms</a> · 
+            <a href="privacy.html" style="color:var(--muted)">Privacy</a> · 
+            <a href="mailto:support@diverseindustriesinc.com" style="color:var(--muted)">Support</a>
+        </p>
+    </footer>
+    
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const STRIPE_PK='pk_live_51TxzMhPH3M1F0LEEUde2shYr3t2Zv2uPjZHGZsjVlrL4wkyRLdYJQi4UYgXQfLkf74b1fem5pLpwqPMHAJGT4IVB00OLxwIXuA';
+        async function checkout(plan){
+            try{
+                const res=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan})});
+                const{sessionId}=await res.json();
+                if(sessionId){const stripe=Stripe(STRIPE_PK);await stripe.redirectToCheckout({sessionId});}
+                else{window.location.href='app.html';}
+            }catch(e){window.location.href='app.html';}
+        }
+    </script>
+</body>
+</html>

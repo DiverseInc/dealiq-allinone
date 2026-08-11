@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1270" height="760" viewBox="0 0 1270 760">
+  <rect width="1270" height="760" fill="#F4F6F9"/>
+  
+  <!-- Header -->
+  <rect width="1270" height="64" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="24" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#0A1628">DealIQ Pro</text>
+  
+  <!-- Title -->
+  <text x="296" y="110" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1E293B">AI Content Generators</text>
+  <rect x="296" y="125" width="200" height="28" rx="14" fill="#10B981"/>
+  <text x="396" y="144" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">3/5 generations used</text>
+  
+  <!-- Generator tabs -->
+  <rect x="296" y="170" width="940" height="50" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="300" y="174" width="80" height="42" rx="20" fill="#0A1628"/>
+  <text x="340" y="200" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">marketing</text>
+  <rect x="390" y="174" width="70" height="42" rx="20" fill="transparent"/>
+  <text x="425" y="200" font-family="Arial, sans-serif" font-size="12" fill="#6B7280" text-anchor="middle">listing</text>
+  <rect x="470" y="174" width="80" height="42" rx="20" fill="transparent"/>
+  <text x="510" y="200" font-family="Arial, sans-serif" font-size="12" fill="#6B7280" text-anchor="middle">followup</text>
+  <rect x="560" y="174" width="100" height="42" rx="20" fill="transparent"/>
+  <text x="610" y="200" font-family="Arial, sans-serif" font-size="12" fill="#6B7280" text-anchor="middle">marketreport</text>
+  <rect x="670" y="174" width="80" height="42" rx="20" fill="transparent"/>
+  <text x="710" y="200" font-family="Arial, sans-serif" font-size="12" fill="#6B7280" text-anchor="middle">objection</text>
+  
+  <!-- Generator card -->
+  <rect x="296" y="240" width="460" height="500" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="320" y="275" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#1E293B">Marketing</text>
+  
+  <text x="320" y="310" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7280">CONTACT</text>
+  <rect x="320" y="320" width="416" height="40" rx="8" fill="#F8FAFC" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="336" y="345" font-family="Arial, sans-serif" font-size="14" fill="#1E293B">Prospect</text>
+  
+  <text x="320" y="385" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7280">ADDRESS</text>
+  <rect x="320" y="395" width="416" height="40" rx="8" fill="#F8FAFC" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="336" y="420" font-family="Arial, sans-serif" font-size="14" fill="#1E293B">1428 Elm St</text>
+  
+  <text x="320" y="460" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7280">PRICE</text>
+  <rect x="320" y="470" width="416" height="40" rx="8" fill="#F8FAFC" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="336" y="495" font-family="Arial, sans-serif" font-size="14" fill="#1E293B">$425,000</text>
+  
+  <rect x="320" y="530" width="416" height="44" rx="8" fill="#C8963E"/>
+  <text x="528" y="558" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">Generate</text>
+  
+  <!-- Output preview -->
+  <rect x="780" y="240" width="456" height="500" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="804" y="275" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#1E293B">Generated Output</text>
+  
+  <rect x="804" y="295" width="408" height="420" rx="8" fill="#010409"/>
+  <text x="820" y="325" font-family="monospace" font-size="12" fill="#E6EDF3">🌟 JUST LISTED – 1428 Elm St 🌟</text>
+  <text x="820" y="345" font-family="monospace" font-size="12" fill="#E6EDF3">📌 PRICE: $425,000</text>
+  <text x="820" y="375" font-family="monospace" font-size="12" fill="#E6EDF3">✨ Step inside this beautiful</text>
+  <text x="820" y="395" font-family="monospace" font-size="12" fill="#E6EDF3">property located in a sought-</text>
+  <text x="820" y="415" font-family="monospace" font-size="12" fill="#E6EDF3">after neighbourhood.</text>
+  <text x="820" y="445" font-family="monospace" font-size="12" fill="#E6EDF3">Features include:</text>
+  <text x="820" y="465" font-family="monospace" font-size="12" fill="#E6EDF3">• Spacious open floor plan</text>
+  <text x="820" y="485" font-family="monospace" font-size="12" fill="#E6EDF3">• Modern kitchen</text>
+  <text x="820" y="505" font-family="monospace" font-size="12" fill="#E6EDF3">• Hardwood floors throughout</text>
+  <text x="820" y="525" font-family="monospace" font-size="12" fill="#E6EDF3">• Private backyard</text>
+  
+  <rect x="1120" y="680" width="80" height="28" rx="6" fill="#0A1628"/>
+  <text x="1160" y="700" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle">📋 Copy</text>
+</svg>

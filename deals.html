@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Deals — DealIQ Calculators</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 24px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .btn { background: #0A1628; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; text-decoration: none; display: inline-block; }
+        .btn-accent { background: #C8963E; }
+        .btn-danger { background: #EF4444; }
+        .btn-sm { padding: 6px 12px; font-size: 12px; }
+        .deals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .deal-card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px; }
+        .deal-card h3 { margin-bottom: 8px; }
+        .deal-card .address { color: #666; font-size: 14px; margin-bottom: 12px; }
+        .deal-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .deal-card .metric { font-size: 13px; }
+        .deal-card .metric label { color: #999; }
+        .deal-card .metric .value { font-weight: 700; }
+        .deal-card .actions { display: flex; gap: 8px; margin-top: 12px; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+        .badge-green { background: #D1FAE5; color: #065F46; }
+        .badge-amber { background: #FEF3C7; color: #92400E; }
+        .badge-red { background: #FEE2E2; color: #991B1B; }
+        .empty-state { text-align: center; padding: 60px 24px; color: #999; }
+        .search { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; margin-bottom: 24px; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: #fff; border-radius: 12px; padding: 32px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+        .input-group input, .input-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>My Deals</h1>
+            <div>
+                <button class="btn" onclick="exportAllDeals()">📥 Export All</button>
+                <button class="btn btn-accent" onclick="openAddModal()">+ Add Deal</button>
+            </div>
+        </div>
+        
+        <input type="text" class="search" placeholder="Search deals by address, type, or status..." id="searchInput" oninput="filterDeals()">
+        
+        <div class="deals-grid" id="dealsGrid"></div>
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <h3>No deals yet</h3>
+            <p>Click "+ Add Deal" to save your first deal.</p>
+        </div>
+    </div>
+    
+    <!-- Add Deal Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 24px;">Add New Deal</h2>
+            <div class="input-group">
+                <label>Property Address</label>
+                <input type="text" id="newAddress" placeholder="123 Main St">
+            </div>
+            <div class="input-group">
+                <label>Deal Type</label>
+                <select id="newType">
+                    <option value="flip">Fix & Flip</option>
+                    <option value="rental">Buy & Hold</option>
+                    <option value="brrrr">BRRRR</option>
+                    <option value="wholesale">Wholesale</option>
+                    <option value="development">Development</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Purchase Price ($)</label>
+                <input type="number" id="newPrice" placeholder="200000">
+            </div>
+            <div class="input-group">
+                <label>ARV ($)</label>
+                <input type="number" id="newARV" placeholder="320000">
+            </div>
+            <div class="input-group">
+                <label>Repair Costs ($)</label>
+                <input type="number" id="newRepairs" placeholder="40000">
+            </div>
+            <div class="input-group">
+                <label>Status</label>
+                <select id="newStatus">
+                    <option value="analyzing">Analyzing</option>
+                    <option value="offered">Offer Made</option>
+                    <option value="under-contract">Under Contract</option>
+                    <option value="closed">Closed</option>
+                    <option value="passed">Passed</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Notes</label>
+                <input type="text" id="newNotes" placeholder="Any notes about this deal...">
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 24px;">
+                <button class="btn" onclick="saveDeal()">Save Deal</button>
+                <button class="btn" style="background:#666;" onclick="closeAddModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px;">
+        <a href="landing.html">← Back to All Calculators</a>
+    </div>
+
+    <script>
+    let deals=JSON.parse(localStorage.getItem('dealiq_deals'))||[];
+    
+    function renderDeals(){
+        const grid=document.getElementById('dealsGrid');
+        const empty=document.getElementById('emptyState');
+        if(deals.length===0){grid.innerHTML='';empty.style.display='block';return;}
+        empty.style.display='none';
+        grid.innerHTML=deals.map(d=>{
+            const profit=d.arv-d.price-d.repairs;
+            const margin=d.arv>0?((profit/d.arv)*100).toFixed(1):0;
+            const statusColor=d.status==='closed'?'green':d.status==='passed'?'red':d.status==='under-contract'?'amber':'';
+            return `<div class="deal-card">
+                <div style="display:flex;justify-content:space-between;align-items:start;">
+                    <h3>${d.address||'Untitled'}</h3>
+                    <span class="badge badge-${statusColor}">${d.status}</span>
+                </div>
+                <div class="address">${d.type.toUpperCase()}</div>
+                <div class="metrics">
+                    <div class="metric"><label>Price</label><div class="value">$${d.price.toLocaleString()}</div></div>
+                    <div class="metric"><label>ARV</label><div class="value">$${d.arv.toLocaleString()}</div></div>
+                    <div class="metric"><label>Profit</label><div class="value" style="color:${profit>=0?'#10B981':'#EF4444'};">$${profit.toLocaleString()}</div></div>
+                    <div class="metric"><label>Margin</label><div class="value">${margin}%</div></div>
+                </div>
+                ${d.notes?`<div style="font-size:12px;color:#666;margin-bottom:8px;">📝 ${d.notes}</div>`:''}
+                <div class="actions">
+                    <button class="btn btn-sm" onclick="exportDeal('${d.id}')">📄 PDF</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteDeal('${d.id}')">🗑️ Delete</button>
+                </div>
+            </div>`;
+        }).join('');
+    }
+    
+    function filterDeals(){
+        const q=document.getElementById('searchInput').value.toLowerCase();
+        const filtered=deals.filter(d=>(d.address||'').toLowerCase().includes(q)||(d.type||'').toLowerCase().includes(q)||(d.status||'').toLowerCase().includes(q));
+        const grid=document.getElementById('dealsGrid');
+        grid.innerHTML=filtered.map(d=>{
+            const profit=d.arv-d.price-d.repairs;
+            const margin=d.arv>0?((profit/d.arv)*100).toFixed(1):0;
+            return `<div class="deal-card">
+                <h3>${d.address||'Untitled'}</h3>
+                <div class="address">${d.type.toUpperCase()}</div>
+                <div class="metrics">
+                    <div class="metric"><label>Price</label><div class="value">$${d.price.toLocaleString()}</div></div>
+                    <div class="metric"><label>ARV</label><div class="value">$${d.arv.toLocaleString()}</div></div>
+                    <div class="metric"><label>Profit</label><div class="value" style="color:${profit>=0?'#10B981':'#EF4444'};">$${profit.toLocaleString()}</div></div>
+                    <div class="metric"><label>Margin</label><div class="value">${margin}%</div></div>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-sm" onclick="exportDeal('${d.id}')">📄 PDF</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteDeal('${d.id}')">🗑️ Delete</button>
+                </div>
+            </div>`;
+        }).join('');
+    }
+    
+    function openAddModal(){document.getElementById('addModal').classList.add('active');}
+    function closeAddModal(){document.getElementById('addModal').classList.remove('active');}
+    
+    function saveDeal(){
+        const deal={
+            id:Date.now().toString(36)+Math.random().toString(36).substr(2),
+            address:document.getElementById('newAddress').value,
+            type:document.getElementById('newType').value,
+            price:parseFloat(document.getElementById('newPrice').value)||0,
+            arv:parseFloat(document.getElementById('newARV').value)||0,
+            repairs:parseFloat(document.getElementById('newRepairs').value)||0,
+            status:document.getElementById('newStatus').value,
+            notes:document.getElementById('newNotes').value,
+            createdAt:new Date().toISOString()
+        };
+        deals.push(deal);
+        localStorage.setItem('dealiq_deals',JSON.stringify(deals));
+        closeAddModal();
+        renderDeals();
+    }
+    
+    function deleteDeal(id){
+        if(!confirm('Delete this deal?'))return;
+        deals=deals.filter(d=>d.id!==id);
+        localStorage.setItem('dealiq_deals',JSON.stringify(deals));
+        renderDeals();
+    }
+    
+    function exportDeal(id){
+        const d=deals.find(x=>x.id===id);
+        if(!d)return;
+        const profit=d.arv-d.price-d.repairs;
+        const margin=d.arv>0?((profit/d.arv)*100).toFixed(1):0;
+        const text=`DEALIQ CALCULATORS - DEAL REPORT\n================================\n\nProperty: ${d.address}\nType: ${d.type.toUpperCase()}\nStatus: ${d.status}\nDate: ${new Date(d.createdAt).toLocaleDateString()}\n\nNUMBERS\n-------\nPurchase Price: $${d.price.toLocaleString()}\nARV: $${d.arv.toLocaleString()}\nRepair Costs: $${d.repairs.toLocaleString()}\n\nRESULTS\n-------\nProfit: $${profit.toLocaleString()}\nMargin: ${margin}%\n\nNotes: ${d.notes||'None'}\n\nGenerated by DealIQ Calculators\nhttps://realestate-calculators-five.vercel.app`;
+        const blob=new Blob([text],{type:'text/plain'});
+        const a=document.createElement('a');
+        a.href=URL.createObjectURL(blob);
+        a.download=`deal-${d.address.replace(/\s+/g,'-').toLowerCase()}.txt`;
+        a.click();
+    }
+    
+    function exportAllDeals(){
+        if(deals.length===0){alert('No deals to export.');return;}
+        const text=deals.map(d=>{
+            const profit=d.arv-d.price-d.repairs;
+            return `${d.address} | ${d.type} | $${d.price.toLocaleString()} | ARV: $${d.arv.toLocaleString()} | Profit: $${profit.toLocaleString()} | ${d.status}`;
+        }).join('\n');
+        const blob=new Blob(['Address,Type,Price,ARV,Profit,Status\n'+text],{type:'text/csv'});
+        const a=document.createElement('a');
+        a.href=URL.createObjectURL(blob);
+        a.download='dealiq-deals.csv';
+        a.click();
+    }
+    
+    renderDeals();
+    </script>
+</body>
+</html>

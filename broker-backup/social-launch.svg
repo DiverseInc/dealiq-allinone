@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A1628"/>
+      <stop offset="100%" style="stop-color:#162032"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="200" fill="#C8963E" opacity="0.05"/>
+  <circle cx="1100" cy="530" r="300" fill="#1A7A6B" opacity="0.05"/>
+  
+  <!-- Content -->
+  <text x="600" y="180" font-family="Arial, sans-serif" font-size="24" font-weight="600" fill="#C8963E" text-anchor="middle">PRODUCT HUNT LAUNCH</text>
+  
+  <text x="600" y="280" font-family="Arial, sans-serif" font-size="72" font-weight="800" fill="#FFFFFF" text-anchor="middle">DealIQ Pro</text>
+  
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="24" fill="#8B949E" text-anchor="middle">All-in-One Broker Platform</text>
+  
+  <!-- Features -->
+  <text x="200" y="420" font-family="Arial, sans-serif" font-size="18" fill="#E6EDF3">✅ Deals Pipeline</text>
+  <text x="200" y="460" font-family="Arial, sans-serif" font-size="18" fill="#E6EDF3">✅ 23 AI Generators</text>
+  <text x="200" y="500" font-family="Arial, sans-serif" font-size="18" fill="#E6EDF3">✅ Mortgage Calculator</text>
+  
+  <text x="600" y="420" font-family="Arial, sans-serif" font-size="18" fill="#E6EDF3">✅ Team Management</text>
+  <text x="600" y="460" font-family="Arial, sans-serif" font-size="18" fill="#E6EDF3">✅ Custom Workflows</text>
+  <text x="600" y="500" font-family="Arial, sans-serif" font-size="18" fill="#E6EDF3">✅ API Integrations</text>
+  
+  <!-- CTA -->
+  <rect x="350" y="540" width="500" height="60" rx="30" fill="#C8963E"/>
+  <text x="600" y="578" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">Free to Start → dealiq.diverseindustriesinc.com</text>
+  
+  <!-- Promo code -->
+  <text x="600" y="620" font-family="Arial, sans-serif" font-size="16" fill="#C8963E" text-anchor="middle">Use code PH3FREE for 3 months free</text>
+</svg>

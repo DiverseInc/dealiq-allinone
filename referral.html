@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral Program — DealIQ Pro</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#F8FAFC;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0;--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B}
+        .dark{--bg:#0F172A;--card:#1E293B;--text:#F1F5F9;--muted:#94A3B8;--border:#334155}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+        .container{max-width:800px;margin:60px auto;padding:0 24px}
+        .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+        .topbar h1{font-size:36px;font-weight:800}
+        .toggle-btn{background:var(--card);border:1px solid var(--border);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:14px;color:var(--text)}
+        .hero{text-align:center;margin-bottom:40px}
+        .hero .icon{font-size:64px;margin-bottom:16px}
+        .hero p{color:var(--muted);font-size:18px;max-width:500px;margin:0 auto}
+        .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:40px 0}
+        .step{text-align:center;padding:24px}
+        .step .num{width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+        .step h3{margin-bottom:8px}
+        .step p{color:var(--muted);font-size:14px}
+        .rewards{background:var(--card);border:2px solid var(--gold);border-radius:16px;padding:32px;margin:40px 0}
+        .rewards h2{margin-bottom:16px}
+        .reward-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+        .reward{padding:16px;border:1px solid var(--border);border-radius:8px}
+        .reward .amount{font-size:24px;font-weight:800;color:var(--gold)}
+        .reward .desc{font-size:14px;color:var(--muted);margin-top:4px}
+        .share-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin:40px 0}
+        .share-box h3{margin-bottom:16px}
+        .share-link{display:flex;gap:8px}
+        .share-link input{flex:1;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:var(--bg);color:var(--text)}
+        .btn{padding:12px 24px;border:none;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s}
+        .btn-primary{background:var(--navy);color:#fff}
+        .btn-accent{background:var(--gold);color:#fff}
+        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0}
+        .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
+        .stat .value{font-size:28px;font-weight:800;color:var(--teal)}
+        .stat .label{font-size:12px;color:var(--muted);margin-top:4px}
+        footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:14px;border-top:1px solid var(--border);margin-top:60px}
+        @media(max-width:768px){.steps,.reward-grid,.stats{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <h1>🎁 Referral Program</h1>
+            <div style="display:flex;gap:8px">
+                <button class="toggle-btn" onclick="toggleDark()">🌙</button>
+                <a href="landing.html" class="toggle-btn" style="text-decoration:none">← Back</a>
+            </div>
+        </div>
+        
+        <div class="hero">
+            <div class="icon">🤝</div>
+            <h2>Give $20, Get $20</h2>
+            <p>Refer friends to DealIQ Pro and you both get $20 off your next month.</p>
+        </div>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="num">1</div>
+                <h3>Share Your Link</h3>
+                <p>Copy your unique referral link and share it with friends.</p>
+            </div>
+            <div class="step">
+                <div class="num">2</div>
+                <h3>They Sign Up</h3>
+                <p>Your friend signs up for a Pro plan using your link.</p>
+            </div>
+            <div class="step">
+                <div class="num">3</div>
+                <h3>You Both Save</h3>
+                <p>You both get $20 off when they become a paying customer.</p>
+            </div>
+        </div>
+        
+        <div class="rewards">
+            <h2>🏆 Reward Tiers</h2>
+            <div class="reward-grid">
+                <div class="reward">
+                    <div class="amount">1 Referral</div>
+                    <div class="desc">$20 off for you and your friend</div>
+                </div>
+                <div class="reward">
+                    <div class="amount">5 Referrals</div>
+                    <div class="desc">1 month free + exclusive swag</div>
+                </div>
+                <div class="reward">
+                    <div class="amount">10 Referrals</div>
+                    <div class="desc">3 months free + lifetime discount</div>
+                </div>
+                <div class="reward">
+                    <div class="amount">25+ Referrals</div>
+                    <div class="desc">Free Pro plan forever + revenue share</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="share-box">
+            <h3>📤 Your Referral Link</h3>
+            <div class="share-link">
+                <input type="text" id="refLink" value="https://app.dealiqpro.com?ref=YOURCODE" readonly>
+                <button class="btn btn-accent" onclick="copyLink()">📋 Copy</button>
+            </div>
+            <p style="font-size:12px;color:var(--muted);margin-top:8px">Share this link with friends. They'll get $20 off their first month.</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="value" id="totalReferrals">0</div>
+                <div class="label">Your Referrals</div>
+            </div>
+            <div class="stat">
+                <div class="value" id="totalEarned">$0</div>
+                <div class="label">Total Earned</div>
+            </div>
+            <div class="stat">
+                <div class="value" id="nextReward">$20</div>
+                <div class="label">Next Reward</div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Diverse Industries Inc. All rights reserved.</p>
+    </footer>
+    
+    <script>
+    function copyLink(){
+        const link=document.getElementById('refLink');
+        navigator.clipboard.writeText(link.value).then(()=>alert('Copied!'));
+    }
+    function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dealiq_dark',document.body.classList.contains('dark'));}
+    if(localStorage.getItem('dealiq_dark')==='true')document.body.classList.add('dark');
+    </script>
+</body>
+</html>
