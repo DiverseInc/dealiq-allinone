@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cap Rate Calculator — DealIQ</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .calculator { max-width: 600px; margin: 40px auto; }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .results { background: #f8f9fa; padding: 24px; border-radius: 12px; margin-top: 24px; }
+        .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .result-row:last-child { border-bottom: none; }
+        .result-row .label { color: #666; }
+        .result-row .value { font-weight: 700; }
+        .result-row.highlight { font-size: 20px; padding: 16px 0; }
+        .result-row.highlight .value { color: #1A7A6B; font-size: 28px; }
+        .btn { background: #0A1628; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; }
+        .verdict { padding: 16px; border-radius: 8px; margin-top: 16px; font-weight: 600; text-align: center; }
+        .verdict.great { background: #D1FAE5; color: #065F46; }
+        .verdict.good { background: #DBEAFE; color: #1E40AF; }
+        .verdict.fair { background: #FEF3C7; color: #92400E; }
+        .verdict.poor { background: #FEE2E2; color: #991B1B; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Cap Rate Calculator</h1>
+        <p>Calculate capitalization rate for rental properties.</p>
+        
+        <div class="panel" style="margin-top: 24px;">
+            <div class="input-group">
+                <label>Annual Rental Income ($)</label>
+                <input type="number" id="annualRent" value="26400" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Annual Operating Expenses ($)</label>
+                <input type="number" id="expenses" value="8000" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Property Purchase Price ($)</label>
+                <input type="number" id="price" value="300000" oninput="calculate()">
+            </div>
+        </div>
+        
+        <div class="results" id="results">
+            <div class="result-row"><span class="label">Gross Rent</span><span class="value" id="grossRent">$26,400</span></div>
+            <div class="result-row"><span class="label">Operating Expenses</span><span class="value" id="opExpenses">-$8,000</span></div>
+            <div class="result-row"><span class="label">Net Operating Income (NOI)</span><span class="value" id="noi">$18,400</span></div>
+            <div class="result-row highlight"><span class="label">Cap Rate</span><span class="value" id="capRate">6.13%</span></div>
+            <div class="verdict good" id="verdict">Good — Above average for most markets</div>
+        </div>
+        
+        <div style="margin-top: 24px;">
+            <a href="landing.html">← Back to All Calculators</a>
+        </div>
+    </div>
+    
+    <script>
+    function calculate(){
+        const rent=parseFloat(document.getElementById('annualRent').value)||0;
+        const exp=parseFloat(document.getElementById('expenses').value)||0;
+        const price=parseFloat(document.getElementById('price').value)||0;
+        const noi=rent-exp;
+        const capRate=price>0?((noi/price)*100):0;
+        document.getElementById('grossRent').textContent='$'+rent.toLocaleString();
+        document.getElementById('opExpenses').textContent='-$'+exp.toLocaleString();
+        document.getElementById('noi').textContent='$'+noi.toLocaleString();
+        document.getElementById('capRate').textContent=capRate.toFixed(2)+'%';
+        const v=document.getElementById('verdict');
+        if(capRate>=10){v.textContent='Excellent — High return market';v.className='verdict great';}
+        else if(capRate>=7){v.textContent='Good — Above average for most markets';v.className='verdict good';}
+        else if(capRate>=5){v.textContent='Fair — Average for stable markets';v.className='verdict fair';}
+        else{v.textContent='Low — May not be a good investment';v.className='verdict poor';}
+    }
+    calculate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rehab / Flip (Mock) | DealIQ</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="flip">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:14px; line-height:1.1;">DealIQ</div>
+            <div style="font-size:12px; color:var(--muted); font-weight:700;">Rehab / Flip (Mock)</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="./index.html" data-nav="home">Home</a>
+          <a href="./max-offer.html" data-nav="max-offer">Max Offer</a>
+          <a href="./wholesale.html" data-nav="wholesale">Wholesaler</a>
+          <a href="./flip.html" data-nav="flip">Rehab / Flip</a>
+          <a href="./rental.html" data-nav="rental">Rehab / Rent</a>
+          <a href="./brrrr.html" data-nav="brrrr">BRRRR</a>
+          <a href="./development.html" data-nav="development">New Dev</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>Deal Analysis for Rehab / Flip</h1>
+        <p>Mock flip calculator: model financing costs and estimate profit + ROI.</p>
+      </section>
+
+      <section style="margin-top:16px;">
+        <div class="grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Deal Inputs</h2>
+                <div class="subtitle">Purchase, rehab, resale, plus financing assumptions.</div>
+              </div>
+              <span class="badge">Instant • Mock</span>
+            </div>
+
+            <div class="panel-body">
+              <div class="form">
+                <div class="row">
+                  <div class="field">
+                    <label for="flip_purchase">Purchase Price ($)</label>
+                    <input id="flip_purchase" type="number" value="342500" min="0" step="500" />
+                  </div>
+                  <div class="field">
+                    <label for="flip_rehab">Rehab Budget ($)</label>
+                    <input id="flip_rehab" type="number" value="55000" min="0" step="1000" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="field">
+                    <label for="flip_resale">Expected Resale ($)</label>
+                    <input id="flip_resale" type="number" value="495000" min="0" step="500" />
+                  </div>
+                  <div class="field">
+                    <label for="flip_closing">Closing Costs ($)</label>
+                    <input id="flip_closing" type="number" value="6000" min="0" step="500" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="field">
+                    <label for="flip_rate">Financing Rate (% APR)</label>
+                    <input id="flip_rate" type="number" value="10" min="0" step="0.1" />
+                  </div>
+                  <div class="field">
+                    <label for="flip_months">Holding Months</label>
+                    <input id="flip_months" type="number" value="6" min="0" step="1" />
+                  </div>
+                </div>
+
+                <div class="actions">
+                  <button class="btn primary" type="button" onclick="initFlip()">Calculate</button>
+                  <button
+                    class="btn"
+                    type="button"
+                    onclick="
+                      document.getElementById('flip_purchase').value=342500;
+                      document.getElementById('flip_rehab').value=55000;
+                      document.getElementById('flip_resale').value=495000;
+                      document.getElementById('flip_closing').value=6000;
+                      document.getElementById('flip_rate').value=10;
+                      document.getElementById('flip_months').value=6;
+                      initFlip();
+                    "
+                  >
+                    Reset
+                  </button>
+                </div>
+
+                <div class="small">
+                  Mock model: <span class="mono">profit = resale - (purchase + rehab + closing + financingCost)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Results</h2>
+                <div class="subtitle">Profit + ROI + viability status.</div>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="results">
+                <div class="kpis" style="grid-template-columns: 1fr 1fr;">
+                  <div class="kpi">
+                    <div class="label">Estimated Profit</div>
+                    <div class="value" id="flip_result_profit">$0</div>
+                  </div>
+                  <div class="kpi" style="background: rgba(15,23,42,.45);">
+                    <div class="label">ROI (mock)</div>
+                    <div class="value" id="flip_result_roi">0%</div>
+                  </div>
+                </div>
+                <hr class="sep" />
+                <div class="kpi" style="border-color: var(--border); background: rgba(2,6,23,.30);">
+                  <div class="label">Status</div>
+                  <div class="value" id="flip_result_status">—</div>
+                </div>
+              </div>
+
+              <div class="small" style="margin-top:14px;">
+                Later: add multiple financing options (DSCR, hard money tiers, ARV-based LTV) and compare scenarios.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        © <span id="year"></span> DealIQ
+      </footer>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

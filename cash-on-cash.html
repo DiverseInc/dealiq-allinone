@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash-on-Cash Calculator — DealIQ</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .calculator { max-width: 600px; margin: 40px auto; }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .results { background: #f8f9fa; padding: 24px; border-radius: 12px; margin-top: 24px; }
+        .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .result-row:last-child { border-bottom: none; }
+        .result-row.highlight { font-size: 20px; padding: 16px 0; }
+        .result-row.highlight .value { color: #1A7A6B; font-size: 28px; }
+        .btn { background: #0A1628; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; }
+        .verdict { padding: 16px; border-radius: 8px; margin-top: 16px; font-weight: 600; text-align: center; }
+        .verdict.great { background: #D1FAE5; color: #065F46; }
+        .verdict.good { background: #DBEAFE; color: #1E40AF; }
+        .verdict.fair { background: #FEF3C7; color: #92400E; }
+        .verdict.poor { background: #FEE2E2; color: #991B1B; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Cash-on-Cash Return Calculator</h1>
+        <p>Calculate ROI on the actual cash invested.</p>
+        
+        <div class="panel" style="margin-top: 24px;">
+            <div class="input-group">
+                <label>Annual Pre-Tax Cash Flow ($)</label>
+                <input type="number" id="cashFlow" value="12000" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Total Cash Invested ($)</label>
+                <input type="number" id="cashInvested" value="60000" oninput="calculate()">
+                <small style="color:#666;">Down payment + closing costs + repairs</small>
+            </div>
+        </div>
+        
+        <div class="results" id="results">
+            <div class="result-row"><span class="label">Annual Cash Flow</span><span class="value" id="cf">$12,000</span></div>
+            <div class="result-row"><span class="label">Cash Invested</span><span class="value" id="ci">$60,000</span></div>
+            <div class="result-row highlight"><span class="label">Cash-on-Cash Return</span><span class="value" id="coc">20.00%</span></div>
+            <div class="verdict great" id="verdict">Excellent — Outstanding return on investment</div>
+        </div>
+        
+        <div style="margin-top: 24px;">
+            <a href="landing.html">← Back to All Calculators</a>
+        </div>
+    </div>
+    
+    <script>
+    function calculate(){
+        const cf=parseFloat(document.getElementById('cashFlow').value)||0;
+        const ci=parseFloat(document.getElementById('cashInvested').value)||0;
+        const coc=ci>0?((cf/ci)*100):0;
+        document.getElementById('cf').textContent='$'+cf.toLocaleString();
+        document.getElementById('ci').textContent='$'+ci.toLocaleString();
+        document.getElementById('coc').textContent=coc.toFixed(2)+'%';
+        const v=document.getElementById('verdict');
+        if(coc>=20){v.textContent='Excellent — Outstanding return on investment';v.className='verdict great';}
+        else if(coc>=12){v.textContent='Good — Strong return for most markets';v.className='verdict good';}
+        else if(coc>=8){v.textContent='Fair — Average return';v.className='verdict fair';}
+        else{v.textContent='Low — Consider other investments';v.className='verdict poor';}
+    }
+    calculate();
+    </script>
+</body>
+</html>

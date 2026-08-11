@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Development (Mock) | DealIQ</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="development">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:14px; line-height:1.1;">DealIQ</div>
+            <div style="font-size:12px; color:var(--muted); font-weight:700;">New Development (Mock)</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="./index.html" data-nav="home">Home</a>
+          <a href="./max-offer.html" data-nav="max-offer">Max Offer</a>
+          <a href="./wholesale.html" data-nav="wholesale">Wholesaler</a>
+          <a href="./flip.html" data-nav="flip">Rehab / Flip</a>
+          <a href="./rental.html" data-nav="rental">Rehab / Rent</a>
+          <a href="./brrrr.html" data-nav="brrrr">BRRRR</a>
+          <a href="./development.html" data-nav="development">New Dev</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>Deal Analysis for New Development</h1>
+        <p>Mock development model: land + hard + soft + simple interest carryover to estimate profit + margin.</p>
+      </section>
+
+      <section style="margin-top:16px;">
+        <div class="grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Project Inputs</h2>
+                <div class="subtitle">Cost categories + timeline + expected sale.</div>
+              </div>
+              <span class="badge">Instant • Mock</span>
+            </div>
+
+            <div class="panel-body">
+              <div class="form">
+                <div class="row">
+                  <div class="field">
+                    <label for="dev_land">Land Cost ($)</label>
+                    <input id="dev_land" type="number" value="120000" min="0" step="5000" />
+                  </div>
+                  <div class="field">
+                    <label for="dev_hard">Hard Costs ($)</label>
+                    <input id="dev_hard" type="number" value="420000" min="0" step="5000" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="field">
+                    <label for="dev_soft">Soft Costs ($)</label>
+                    <input id="dev_soft" type="number" value="65000" min="0" step="1000" />
+                  </div>
+                  <div class="field">
+                    <label for="dev_rate">Interest Rate (% APR)</label>
+                    <input id="dev_rate" type="number" value="8" min="0" step="0.1" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="field">
+                    <label for="dev_months">Construction Months</label>
+                    <input id="dev_months" type="number" value="12" min="1" step="1" />
+                  </div>
+                  <div class="field">
+                    <label for="dev_sale">Expected Sale Price ($)</label>
+                    <input id="dev_sale" type="number" value="650000" min="0" step="5000" />
+                  </div>
+                </div>
+
+                <div class="actions">
+                  <button class="btn primary" type="button" onclick="initDevelopment()">Calculate</button>
+                  <button
+                    class="btn"
+                    type="button"
+                    onclick="
+                      document.getElementById('dev_land').value=120000;
+                      document.getElementById('dev_hard').value=420000;
+                      document.getElementById('dev_soft').value=65000;
+                      document.getElementById('dev_rate').value=8;
+                      document.getElementById('dev_months').value=12;
+                      document.getElementById('dev_sale').value=650000;
+                      initDevelopment();
+                    "
+                  >
+                    Reset
+                  </button>
+                </div>
+
+                <div class="small">
+                  Mock model: <span class="mono">profit = sale - (land + hard + soft + interestCarry)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Results</h2>
+                <div class="subtitle">Profit + margin + viability status.</div>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="results">
+                <div class="kpis" style="grid-template-columns: 1fr 1fr;">
+                  <div class="kpi">
+                    <div class="label">Estimated Profit</div>
+                    <div class="value" id="dev_result_profit">$0</div>
+                  </div>
+                  <div class="kpi" style="background: rgba(15,23,42,.45);">
+                    <div class="label">Margin (mock)</div>
+                    <div class="value" id="dev_result_margin">0%</div>
+                  </div>
+                </div>
+
+                <hr class="sep" />
+
+                <div class="kpi" style="border-color: var(--border); background: rgba(2,6,23,.30);">
+                  <div class="label">Status</div>
+                  <div class="value" id="dev_result_status">—</div>
+                </div>
+              </div>
+
+              <div class="small" style="margin-top:14px;">
+                Later: add absorption rates, multiple phases, lender draws, and detailed budget line items.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        © <span id="year"></span> DealIQ
+      </footer>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

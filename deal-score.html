@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deal Score — DealIQ Calculators</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .calculator { max-width: 800px; margin: 40px auto; }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .results { background: #f8f9fa; padding: 24px; border-radius: 12px; margin-top: 24px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 48px; font-weight: 800; }
+        .score-great { background: #D1FAE5; color: #065F46; }
+        .score-good { background: #DBEAFE; color: #1E40AF; }
+        .score-fair { background: #FEF3C7; color: #92400E; }
+        .score-poor { background: #FEE2E2; color: #991B1B; }
+        .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+        .metric { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eee; }
+        .metric h4 { font-size: 12px; color: #666; text-transform: uppercase; margin-bottom: 4px; }
+        .metric .value { font-size: 24px; font-weight: 700; }
+        .metric .value.green { color: #10B981; }
+        .metric .value.red { color: #EF4444; }
+        .btn { background: #0A1628; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Deal Score Analyzer</h1>
+        <p>Get an instant score (1-100) for any real estate deal.</p>
+        
+        <div class="panel" style="margin-top: 24px;">
+            <h3>Deal Details</h3>
+            <div class="input-group">
+                <label>Purchase Price ($)</label>
+                <input type="number" id="purchasePrice" value="200000">
+            </div>
+            <div class="input-group">
+                <label>After Repair Value (ARV) ($)</label>
+                <input type="number" id="arv" value="320000">
+            </div>
+            <div class="input-group">
+                <label>Estimated Repair Costs ($)</label>
+                <input type="number" id="repairs" value="40000">
+            </div>
+            <div class="input-group">
+                <label>Monthly Rent (if rental)</label>
+                <input type="number" id="rent" value="2200">
+            </div>
+            <div class="input-group">
+                <label>Hold Time (months)</label>
+                <input type="number" id="holdTime" value="6">
+            </div>
+            <div class="input-group">
+                <label>Deal Type</label>
+                <select id="dealType" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:16px;">
+                    <option value="flip">Fix & Flip</option>
+                    <option value="rental">Buy & Hold Rental</option>
+                    <option value="brrrr">BRRRR</option>
+                    <option value="wholesale">Wholesale</option>
+                </select>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="calculateScore()" style="margin-top: 24px;width:100%;">Calculate Deal Score</button>
+        
+        <div class="results" id="results" style="display:none;">
+            <div id="scoreCircle" class="score-circle score-great">85</div>
+            <h3 id="scoreLabel" style="text-align:center;">Great Deal!</h3>
+            
+            <div class="metrics">
+                <div class="metric">
+                    <h4>Profit Margin</h4>
+                    <div class="value" id="profitMargin">32%</div>
+                </div>
+                <div class="metric">
+                    <h4>ROI</h4>
+                    <div class="value" id="roi">68%</div>
+                </div>
+                <div class="metric">
+                    <h4>Max Offer</h4>
+                    <div class="value" id="maxOffer">$215,000</div>
+                </div>
+                <div class="metric">
+                    <h4>Profit</h4>
+                    <div class="value green" id="profit">$56,000</div>
+                </div>
+                <div class="metric">
+                    <h4>Cash on Cash (if rental)</h4>
+                    <div class="value" id="coc">12%</div>
+                </div>
+                <div class="metric">
+                    <h4>Cap Rate</h4>
+                    <div class="value" id="capRate">8.5%</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 24px;padding:16px;background:#fff;border-radius:8px;border:1px solid #eee;">
+                <h4>Score Breakdown</h4>
+                <div id="breakdown" style="margin-top:8px;font-size:14px;line-height:1.8;"></div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 24px;">
+            <a href="landing.html">← Back to All Calculators</a>
+        </div>
+    </div>
+    
+    <script>
+    function calculateScore(){
+        const price=parseFloat(document.getElementById('purchasePrice').value)||0;
+        const arv=parseFloat(document.getElementById('arv').value)||0;
+        const repairs=parseFloat(document.getElementById('repairs').value)||0;
+        const rent=parseFloat(document.getElementById('rent').value)||0;
+        const holdTime=parseInt(document.getElementById('holdTime').value)||6;
+        const type=document.getElementById('dealType').value;
+        
+        let score=0;
+        let breakdown=[];
+        
+        // Profit margin (30 points)
+        const totalCost=price+repairs;
+        const profit=arv-totalCost;
+        const margin=arv>0?(profit/arv)*100:0;
+        const marginScore=Math.min(30,margin*1.5);
+        score+=marginScore;
+        breakdown.push(`Profit Margin: ${margin.toFixed(1)}% → ${marginScore.toFixed(0)}/30 pts`);
+        
+        // ROI (25 points)
+        const roi=price>0?(profit/price)*100:0;
+        const roiScore=Math.min(25,roi/4);
+        score+=roiScore;
+        breakdown.push(`ROI: ${roi.toFixed(1)}% → ${roiScore.toFixed(0)}/25 pts`);
+        
+        // Deal type bonus (15 points)
+        let typeScore=0;
+        if(type==='brrrr')typeScore=15;
+        else if(type==='rental')typeScore=12;
+        else if(type==='flip')typeScore=10;
+        else typeScore=8;
+        score+=typeScore;
+        breakdown.push(`Deal Type (${type}): ${typeScore}/15 pts`);
+        
+        // Cash flow for rentals (15 points)
+        if(type==='rental'||type==='brrrr'){
+            const monthlyExpenses=price*0.01;
+            const cashFlow=rent-monthlyExpenses;
+            const cashFlowScore=Math.min(15,cashFlow/50);
+            score+=cashFlowScore;
+            breakdown.push(`Monthly Cash Flow: $${cashFlow.toFixed(0)} → ${cashFlowScore.toFixed(0)}/15 pts`);
+        }else{
+            score+=7;
+            breakdown.push(`N/A (not rental): 7/15 pts`);
+        }
+        
+        // Hold time (15 points)
+        const holdScore=Math.max(0,15-holdTime);
+        score+=holdScore;
+        breakdown.push(`Hold Time: ${holdTime} months → ${holdScore}/15 pts`);
+        
+        // Calculate additional metrics
+        const maxOffer=arv*0.7repairs;
+        const annualRent=rent*12;
+        const capRate=price>0?((annualRent/price)*100):0;
+        const coc=price>0?(((rent*12-repairs)/price)*100):0;
+        
+        // Update UI
+        score=Math.round(Math.min(100,Math.max(0,score)));
+        const circle=document.getElementById('scoreCircle');
+        circle.textContent=score;
+        circle.className='score-circle '+(score>=80?'score-great':score>=60?'score-good':score>=40?'score-fair':'score-poor');
+        
+        document.getElementById('scoreLabel').textContent=score>=80?'Great Deal!':score>=60?'Good Deal':score>=40?'Fair Deal':'Poor Deal';
+        document.getElementById('profitMargin').textContent=margin.toFixed(1)+'%';
+        document.getElementById('profitMargin').className='value '+(margin>20?'green':'red');
+        document.getElementById('roi').textContent=roi.toFixed(1)+'%';
+        document.getElementById('maxOffer').textContent='$'+maxOffer.toLocaleString(undefined,{maximumFractionDigits:0});
+        document.getElementById('profit').textContent=(profit>=0?'+':'')+'$'+profit.toLocaleString(undefined,{maximumFractionDigits:0});
+        document.getElementById('profit').className='value '+(profit>=0?'green':'red');
+        document.getElementById('coc').textContent=coc.toFixed(1)+'%';
+        document.getElementById('capRate').textContent=capRate.toFixed(1)+'%';
+        document.getElementById('breakdown').innerHTML=breakdown.map(b=>`<div>${b}</div>`).join('');
+        
+        document.getElementById('results').style.display='block';
+    }
+    </script>
+</body>
+</html>

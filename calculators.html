@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DealIQ | Real Estate Calculators (Mock)</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <meta name="description" content="Real estate deal calculators and property analysis (static mock multi-page site)." />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:14px; line-height:1.1;">DealIQ</div>
+            <div style="font-size:12px; color:var(--muted); font-weight:700;">Calculators & Comps (Mock)</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="./index.html" class="active" data-nav="home">Home</a>
+          <a href="./max-offer.html" data-nav="max-offer">Max Offer</a>
+          <a href="./wholesale.html" data-nav="wholesale">Wholesaler</a>
+          <a href="./flip.html" data-nav="flip">Rehab / Flip</a>
+          <a href="./rental.html" data-nav="rental">Rehab / Rent</a>
+          <a href="./brrrr.html" data-nav="brrrr">BRRRR</a>
+          <a href="./development.html" data-nav="development">New Dev</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>Real estate deal math—fast, simple, and mobile-ready.</h1>
+        <p>
+          This is a static multi-page HTML/CSS/JS scaffold with mock calculators and sample data.
+          Connect real data APIs later without changing the UI structure.
+        </p>
+        <div class="grid" style="align-items:start;">
+          <div>
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Quick start</h2>
+                  <div class="subtitle">Pick a calculator to generate instant outputs.</div>
+                </div>
+                <span class="badge">No backend • Frontend only</span>
+              </div>
+              <div class="panel-body">
+                <div class="small">
+                  <b>What’s included now:</b>
+                  <ul>
+                    <li>Max Offer Calculator (mock logic)</li>
+                    <li>ARV (mock) + Deal Analysis UI templates</li>
+                    <li>Sample comps tables with realistic-looking placeholder rows</li>
+                  </ul>
+                </div>
+                <hr class="sep" />
+                <div class="actions">
+                  <a class="btn primary" href="./max-offer.html">Open Max Offer</a>
+                  <a class="btn" href="./wholesale.html">Open Wholesaler Analysis</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Instant Demo Data</h2>
+                <div class="subtitle">Mock comps + rental comps nationwide.</div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="kpis">
+                <div class="kpi">
+                  <div class="label">ARV (mock)</div>
+                  <div class="value" id="homeKpiArv">$485,000</div>
+                </div>
+                <div class="kpi">
+                  <div class="label">Rental Estimate (mock)</div>
+                  <div class="value" id="homeKpiRent">$2,650/mo</div>
+                </div>
+              </div>
+
+              <div class="small" style="margin-top:12px;">
+                In later versions, this page can fetch real comps from providers (ATTOM/Zillow/RentCast/etc.)
+                via pluggable API modules.
+              </div>
+
+              <hr class="sep" />
+              <div class="small mono">
+                Tip: Use the “Share” button on each page to copy a link with query params.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section style="margin-top:16px;">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Sample Property Details</h2>
+              <div class="subtitle">Owner, mailing address, and last sold (mock)</div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <table class="table" role="table" aria-label="Sample property details">
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Owner</td><td>Jordan &amp; Casey Williams</td></tr>
+                <tr><td>Mailing Address</td><td>1840 Lakeview Dr, Austin, TX 78704</td></tr>
+                <tr><td>Last Sold</td><td>2019-04-12 for $342,500</td></tr>
+                <tr><td>Outstanding Mortgage (mock)</td><td>$212,800</td></tr>
+                <tr><td>Property</td><td>3 Bed • 2 Bath • 1,540 Sq Ft • 1987 Built</td></tr>
+                <tr><td>Lot (mock)</td><td>6,800 Sq Ft</td></tr>
+              </tbody>
+            </table>
+            <div class="small" style="margin-top:10px;">
+              Property/comps UI is structured to match the full app spec; only the calculations are mocked for now.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        © <span id="year"></span> DealIQ • Static HTML multi-page scaffold (mock).
+      </footer>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

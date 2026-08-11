@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DealIQ Pro — Product Hunt Launch</title>
+    <meta name="description" content="The all-in-one platform for real estate brokers. Free to start.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --navy: #0A1628; --gold: #C8963E; --teal: #1A7A6B; --bg: #F8FAFC; --text: #1E293B; --muted: #64748B; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 24px; background: linear-gradient(180deg, #fff 0%, var(--bg) 100%); }
+        .hero-content { max-width: 700px; }
+        .badge { display: inline-block; background: #FF6154; color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 24px; }
+        h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+        h1 span { color: var(--gold); }
+        .subtitle { font-size: 20px; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
+        .cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+        .btn { padding: 16px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; text-decoration: none; transition: all 0.2s; }
+        .btn-primary { background: var(--navy); color: #fff; }
+        .btn-primary:hover { background: #060F1C; transform: translateY(-2px); }
+        .btn-accent { background: var(--gold); color: #fff; }
+        .btn-accent:hover { opacity: 0.9; }
+        .promo { background: #FEF3C7; border: 2px solid var(--gold); border-radius: 12px; padding: 24px; margin-bottom: 40px; }
+        .promo h3 { color: var(--gold); margin-bottom: 8px; }
+        .promo code { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 6px; font-size: 18px; font-weight: 700; letter-spacing: 2px; }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px; text-align: left; }
+        .feature { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px; }
+        .feature h4 { margin-bottom: 8px; }
+        .feature p { font-size: 14px; color: var(--muted); }
+        .social { display: flex; gap: 16px; justify-content: center; }
+        .social a { color: var(--muted); text-decoration: none; font-size: 14px; }
+        .social a:hover { color: var(--navy); }
+        @media (max-width: 640px) { .cta { flex-direction: column; align-items: center; } .btn { width: 100%; text-align: center; } }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">🎉 Product Hunt Launch</div>
+            <h1>Deal<span>IQ</span> Pro</h1>
+            <p class="subtitle">The all-in-one platform for real estate brokers. CRM, AI tools, calculators, and pipeline management — free to start.</p>
+            
+            <div class="promo">
+                <h3>🎉 Product Hunt Exclusive</h3>
+                <p>Use code <code>PH3FREE</code> for 3 months free on Pro plan</p>
+            </div>
+            
+            <div class="cta">
+                <a href="app.html" class="btn btn-primary">Start Free →</a>
+                <a href="#features" class="btn btn-accent">See Features</a>
+            </div>
+            
+            <div class="features" id="features">
+                <div class="feature">
+                    <h4>📊 Deals Pipeline</h4>
+                    <p>Visual Kanban board to track deals from lead to close</p>
+                </div>
+                <div class="feature">
+                    <h4>🤖 23 AI Generators</h4>
+                    <p>Listings, scripts, follow-ups, market reports in seconds</p>
+                </div>
+                <div class="feature">
+                    <h4>🧮 Mortgage Calculator</h4>
+                    <p>Full calculator with amortization and pre-qualification</p>
+                </div>
+                <div class="feature">
+                    <h4>👥 Team Management</h4>
+                    <p>Multi-user roles, permissions, and activity logs</p>
+                </div>
+            </div>
+            
+            <div class="social">
+                <a href="https://twitter.com/DealIQPro">Twitter</a>
+                <a href="https://linkedin.com/company/dealiqpro">LinkedIn</a>
+                <a href="https://github.com/dealiqpro">GitHub</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

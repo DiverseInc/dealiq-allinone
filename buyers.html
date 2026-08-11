@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer List — DealIQ</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#F8FAFC;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0;--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B}
+        .dark{--bg:#0F172A;--card:#1E293B;--text:#F1F5F9;--muted:#94A3B8;--border:#334155}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);transition:all .3s}
+        .container{max-width:1200px;margin:40px auto;padding:0 24px}
+        .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:16px}
+        .topbar h1{font-size:32px;font-weight:800}
+        .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s}
+        .btn-primary{background:var(--navy);color:#fff}
+        .btn-accent{background:var(--gold);color:#fff}
+        .btn-danger{background:#EF4444;color:#fff}
+        .btn-secondary{background:var(--border);color:var(--text)}
+        .toggle-btn{background:var(--card);border:1px solid var(--border);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:14px;color:var(--text)}
+        .search{width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:16px;margin-bottom:24px;background:var(--card);color:var(--text)}
+        table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+        th{text-align:left;padding:12px 16px;background:var(--navy);color:#fff;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+        td{padding:12px 16px;border-bottom:1px solid var(--border);font-size:14px}
+        tr:hover{background:var(--bg)}
+        .badge{padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700}
+        .badge-active{background:#D1FAE5;color:#065F46}
+        .badge-inactive{background:#FEE2E2;color:#991B1B}
+        .badge-cold{background:#DBEAFE;color:#1E40AF}
+        .badge-warm{background:#FEF3C7;color:#92400E}
+        .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
+        .modal.active{display:flex}
+        .modal-content{background:var(--card);border-radius:12px;padding:32px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .input-group{margin-bottom:16px}
+        .input-group label{display:block;font-weight:600;margin-bottom:6px;font-size:13px;color:var(--muted)}
+        .input-group input,.input-group select{width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:15px;background:var(--bg);color:var(--text)}
+        .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+        .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+        .stat .value{font-size:28px;font-weight:800}
+        .stat .label{font-size:12px;color:var(--muted);margin-top:4px}
+        @media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}.form-row{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <h1>👥 Buyer List</h1>
+            <div style="display:flex;gap:8px;align-items:center">
+                <button class="toggle-btn" onclick="toggleDark()">🌙</button>
+                <button class="btn btn-accent" onclick="openAddModal()">+ Add Buyer</button>
+                <button class="btn btn-secondary" onclick="exportBuyers()">📥 Export CSV</button>
+                <a href="landing.html" class="toggle-btn" style="text-decoration:none">← Back</a>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat"><div class="value" id="totalBuyers">0</div><div class="label">Total Buyers</div></div>
+            <div class="stat"><div class="value" id="activeBuyers">0</div><div class="label">Active</div></div>
+            <div class="stat"><div class="value" id="cashBuyers">0</div><div class="label">Cash Buyers</div></div>
+            <div class="stat"><div class="value" id="avgBudget">$0</div><div class="label">Avg Budget</div></div>
+        </div>
+        
+        <input type="text" class="search" placeholder="Search by name, email, phone, or city..." id="searchInput" oninput="filterBuyers()">
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>City</th>
+                    <th>Type</th>
+                    <th>Budget</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="buyersTable"></tbody>
+        </table>
+        <div id="emptyState" style="text-align:center;padding:60px;color:var(--muted);display:none">
+            <h3>No buyers yet</h3>
+            <p>Click "+ Add Buyer" to start building your buyer list.</p>
+        </div>
+    </div>
+    
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <h2 style="margin-bottom:24px">Add New Buyer</h2>
+            <div class="form-row">
+                <div class="input-group"><label>Full Name</label><input type="text" id="b-name"></div>
+                <div class="input-group"><label>Phone</label><input type="tel" id="b-phone"></div>
+            </div>
+            <div class="input-group"><label>Email</label><input type="email" id="b-email"></div>
+            <div class="form-row">
+                <div class="input-group"><label>City</label><input type="text" id="b-city"></div>
+                <div class="input-group"><label>State</label><input type="text" id="b-state"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Buyer Type</label><select id="b-type"><option>Cash Buyer</option><option>Investor</option><option>Flipper</option><option>Landlord</option><option>Developer</option><option>Agent</option></select></div>
+                <div class="input-group"><label>Budget Range</label><select id="b-budget"><option>Under $100K</option><option>$100K-$200K</option><option>$200K-$300K</option><option>$300K-$500K</option><option>$500K-$1M</option><option>$1M+</option></select></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Preferred Areas</label><input type="text" id="b-areas" placeholder="North side, downtown"></div>
+                <div class="input-group"><label>Property Types</label><input type="text" id="b-propTypes" placeholder="SFH, multifamily"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Status</label><select id="b-status"><option>Active</option><option>Warm Lead</option><option>Cold Lead</option><option>Inactive</option></select></div>
+                <div class="input-group"><label>Last Contact</label><input type="date" id="b-lastContact"></div>
+            </div>
+            <div class="input-group"><label>Notes</label><input type="text" id="b-notes" placeholder="Any notes about this buyer..."></div>
+            <div style="display:flex;gap:8px;margin-top:24px">
+                <button class="btn btn-primary" onclick="saveBuyer()">Save Buyer</button>
+                <button class="btn btn-secondary" onclick="closeAddModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let buyers=JSON.parse(localStorage.getItem('dealiq_buyers'))||[];
+    
+    function renderBuyers(list){
+        const tbody=document.getElementById('buyersTable');
+        const empty=document.getElementById('emptyState');
+        if(!list)list=buyers;
+        if(list.length===0){tbody.innerHTML='';empty.style.display='block';return;}
+        empty.style.display='none';
+        tbody.innerHTML=list.map(b=>{
+            const statusClass=b.status==='Active'?'badge-active':b.status==='Warm Lead'?'badge-warm':b.status==='Cold Lead'?'badge-cold':'badge-inactive';
+            return `<tr>
+                <td><strong>${b.name}</strong></td>
+                <td>${b.phone||''}<br><span style="color:var(--muted);font-size:12px">${b.email||''}</span></td>
+                <td>${b.city||''}, ${b.state||''}</td>
+                <td>${b.type}</td>
+                <td>${b.budget}</td>
+                <td><span class="badge ${statusClass}">${b.status}</span></td>
+                <td>
+                    <button class="btn btn-sm btn-danger" onclick="deleteBuyer('${b.id}')" style="padding:4px 8px;font-size:11px">✕</button>
+                </td>
+            </tr>`;
+        }).join('');
+        updateStats();
+    }
+    
+    function updateStats(){
+        document.getElementById('totalBuyers').textContent=buyers.length;
+        document.getElementById('activeBuyers').textContent=buyers.filter(b=>b.status==='Active').length;
+        document.getElementById('cashBuyers').textContent=buyers.filter(b=>b.type==='Cash Buyer').length;
+        document.getElementById('avgBudget').textContent=buyers.length?'$'+Math.round(buyers.length).toLocaleString():'$0';
+    }
+    
+    function filterBuyers(){
+        const q=document.getElementById('searchInput').value.toLowerCase();
+        const filtered=buyers.filter(b=>(b.name||'').toLowerCase().includes(q)||(b.email||'').toLowerCase().includes(q)||(b.phone||'').includes(q)||(b.city||'').toLowerCase().includes(q));
+        renderBuyers(filtered);
+    }
+    
+    function openAddModal(){document.getElementById('addModal').classList.add('active');}
+    function closeAddModal(){document.getElementById('addModal').classList.remove('active');}
+    
+    function saveBuyer(){
+        const buyer={
+            id:Date.now().toString(36)+Math.random().toString(36).substr(2),
+            name:document.getElementById('b-name').value,
+            phone:document.getElementById('b-phone').value,
+            email:document.getElementById('b-email').value,
+            city:document.getElementById('b-city').value,
+            state:document.getElementById('b-state').value,
+            type:document.getElementById('b-type').value,
+            budget:document.getElementById('b-budget').value,
+            areas:document.getElementById('b-areas').value,
+            propTypes:document.getElementById('b-propTypes').value,
+            status:document.getElementById('b-status').value,
+            lastContact:document.getElementById('b-lastContact').value,
+            notes:document.getElementById('b-notes').value,
+            createdAt:new Date().toISOString()
+        };
+        buyers.push(buyer);
+        localStorage.setItem('dealiq_buyers',JSON.stringify(buyers));
+        closeAddModal();
+        renderBuyers();
+    }
+    
+    function deleteBuyer(id){
+        if(!confirm('Delete this buyer?'))return;
+        buyers=buyers.filter(b=>b.id!==id);
+        localStorage.setItem('dealiq_buyers',JSON.stringify(buyers));
+        renderBuyers();
+    }
+    
+    function exportBuyers(){
+        if(buyers.length===0){alert('No buyers to export.');return;}
+        const csv='Name,Phone,Email,City,State,Type,Budget,Status,Last Contact,Notes\n'+
+            buyers.map(b=>`"${b.name}","${b.phone}","${b.email}","${b.city}","${b.state}","${b.type}","${b.budget}","${b.status}","${b.lastContact}","${b.notes}"`).join('\n');
+        const blob=new Blob([csv],{type:'text/csv'});
+        const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='buyer-list.csv';a.click();
+    }
+    
+    function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dealiq_dark',document.body.classList.contains('dark'));}
+    if(localStorage.getItem('dealiq_dark')==='true')document.body.classList.add('dark');
+    
+    renderBuyers();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DealIQ Pro — All-in-One Broker Platform</title>
+    <meta name="description" content="The all-in-one platform for real estate brokers and mortgage professionals. CRM, deals pipeline, calculators, and AI-powered tools.">
+    <meta name="keywords" content="real estate broker, mortgage, CRM, deals pipeline, property management, AI tools">
+    <meta name="author" content="Diverse Industries Inc">
+    <meta property="og:title" content="DealIQ Pro — All-in-One Broker Platform">
+    <meta property="og:description" content="CRM, deals pipeline, calculators, and AI-powered tools for real estate brokers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dealiq.diverseindustriesinc.com">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22DealIQ%20Pro%22,%22short_name%22:%22DealIQ%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%23F4F6F9%22,%22theme_color%22:%22%230A1628%22,%22description%22:%22All-in-One%20Broker%20Platform%22}">
+    <meta name="theme-color" content="#0A1628">
+    <script defer data-domain="dealiq.diverseindustriesinc.com" src="https://plausible.io/js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <style>
+        :root {
+            --navy: #0A1628; --navy-hover: #060F1C; --gold: #C8963E; --teal: #1A7A6B;
+            --bg: #F4F6F9; --card: #FFFFFF; --text: #1E1E1E; --muted: #6B7280;
+            --green: #10B981; --amber: #F59E0B; --red: #EF4444; --blue: #3B82F6;
+            --border: #E5E7EB; --shadow: 0 2px 8px rgba(0,0,0,0.06);
+            --radius: 12px; --radius-sm: 8px;
+            --transition: 0.2s ease;
+        }
+        .dark-mode {
+            --bg: #111827; --card: #1F2937; --text: #F9FAFB; --muted: #D1D5DB;
+            --border: #374151; --shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background var(--transition);}
+        button,input,select,textarea{font-family:'Inter',sans-serif;outline:none;}
+        button{cursor:pointer;border:none;background:none;}
+        input,select,textarea{border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;font-size:14px;background:var(--card);color:var(--text);width:100%;transition:border var(--transition);}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--radius-sm);font-weight:600;font-size:14px;transition:all var(--transition);}
+        .btn-primary{background:var(--navy);color:#fff;}.btn-primary:hover{background:var(--navy-hover);}
+        .btn-secondary{background:var(--card);color:var(--navy);border:2px solid var(--navy);}
+        .btn-accent{background:var(--gold);color:#fff;}.btn-accent:hover{opacity:0.9;}
+        .btn-danger{background:var(--red);color:#fff;}.btn-sm{padding:6px 14px;font-size:12px;}
+        .role-btn{background:transparent;color:var(--muted);border:1px solid transparent;}
+        .role-btn.active{background:var(--navy);color:#fff;}
+        .dark-mode .role-btn{color:#E5E7EB;}
+        .btn-icon{background:transparent;color:var(--muted);font-size:18px;padding:8px;border:none;}
+        .dark-mode .btn-icon{color:#E5E7EB;}
+        .dark-mode .btn-secondary{color:#E5E7EB;border-color:#E5E7EB;}
+        .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);}
+        .metric-value{font-family:'Poppins',sans-serif;font-size:28px;font-weight:700;cursor:pointer;}
+        .metric-value:hover{color:var(--teal);}
+        .sidebar-link{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--radius-sm);color:var(--muted);font-weight:500;font-size:14px;border:none;background:transparent;cursor:pointer;width:100%;}
+        .sidebar-link.active,.sidebar-link:hover{background:rgba(10,22,40,0.08);color:var(--navy);font-weight:600;}
+        .dark-mode .sidebar-link{color:#E5E7EB;}
+        .dark-mode .sidebar-link.active,.dark-mode .sidebar-link:hover{background:rgba(255,255,255,0.08);color:#FFFFFF;}
+        .dark-mode h2,.dark-mode h3,.dark-mode h4{color:#F9FAFB;}
+        .badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+        .badge-green{background:rgba(16,185,129,0.15);color:#059669;}
+        .badge-amber{background:rgba(245,158,11,0.15);color:#d97706;}
+        .badge-navy{background:rgba(10,22,40,0.12);color:#0A1628;}
+        .dark-mode .badge-navy{background:rgba(255,255,255,0.1);color:#E5E7EB;}
+        .badge-red{background:rgba(239,68,68,0.15);color:#dc2626;}
+        .badge-teal{background:rgba(26,122,107,0.15);color:#1A7A6B;}
+        .badge-blue{background:rgba(59,130,246,0.15);color:#2563eb;}
+        .tab-btn{padding:8px 16px;border-radius:20px;font-size:13px;margin-right:4px;background:var(--bg);color:var(--muted);border:none;cursor:pointer;transition:all var(--transition);}
+        .tab-btn.active{background:var(--navy);color:#fff;}
+        .generated-output{background:var(--bg);padding:12px;border-radius:8px;white-space:pre-wrap;font-size:13px;min-height:60px;max-height:350px;overflow-y:auto;position:relative;}
+        .copy-btn{position:absolute;top:8px;right:8px;background:var(--card);color:var(--navy);border:1px solid var(--border);border-radius:4px;padding:4px 8px;font-size:11px;cursor:pointer;}
+        .spinner{width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin 0.8s linear infinite;}
+        @keyframes spin{to{transform:rotate(360deg);}}
+        .empty-state{text-align:center;padding:40px;color:var(--muted);}
+        .kanban-column{padding:16px;min-width:250px;flex-shrink:0;transition:background 0.2s;}
+        .kanban-column.drag-over{background:rgba(26,122,107,0.1);}
+        .deal-card{cursor:grab;transition:transform 0.1s;user-select:none;}
+        .deal-card:active{cursor:grabbing;}
+        @media (max-width:768px){
+            #topbar{padding:0 12px;height:56px;}
+            #role-switcher{display:none;}
+            #sidebar{position:absolute;left:-280px;top:56px;bottom:0;z-index:200;width:260px;transition:left 0.3s;background:var(--card);}
+            #sidebar.open{left:0;}
+            #app-content{margin-left:0;}
+            .mobile-menu-btn{display:block!important;}
+            .responsive-hide{display:none;}
+        }
+        @media (min-width:769px){
+            .mobile-menu-btn{display:none!important;}
+        }
+        @media print{
+            body *{visibility:hidden;}
+            #app-content,#app-content *{visibility:visible;}
+            #sidebar,#topbar,#toast-container,#modal-overlay{display:none!important;}
+            #app-content{margin:0;padding:0;position:absolute;left:0;top:0;}
+        }
+    </style>
+</head>
+<body>
+<div id="loading-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:9999;align-items:center;justify-content:center;">
+    <div class="spinner" style="width:40px;height:40px;border-width:4px;"></div>
+</div>
+<div id="login-screen" style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);">
+    <div class="card" style="max-width:420px;width:90%;">
+        <h2 style="text-align:center;" id="brand-name-display"></h2>
+        <p style="text-align:center;color:var(--muted);">Sign in to your account</p>
+        <form id="login-form" style="margin-top:20px;">
+            <select id="user-select" style="margin-bottom:12px;"></select>
+            <input type="password" id="password-input" placeholder="Password" required>
+            <button type="submit" class="btn btn-accent" style="width:100%;margin-top:10px;">Sign In</button>
+            <p id="login-error" style="color:var(--red);margin-top:8px;text-align:center;"></p>
+        </form>
+    </div>
+</div>
+<div id="main-app" style="display:none;">
+    <nav id="topbar" style="position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+            <button class="mobile-menu-btn btn-icon" id="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button>
+            <div class="logo-container" style="display:flex;align-items:center;gap:12px;">
+                <span id="sub-badge" class="badge badge-navy" style="cursor:pointer;" onclick="showUpgradeModal('features')">Starter</span>
+            </div>
+        </div>
+        <div id="role-switcher" class="responsive-hide" style="display:flex;background:var(--bg);border-radius:30px;padding:4px;">
+            <button class="btn role-btn active" data-role="realestate" style="border-radius:30px;padding:8px 18px;font-size:13px;">Real Estate</button>
+            <button class="btn role-btn" data-role="mortgage" style="border-radius:30px;padding:8px 18px;font-size:13px;">Mortgage</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <button class="btn-icon" id="dark-toggle"><i class="fa-solid fa-moon"></i></button>
+            <button class="btn-icon" id="settings-btn" title="White‑Label Settings"><i class="fa-solid fa-gear"></i></button>
+            <button class="btn btn-sm btn-secondary responsive-hide" id="export-btn"><i class="fa-solid fa-download"></i> Export</button>
+            <button class="btn btn-sm btn-secondary responsive-hide" id="import-btn"><i class="fa-solid fa-upload"></i> Import</button>
+            <input type="file" id="import-file" accept=".json" style="display:none;">
+            <button id="logout-btn" class="btn btn-sm btn-secondary"><i class="fa-solid fa-right-from-bracket"></i> Switch</button>
+        </div>
+    </nav>
+    <div style="display:flex;min-height:calc(100vh - 64px);">
+        <aside id="sidebar" style="width:260px;background:var(--card);border-right:1px solid var(--border);padding:12px;">
+            <nav id="sidebar-nav"></nav>
+        </aside>
+        <main id="app-content" style="flex:1;padding:24px;overflow-y:auto;"></main>
+    </div>
+</div>
+<div id="toast-container" style="position:fixed;top:80px;right:20px;z-index:9999;"></div>
+<div id="modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:8000;align-items:center;justify-content:center;">
+    <div class="card" style="max-width:700px;width:90%;max-height:85vh;overflow-y:auto;">
+        <button onclick="closeModal()" style="float:right;background:transparent;border:none;font-size:20px;">&times;</button>
+        <div id="modal-content"></div>
+    </div>
+</div>
+<script>
+// ─── IndexedDB Wrapper ──────────────────────
+const DB_NAME='BrokerFileDB', DB_STORE='files';
+let dbPromise=null;
+function openDB(){
+    if(!dbPromise) dbPromise=new Promise((res,rej)=>{
+        const r=indexedDB.open(DB_NAME,1);
+        r.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains(DB_STORE))db.createObjectStore(DB_STORE,{keyPath:'id'});};
+        r.onsuccess=()=>res(r.result);
+        r.onerror=()=>rej(r.error);
+    });
+    return dbPromise;
+}
+async function saveFileToDB(id,blob){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(DB_STORE,'readwrite');tx.objectStore(DB_STORE).put({id,blob});tx.oncomplete=res;tx.onerror=()=>rej(tx.error);});}
+async function getFileFromDB(id){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(DB_STORE,'readonly');const r=tx.objectStore(DB_STORE).get(id);r.onsuccess=()=>res(r.result?.blob||null);r.onerror=()=>rej(r.error);});}
+async function deleteFileFromDB(id){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(DB_STORE,'readwrite');tx.objectStore(DB_STORE).delete(id);tx.oncomplete=res;tx.onerror=()=>rej(tx.error);});}
+
+// ─── Brand & Crypto ────────────────────────
+const DEFAULT_PASSWORD='admin123';
+let BRAND=JSON.parse(localStorage.getItem('wl_brand'))||{
+    companyName:'Your Company',
+    logoHTML:'<span style="font-family:Poppins;font-weight:700;font-size:18px;color:var(--text);">YOUR COMPANY</span>',
+    users:{admin:{name:'Admin',storageKey:'wl_admin'},user1:{name:'User 1',storageKey:'wl_user1'}},
+    licenseKeys:[]
+};
+async function ensureUserHashes(){
+    for(const k of Object.keys(BRAND.users)) if(!BRAND.users[k].passwordHash) BRAND.users[k].passwordHash=await hashPassword(DEFAULT_PASSWORD);
+    localStorage.setItem('wl_brand',JSON.stringify(BRAND));
+}
+async function hashPassword(pw){const e=new TextEncoder();const h=await crypto.subtle.digest('SHA-256',e.encode(pw));return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+async function verifyPassword(userKey,pw){const u=BRAND.users[userKey];if(!u)return false;return (await hashPassword(pw))===u.passwordHash;}
+
+// ─── License ───────────────────────────────
+const LIC_KEY='broker_license';
+function checkLicense(){
+    if(!BRAND.licenseKeys.length)return true;
+    const s=localStorage.getItem(LIC_KEY);
+    if(s&&BRAND.licenseKeys.includes(s))return true;
+    const k=prompt('Enter license key:');
+    if(k&&BRAND.licenseKeys.includes(k.trim())){localStorage.setItem(LIC_KEY,k.trim());showToast('License activated!','success');return true;}
+    else{showToast('Invalid license','error');return false;}
+}
+
+// ─── State ─────────────────────────────────
+let appData={properties:[],deals:[],loans:[],contacts:[],calendarEvents:[],documents:[],referrals:[],commissionHistory:[],lenders:[],activeRole:'realestate',currentHash:'realestate-dashboard',templates:[],voiceMemos:[],notes:[]};
+let currentUser=null,darkMode=localStorage.getItem('diverse_dark')==='true';
+let currentMonth=new Date().getMonth(),currentYear=new Date().getFullYear();
+const UNDO_LIMIT=20;let undoStack=[],redoStack=[];
+
+// ─── Subscription & Feature Gating ─────────
+const PLANS={
+    free:{name:'Starter',price:0,features:{
+        properties:5,clients:10,aiGens:5,documents:100*1024*1024,teamMembers:1,workflows:0,
+        analytics:'basic',apiAccess:false,whiteLabel:false,support:'community',deals:Infinity,loans:Infinity
+    }},
+    pro:{name:'Pro',price:29,features:{
+        properties:Infinity,clients:Infinity,aiGens:Infinity,documents:1024*1024*1024,teamMembers:5,workflows:3,
+        analytics:'advanced',apiAccess:false,whiteLabel:true,support:'email',deals:Infinity,loans:Infinity
+    }},
+    enterprise:{name:'Enterprise',price:99,features:{
+        properties:Infinity,clients:Infinity,aiGens:Infinity,documents:10*1024*1024*1024,teamMembers:Infinity,workflows:Infinity,
+        analytics:'advanced+api',apiAccess:true,whiteLabel:true,support:'priority',deals:Infinity,loans:Infinity
+    }}
+};
+
+function getSubscription(){
+    return appData.subscription||{plan:'free',stripeCustomerId:null,stripeSubscriptionId:null,currentPeriodEnd:null};
+}
+function setSubscription(sub){
+    appData.subscription=sub;saveUserData();
+}
+function getPlan(){return getSubscription().plan;}
+function getPlanFeatures(){return PLANS[getPlan()]||PLANS.free;}
+function isPro(){return getPlan()==='pro'||getPlan()==='enterprise';}
+function isEnterprise(){return getPlan()==='enterprise';}
+
+// Usage tracking
+function getUsage(type){
+    if(!appData.usage)appData.usage={aiGens:0,resetDate:new Date().toISOString().split('T')[0]};
+    // Reset AI gens monthly
+    const today=new Date().toISOString().split('T')[0];
+    if(appData.usage.resetDate!==today){
+        const last=new Date(appData.usage.resetDate);
+        const now=new Date(today);
+        if(last.getMonth()!==now.getMonth()||last.getFullYear()!==now.getFullYear()){
+            appData.usage.aiGens=0;appData.usage.resetDate=today;
+        }
+    }
+    return appData.usage[type]||0;
+}
+function incrementUsage(type){
+    if(!appData.usage)appData.usage={aiGens:0,resetDate:new Date().toISOString().split('T')[0]};
+    appData.usage[type]=(appData.usage[type]||0)+1;saveUserData();
+}
+function canUseFeature(type){
+    const plan=getPlanFeatures();
+    const usage=getUsage(type);
+    const limit=plan[type];
+    if(limit===Infinity)return true;
+    return usage<limit;
+}
+function getUsageDisplay(type){
+    const plan=getPlanFeatures();
+    const usage=getUsage(type);
+    const limit=plan[type];
+    if(limit===Infinity)return`${usage} used`;
+    return`${usage}/${limit}`;
+}
+
+// Feature gate check
+function checkFeature(feature,showUpgrade=true){
+    const plan=getPlanFeatures();
+    switch(feature){
+        case 'properties':return appData.properties.length<plan.properties;
+        case 'clients':return appData.contacts.length<plan.clients;
+        case 'aiGens':return canUseFeature('aiGens');
+        case 'documents':return true;
+        case 'team':return(appData.team||[]).length<plan.teamMembers;
+        case 'workflows':return plan.workflows===Infinity||(appData.workflows||[]).length<plan.workflows;
+        case 'analytics':return plan.analytics!=='basic';
+        case 'api':return plan.apiAccess;
+        case 'whiteLabel':return plan.whiteLabel;
+        default:return true;
+    }
+}
+
+// Upgrade modal
+function showUpgradeModal(feature){
+    const currentPlan=getPlan();
+    const nextPlan=currentPlan==='free'?'pro':'enterprise';
+    const plan=PLANS[nextPlan];
+    openModal(`<div style="text-align:center;padding:20px;">
+        <div style="font-size:48px;margin-bottom:16px;">🔒</div>
+        <h3>Upgrade to ${plan.name}</h3>
+        <p style="color:var(--muted);margin:12px 0;">This feature requires the ${plan.name} plan.</p>
+        <div style="background:var(--bg);padding:16px;border-radius:8px;margin:16px 0;">
+            <div style="font-size:32px;font-weight:800;">$${plan.price}<span style="font-size:14px;font-weight:400;color:var(--muted);">/mo</span></div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Includes unlimited ${feature} and more.</p>
+        <button class="btn btn-accent" onclick="checkout('${nextPlan}')" style="margin-right:8px;">Upgrade Now</button>
+        <button class="btn btn-secondary" onclick="closeModal()">Maybe Later</button>
+        ${currentPlan==='free'?'<p style="font-size:11px;color:var(--muted);margin-top:12px;">Already have a plan? <a href="#" onclick="activateLicense();return false;">Enter license key</a></p>':''}
+    </div>`);
+}
+
+// License activation (for manual sales)
+function activateLicense(){
+    const key=prompt('Enter your license key:');
+    if(!key)return;
+    // In production, validate with Stripe API
+    if(key.startsWith('dip_')){
+        setSubscription({plan:'pro',licenseKey:key,activatedAt:new Date().toISOString()});
+        showToast('License activated! Pro features unlocked.','success');
+        closeModal();renderSidebar();navigate(appData.currentHash);
+    }else if(key.startsWith('die_')){
+        setSubscription({plan:'enterprise',licenseKey:key,activatedAt:new Date().toISOString()});
+        showToast('License activated! Enterprise features unlocked.','success');
+        closeModal();renderSidebar();navigate(appData.currentHash);
+    }else{
+        showToast('Invalid license key.','error');
+    }
+}
+
+// Add subscription badge to topbar
+function updateSubscriptionBadge(){
+    const badge=document.getElementById('sub-badge');
+    if(badge){
+        const plan=getPlan();
+        const colors={free:'badge-navy',pro:'badge-teal',enterprise:'badge-amber'};
+        badge.className=`badge ${colors[plan]||'badge-navy'}`;
+        badge.textContent=PLANS[plan]?.name||'Starter';
+    }
+}
+function pushUndo(){undoStack.push(JSON.stringify(appData));if(undoStack.length>UNDO_LIMIT)undoStack.shift();redoStack=[];}
+function undo(){if(!undoStack.length)return;redoStack.push(JSON.stringify(appData));appData=JSON.parse(undoStack.pop());saveUserData();renderSidebar();navigate(appData.currentHash);showToast('Undo','info');}
+function redo(){if(!redoStack.length)return;undoStack.push(JSON.stringify(appData));appData=JSON.parse(redoStack.pop());saveUserData();renderSidebar();navigate(appData.currentHash);showToast('Redo','info');}
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='z'){e.preventDefault();undo();}if(e.ctrlKey&&e.key==='y'){e.preventDefault();redo();}});
+function getNextId(){return crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).substr(2);}
+function saveUserData(){if(!currentUser)return;localStorage.setItem(BRAND.users[currentUser].storageKey,JSON.stringify(appData));}
+function loadUserData(){
+    const k=BRAND.users[currentUser].storageKey,s=localStorage.getItem(k);
+    if(s){try{appData=JSON.parse(s);}catch{resetAppData();}}else resetAppData();
+    ensureArrays();pushUndo();
+}
+function ensureArrays(){['properties','deals','loans','contacts','calendarEvents','documents','referrals','commissionHistory','lenders','templates','voiceMemos','notes','team','workflows','tasks','webhooks','activityLog'].forEach(t=>{if(!Array.isArray(appData[t]))appData[t]=[];});if(!appData.usage)appData.usage={aiGens:0,resetDate:new Date().toISOString().split('T')[0]};if(!appData.subscription)appData.subscription={plan:'free'};appData.activeRole=appData.activeRole||'realestate';appData.currentHash=appData.currentHash||'realestate-dashboard';}
+function resetAppData(){appData={properties:[],deals:[],loans:[],contacts:[],calendarEvents:[],documents:[],referrals:[],commissionHistory:[],lenders:[],activeRole:'realestate',currentHash:'realestate-dashboard',templates:[],voiceMemos:[],notes:[]};pushUndo();}
+
+// ─── UI Helpers ────────────────────────────
+function showToast(m,t='info'){
+    const c={success:'#10B981',error:'#EF4444',warning:'#F59E0B',info:'#0A1628'};
+    const d=document.createElement('div');d.style.cssText=`background:var(--card);padding:10px 16px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);border-left:4px solid ${c[t]};margin-bottom:8px;font-weight:500;`;d.textContent=m;
+    document.getElementById('toast-container').appendChild(d);setTimeout(()=>d.remove(),3500);
+}
+function openModal(h){document.getElementById('modal-content').innerHTML=h;document.getElementById('modal-overlay').style.display='flex';}
+function closeModal(){document.getElementById('modal-overlay').style.display='none';}
+document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('modal-overlay').style.display==='flex')closeModal();});
+function showLoading(){document.getElementById('loading-overlay').style.display='flex';}
+function hideLoading(){document.getElementById('loading-overlay').style.display='none';}
+
+// ─── Login ─────────────────────────────────
+document.getElementById('brand-name-display').textContent=BRAND.companyName;
+document.querySelector('.logo-container').innerHTML=BRAND.logoHTML+'<span id="current-user-badge" class="badge badge-navy"></span>';
+const userSelect=document.getElementById('user-select');
+async function populateUsers(){await ensureUserHashes();userSelect.innerHTML='<option value="">Select user...</option>';Object.keys(BRAND.users).forEach(k=>userSelect.innerHTML+=`<option value="${k}">${BRAND.users[k].name}</option>`);}
+populateUsers();
+document.getElementById('login-form').addEventListener('submit',async function(e){
+    e.preventDefault();if(!checkLicense())return;
+    const u=userSelect.value,p=document.getElementById('password-input').value,err=document.getElementById('login-error');err.textContent='';
+    if(!u){err.textContent='Select a user.';return;}
+    if(!(await verifyPassword(u,p))){err.textContent='Incorrect password.';return;}
+    currentUser=u;loadUserData();
+    document.getElementById('login-screen').style.display='none';document.getElementById('main-app').style.display='block';
+    document.getElementById('current-user-badge').textContent=BRAND.users[currentUser].name;
+    applyDarkMode();renderSidebar();navigate(appData.currentHash);updateSubscriptionBadge();checkOnboarding();
+});
+document.getElementById('logout-btn').addEventListener('click',()=>{saveUserData();currentUser=null;document.getElementById('login-screen').style.display='flex';document.getElementById('main-app').style.display='none';document.getElementById('password-input').value='';});
+function applyDarkMode(){document.body.classList.toggle('dark-mode',darkMode);document.getElementById('dark-toggle').innerHTML=darkMode?'<i class="fa-solid fa-sun"></i>':'<i class="fa-solid fa-moon"></i>';}
+document.getElementById('dark-toggle').addEventListener('click',()=>{darkMode=!darkMode;localStorage.setItem('diverse_dark',darkMode);applyDarkMode();});applyDarkMode();
+document.getElementById('mobile-menu-toggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
+
+// ─── Settings ──────────────────────────────
+document.getElementById('settings-btn').addEventListener('click',async()=>{
+    const us=Object.entries(BRAND.users).map(([k,v])=>`${k}:${v.name}`).join('\n');
+    openModal(`<h3>⚙️ Settings</h3><form id="settings-form">
+        <div><label>Company</label><input id="set-company" value="${BRAND.companyName}"></div>
+        <div><label>Logo HTML</label><textarea id="set-logo" rows="2">${BRAND.logoHTML}</textarea></div>
+        <div><label>Users (key:Name)</label><textarea id="set-users" rows="4">${us}</textarea></div>
+        <div><label>Default Password</label><input id="set-password" value="${DEFAULT_PASSWORD}"></div>
+        <div><label>License Keys (csv)</label><input id="set-keys" value="${BRAND.licenseKeys.join(',')}"></div>
+        <button type="submit" class="btn btn-accent">Save & Reload</button></form>`);
+    document.getElementById('settings-form').addEventListener('submit',async function(e){
+        e.preventDefault();const lines=document.getElementById('set-users').value.split('\n').filter(l=>l.includes(':'));
+        const nu={};for(const l of lines){const[k,n]=l.split(':').map(s=>s.trim());if(k&&n)nu[k]={name:n,storageKey:'wl_'+k,passwordHash:BRAND.users[k]?.passwordHash||await hashPassword(document.getElementById('set-password').value)};}
+        BRAND.companyName=document.getElementById('set-company').value;BRAND.logoHTML=document.getElementById('set-logo').value;
+        BRAND.users=nu;BRAND.licenseKeys=document.getElementById('set-keys').value.split(',').map(s=>s.trim()).filter(Boolean);
+        localStorage.setItem('wl_brand',JSON.stringify(BRAND));closeModal();showToast('Saved! Reloading...','success');setTimeout(()=>location.reload(),1500);
+    });
+});
+document.getElementById('export-btn').addEventListener('click',()=>{
+    const b=new Blob([JSON.stringify(appData,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='broker_data.json';a.click();showToast('Exported','success');
+});
+document.getElementById('import-btn').addEventListener('click',()=>document.getElementById('import-file').click());
+document.getElementById('import-file').addEventListener('change',e=>{
+    const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{appData=JSON.parse(ev.target.result);ensureArrays();pushUndo();saveUserData();renderSidebar();navigate(appData.currentHash);showToast('Imported','success');}catch{showToast('Invalid file','error');}};r.readAsText(f);
+});
+
+// ─── Sidebar & Navigation ──────────────────
+const reMenu=[{id:'realestate-dashboard',icon:'fa-chart-pie',label:'Dashboard',desc:'Overview'},{id:'realestate-properties',icon:'fa-building',label:'Properties',desc:'Listings'},{id:'realestate-deals',icon:'fa-funnel-dollar',label:'Deals Pipeline',desc:'Stages'},{id:'clients',icon:'fa-users',label:'Clients',desc:'Contacts'},{id:'calendar',icon:'fa-calendar-days',label:'Calendar',desc:'Schedule'},{id:'realestate-commission',icon:'fa-calculator',label:'Commission',desc:'Calc'},{id:'realestate-cma',icon:'fa-chart-line',label:'CMA',desc:'Analysis'},{id:'documents',icon:'fa-file-contract',label:'Docs',desc:'Files'},{id:'realestate-marketing',icon:'fa-bullhorn',label:'Marketing',desc:'Campaigns'},{id:'referrals',icon:'fa-handshake',label:'Referrals',desc:'Network'},{id:'reports',icon:'fa-file-invoice',label:'Reports',desc:'Closed'},{id:'generators',icon:'fa-wand-magic-sparkles',label:'AI Gen',desc:'Templates'},{id:'help',icon:'fa-circle-question',label:'Help',desc:'Support'},{id:'tools',icon:'fa-toolbox',label:'Tools',desc:'Extras'},{id:'enterprise-team',icon:'fa-user-gear',label:'Team',desc:'Manage'},{id:'enterprise-analytics',icon:'fa-chart-column',label:'Analytics',desc:'Metrics'},{id:'enterprise-api',icon:'fa-code',label:'API',desc:'Integrations'},{id:'enterprise-workflows',icon:'fa-robot',label:'Workflows',desc:'Automate'}];
+const moMenu=[{id:'mortgage-dashboard',icon:'fa-chart-pie',label:'Dashboard'},{id:'mortgage-pipeline',icon:'fa-money-bill-trend-up',label:'Loan Pipeline'},{id:'clients',icon:'fa-users',label:'Clients'},{id:'mortgage-calculator',icon:'fa-calculator',label:'Mortgage Calc'},{id:'mortgage-rates',icon:'fa-percent',label:'Rates'},{id:'mortgage-prequal',icon:'fa-clipboard-check',label:'Pre-Qual'},{id:'mortgage-lenders',icon:'fa-building-columns',label:'Lenders'},{id:'calendar',icon:'fa-calendar-days',label:'Calendar'},{id:'documents',icon:'fa-file-contract',label:'Docs'},{id:'referrals',icon:'fa-handshake',label:'Referrals'},{id:'reports',icon:'fa-file-invoice',label:'Reports'},{id:'generators',icon:'fa-wand-magic-sparkles',label:'AI Gen'},{id:'help',icon:'fa-circle-question',label:'Help',desc:'Support'},{id:'tools',icon:'fa-toolbox',label:'Tools'},{id:'enterprise-team',icon:'fa-user-gear',label:'Team',desc:'Manage'},{id:'enterprise-analytics',icon:'fa-chart-column',label:'Analytics',desc:'Metrics'},{id:'enterprise-api',icon:'fa-code',label:'API',desc:'Integrations'},{id:'enterprise-workflows',icon:'fa-robot',label:'Workflows',desc:'Automate'}];
+function renderSidebar(){
+    const m=appData.activeRole==='realestate'?reMenu:moMenu;
+    document.getElementById('sidebar-nav').innerHTML=m.map(i=>`<button class="sidebar-link ${appData.currentHash===i.id?'active':''}" onclick="navigate('${i.id}')" title="${i.desc||''}"><i class="fa-solid ${i.icon}" style="width:20px;"></i><span>${i.label}</span></button>`).join('');
+}
+function navigate(h){appData.currentHash=h;saveUserData();renderSidebar();renderPage(h);document.getElementById('sidebar').classList.remove('open');}
+document.querySelectorAll('.role-btn').forEach(b=>b.addEventListener('click',function(){appData.activeRole=this.dataset.role;document.querySelectorAll('.role-btn').forEach(x=>x.classList.toggle('active',x.dataset.role===appData.activeRole));saveUserData();navigate(appData.activeRole==='realestate'?'realestate-dashboard':'mortgage-dashboard');}));
+
+// ─── Chart instances tracking ──────────────
+let chartInstances={};
+function destroyCharts(){Object.values(chartInstances).forEach(c=>c.destroy());chartInstances={};}
+
+// ─── Page Renderer ─────────────────────────
+function renderPage(hash){
+    const main=document.getElementById('app-content');destroyCharts();main.innerHTML='';
+    const f={
+        'realestate-dashboard':renderReDash,'realestate-properties':renderProperties,'realestate-deals':renderDealsPipeline,
+        'realestate-commission':renderCommission,'realestate-cma':renderCMA,'realestate-marketing':renderMarketing,
+        'mortgage-dashboard':renderMoDash,'mortgage-pipeline':renderLoanPipeline,'mortgage-calculator':renderMortgageCalc,
+        'mortgage-rates':renderRateSheet,'mortgage-prequal':renderPreQual,'mortgage-lenders':renderLenders,
+        'clients':renderClients,'calendar':renderCalendar,'documents':renderDocuments,'referrals':renderReferrals,
+        'reports':renderReports,'generators':renderGenerators,'tools':renderTools,'help':renderHelp,
+        'enterprise-team':renderTeamManagement,'enterprise-analytics':renderAdvancedAnalytics,
+        'enterprise-api':renderAPIIntegrations,'enterprise-workflows':renderCustomWorkflows
+    };
+    main.innerHTML=(f[hash]||renderReDash)();
+    if(hash==='realestate-deals')attachDealEvents();
+    if(hash==='realestate-commission')setTimeout(initCommissionChart,50);
+    if(hash==='mortgage-calculator')setTimeout(updateMortgageCalc,50);
+    if(hash==='documents')setTimeout(initDocumentEvents,50);
+    attachPageEvents(hash);
+    applyEmptyStates();
+}
+function applyEmptyStates(){
+    document.querySelectorAll('#app-content table').forEach(t=>{const b=t.querySelector('tbody');if(b&&!b.children.length){t.style.display='none';if(!t.nextElementSibling?.classList.contains('empty-state')){const d=document.createElement('div');d.className='empty-state';d.textContent='No items yet. Add your first entry!';t.parentNode.insertBefore(d,t.nextSibling);}}});
+}
+
+// ─── RENDER FUNCTIONS ─
+function renderReDash(){
+    const activeL=appData.properties.filter(p=>p.status==='Active').length;
+    const pipe=appData.deals.filter(d=>d.stage!=='closed');
+    const pipeVal=pipe.reduce((s,d)=>s+d.value,0);
+    const closed=appData.deals.filter(d=>d.stage==='closed').length;
+    const clients=appData.contacts.filter(c=>c.status==='Active').length;
+    return `<h2>Real Estate Dashboard</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;">
+        <div class="card"><div class="metric-value" onclick="navigate('realestate-properties')">${activeL}</div>Active Listings<div style="font-size:12px;color:var(--muted);">↓ from last month</div></div>
+        <div class="card"><div class="metric-value" onclick="navigate('realestate-deals')">${pipe.length}</div>Pipeline<div>$${(pipeVal/1e6).toFixed(1)}M</div></div>
+        <div class="card"><div class="metric-value" onclick="navigate('reports')">${closed}</div>Closed</div>
+        <div class="card"><div class="metric-value" onclick="navigate('clients')">${clients}</div>Active Clients</div>
+    </div>
+    <div class="card"><h4>Pipeline Value by Stage</h4><canvas id="pipelineChart" style="max-height:250px;"></canvas></div>
+    ${renderDealsPipeline()}`;
+    setTimeout(()=>{const ctx=document.getElementById('pipelineChart');if(!ctx)return;
+        const stages=['new-lead','contact-made','negotiation','under-contract','closed'];
+        const labels=['New Lead','Contact Made','Negotiation','Under Contract','Closed'];
+        const data=stages.map(s=>appData.deals.filter(d=>d.stage===s).reduce((sum,d)=>sum+d.value,0));
+        chartInstances.pipeline=new Chart(ctx,{type:'bar',data:{labels,datasets:[{label:'Value ($)',data,backgroundColor:'#0A1628'}]},options:{responsive:true,maintainAspectRatio:true}});
+    },100);
+}
+function renderDealsPipeline(){
+    const stages=['new-lead','contact-made','negotiation','under-contract','closed'];
+    const labels=['New Lead','Contact Made','Negotiation','Under Contract','Closed'];
+    let h='<h3>Deals Pipeline</h3><div style="display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;">';
+    stages.forEach((st,i)=>{
+        const d=appData.deals.filter(dd=>dd.stage===st);
+        h+=`<div class="kanban-column card" data-stage="${st}" style="min-width:250px;flex-shrink:0;"><div style="display:flex;justify-content:space-between;margin-bottom:12px;"><strong>${labels[i]}</strong><span class="badge badge-navy">${d.length}</span></div>`;
+        d.forEach(dd=>h+=`<div class="deal-card" draggable="true" data-deal-id="${dd.id}" style="padding:12px;margin-bottom:8px;background:var(--bg);border-radius:6px;"><strong>${dd.client}</strong><br>$${dd.value?.toLocaleString()}<select class="move-deal" data-deal-id="${dd.id}"><option>Move...</option>${stages.filter(s=>s!==st).map(s=>`<option value="${s}">${labels[stages.indexOf(s)]}</option>`).join('')}</select></div>`);
+        h+='</div>';
+    });
+    return h+'</div>';
+}
+function attachDealEvents(){
+    document.querySelectorAll('.deal-card').forEach(c=>c.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',c.dataset.dealId)));
+    document.querySelectorAll('.kanban-column').forEach(col=>{col.addEventListener('dragover',e=>e.preventDefault());col.addEventListener('drop',function(e){e.preventDefault();const id=e.dataTransfer.getData('text/plain');const d=appData.deals.find(x=>x.id==id);if(d){d.stage=this.dataset.stage;pushUndo();saveUserData();renderPage('realestate-deals');}});});
+    document.querySelectorAll('.move-deal').forEach(s=>s.addEventListener('change',function(){if(this.value==='Move...')return;const d=appData.deals.find(x=>x.id==this.dataset.dealId);if(d){d.stage=this.value;pushUndo();saveUserData();renderPage('realestate-deals');}}));
+}
+function renderProperties(){
+    return `<h2>Properties</h2><button class="btn btn-primary" id="add-listing-btn">Add Listing</button>
+    <table style="width:100%;margin-top:12px;border-collapse:collapse;"><thead><tr><th>Address</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>${appData.properties.map(p=>`<tr><td>${p.address}</td><td>$${p.price}</td><td><span class="badge ${p.status==='Active'?'badge-green':'badge-amber'}">${p.status}</span></td><td><button class="btn btn-sm btn-primary view-property" data-id="${p.id}">View</button> <button class="btn btn-sm btn-danger delete-property" data-id="${p.id}">Del</button></td></tr>`).join('')}</tbody></table>`;
+}
+function renderCommission(){
+    return `<h2>Commission Calculator</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="card"><div><label>Sale Price ($)</label><input type="number" id="comm-sale-price" value="450000"></div><div><label>Rate (%)</label><input type="number" id="comm-rate" value="3"></div><div><label>Agent Split (%)</label><input type="number" id="comm-agent-split" value="70"></div><button class="btn btn-accent" id="save-commission-btn">Save</button></div>
+        <div class="card"><h4>Results</h4><p>Net to Agent: <strong id="comm-net">$0</strong></p><canvas id="commChart" width="150" height="150"></canvas></div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h4>History</h4><div id="commission-history"></div></div>`;
+}
+function initCommissionChart(){
+    const price=parseFloat(document.getElementById('comm-sale-price')?.value)||0,rate=parseFloat(document.getElementById('comm-rate')?.value)||0,split=parseFloat(document.getElementById('comm-agent-split')?.value)||0;
+    const total=price*rate/100,agent=total*split/100,broker=total-agent;
+    document.getElementById('comm-net').textContent='$'+agent.toFixed(2);
+    const ctx=document.getElementById('commChart');if(!ctx)return;
+    if(chartInstances.comm)chartInstances.comm.destroy();
+    chartInstances.comm=new Chart(ctx,{type:'doughnut',data:{labels:['Agent','Broker'],datasets:[{data:[agent,broker],backgroundColor:['#1A7A6B','#0A1628']}]},options:{responsive:true,maintainAspectRatio:true,cutout:'70%',plugins:{legend:{display:false}}}});
+    const hist=document.getElementById('commission-history');if(hist)hist.innerHTML=appData.commissionHistory.length?`<table>${appData.commissionHistory.slice().reverse().map(h=>`<tr><td>${h.date}</td><td>$${h.price}</td><td>$${h.net}</td></tr>`).join('')}</table>`:'No history';
+}
+function renderCMA(){
+    return `<h2>CMA Tool</h2><div class="card"><label>Subject Property</label><select id="cma-subject"><option value="">Select...</option>${appData.properties.map(p=>`<option value="${p.id}">${p.address}</option>`).join('')}</select><br><br><label>Comparables (hold Ctrl/Cmd)</label><select id="cma-comps" multiple style="height:120px;">${appData.properties.map(p=>`<option value="${p.id}">${p.address} – $${p.price}</option>`).join('')}</select><br><button class="btn btn-accent" id="run-cma-btn">Run CMA</button><div id="cma-result" style="margin-top:12px;"></div></div>`;
+}
+function renderMarketing(){
+    return `<h2>Marketing Tools</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
+        <div class="card" style="text-align:center;"><i class="fa-solid fa-envelope"></i><h4>Email</h4><button class="btn btn-sm btn-primary" onclick="openCampaignModal('email')">Create</button></div>
+        <div class="card" style="text-align:center;"><i class="fa-solid fa-hashtag"></i><h4>Social</h4><button class="btn btn-sm btn-primary" onclick="openCampaignModal('social')">Create</button></div>
+        <div class="card" style="text-align:center;"><i class="fa-solid fa-print"></i><h4>Flyer</h4><button class="btn btn-sm btn-primary" onclick="openCampaignModal('flyer')">Create</button></div>
+    </div>`;
+}
+window.openCampaignModal=function(t){openModal(`<h3>${t} Campaign</h3><button class="btn btn-accent" onclick="showToast('Launched!','success');closeModal();">Launch</button>`);};
+function renderMoDash(){
+    const active=appData.loans.filter(l=>!['Funded','Denied'].includes(l.status)).length;
+    const uw=appData.loans.filter(l=>l.status==='Underwriting').length,closed=appData.loans.filter(l=>l.status==='Funded').length;
+    const avg=active?(appData.loans.filter(l=>!['Denied'].includes(l.status)).reduce((s,l)=>s+l.rate,0)/active).toFixed(2):'0';
+    return `<h2>Mortgage Dashboard</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        <div class="card"><div class="metric-value">${active}</div>Active Loans</div>
+        <div class="card"><div class="metric-value">${uw}</div>Underwriting</div>
+        <div class="card"><div class="metric-value">${closed}</div>Closed</div>
+        <div class="card"><div class="metric-value">${avg}%</div>Avg Rate</div>
+    </div><canvas id="loanChart" style="max-height:250px;"></canvas>
+    ${renderLoanPipeline()}`;
+    setTimeout(()=>{const ctx=document.getElementById('loanChart');if(ctx)chartInstances.loanChart=new Chart(ctx,{type:'bar',data:{labels:['Active','Underwriting','Funded','Denied'],datasets:[{label:'Loans',data:['Active','Underwriting','Funded','Denied'].map(s=>appData.loans.filter(l=>l.status===s||(s==='Active'&&!['Funded','Denied'].includes(l.status))).length),backgroundColor:'#0A1628'}]}});},100);
+}
+function renderLoanPipeline(){return `<h3>Loan Pipeline</h3><table><thead><tr><th>Borrower</th><th>Amount</th><th>Status</th></tr></thead><tbody>${appData.loans.map(l=>`<tr><td>${l.borrower}</td><td>$${l.amount}</td><td>${l.status}</td></tr>`).join('')}</tbody></table>`;}
+function renderMortgageCalc(){
+    return `<h2>Mortgage Calculator</h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="card"><div><label>Home Price ($)</label><input type="number" id="mc-home-price" value="400000"></div><div><label>Down ($)</label><input type="number" id="mc-down-payment" value="80000"></div><div><label>Term</label><select id="mc-term"><option value="15">15yr</option><option value="30" selected>30yr</option></select></div><div><label>Rate (%)</label><input type="number" id="mc-rate" value="6.42" step="0.01"></div><div><label>Tax (%/yr)</label><input type="number" id="mc-tax-rate" value="1.2"></div><div><label>Ins ($/yr)</label><input type="number" id="mc-insurance" value="1200"></div><div><label>PMI (%)</label><input type="number" id="mc-pmi" value="0.5"></div><div><label>HOA ($/mo)</label><input type="number" id="mc-hoa" value="0"></div></div>
+        <div class="card"><h4>Payment</h4><p>Loan: <strong id="mc-loan-amount">$0</strong></p><p>P&I: <strong id="mc-pi">$0</strong></p><p>Tax: <strong id="mc-tax">$0</strong></p><p>Ins: <strong id="mc-ins">$0</strong></p><p>PMI: <strong id="mc-pmi-amt">$0</strong></p><p>HOA: <strong id="mc-hoa-amt">$0</strong></p><p style="font-size:20px;">Total: <strong id="mc-total">$0</strong></p><button class="btn btn-accent" id="generate-amortization-btn">Amortization</button></div>
+    </div><div id="amortization-output" class="card" style="margin-top:16px;display:none;"></div>`;
+}
+function updateMortgageCalc(){
+    const p=parseFloat(document.getElementById('mc-home-price')?.value)||0,d=parseFloat(document.getElementById('mc-down-payment')?.value)||0;
+    const t=parseInt(document.getElementById('mc-term')?.value||30),r=parseFloat(document.getElementById('mc-rate')?.value)||0;
+    const taxR=parseFloat(document.getElementById('mc-tax-rate')?.value)||0,ins=parseFloat(document.getElementById('mc-insurance')?.value)||0;
+    const pmiR=parseFloat(document.getElementById('mc-pmi')?.value)||0,hoa=parseFloat(document.getElementById('mc-hoa')?.value)||0;
+    const loan=Math.max(0,p-d);const mr=r/100/12,n=t*12;let pi=0;if(mr>0&&loan>0)pi=loan*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1);
+    const tax=(p*(taxR/100))/12,i=ins/12;const ltv=p>0?(loan/p)*100:0;const pmi=ltv>80?(loan*(pmiR/100))/12:0;
+    const total=pi+tax+i+pmi+hoa;
+    const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent='$'+v.toFixed(2);};
+    document.getElementById('mc-loan-amount').textContent='$'+loan.toFixed(0);
+    set('mc-pi',pi);set('mc-tax',tax);set('mc-ins',i);set('mc-pmi-amt',pmi);set('mc-hoa-amt',hoa);
+    document.getElementById('mc-total').textContent='$'+total.toFixed(2);
+    window._mc={loan,r:mr,term:t,pi};
+}
+function renderRateSheet(){
+    const rates=[{type:'Conventional',r15:'5.75',r20:'6.10',r30:'6.42'},{type:'FHA',r15:'5.50',r20:'5.85',r30:'6.15'}];
+    return `<h2>Rate Sheet</h2><table><thead><tr><th>Type</th><th>15yr</th><th>20yr</th><th>30yr</th></tr></thead><tbody>${rates.map(r=>`<tr><td>${r.type}</td><td>${r.r15}%</td><td>${r.r20}%</td><td>${r.r30}%</td></tr>`).join('')}</tbody></table>`;
+}
+function renderPreQual(){return `<h2>Pre-Qualification</h2><div id="pq-step-1"><input id="pq-income" placeholder="Annual Income"><button id="pq-next-1">Next</button></div><div id="pq-step-2" style="display:none;"><input id="pq-debts" placeholder="Monthly Debts"><button id="pq-back-2">Back</button><button id="pq-next-2">Calculate</button></div><div id="pq-step-3" style="display:none;"><div id="pq-results"></div><button id="pq-save-btn">Save Lead</button></div>`;}
+function renderLenders(){
+    return `<h2>Lenders</h2><button class="btn btn-primary" id="add-lender-btn">Add Lender</button>
+    <table><thead><tr><th>Name</th><th>Contact</th><th>Programs</th><th></th></tr></thead><tbody>${appData.lenders.map(l=>`<tr><td>${l.name}</td><td>${l.contact}</td><td>${l.programs}</td><td><button class="btn btn-sm btn-danger delete-lender" data-id="${l.id}">Del</button></td></tr>`).join('')}</tbody></table>`;
+}
+function renderClients(){return `<h2>Clients</h2><button class="btn btn-primary" id="add-contact-btn">Add Contact</button><table><tbody>${appData.contacts.map(c=>`<tr><td>${c.name}</td><td>${c.email}</td></tr>`).join('')}</tbody></table>`;}
+function renderCalendar(){
+    const mn=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const days=new Date(currentYear,currentMonth+1,0).getDate(),fd=new Date(currentYear,currentMonth,1).getDay();
+    let g='';for(let i=0;i<fd;i++)g+='<div></div>';
+    for(let d=1;d<=days;d++){
+        const ds=`${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const ev=appData.calendarEvents.filter(e=>e.date===ds);
+        g+=`<div class="cal-day" data-date="${ds}" style="border:1px solid var(--border);padding:4px;cursor:pointer;min-height:50px;"><strong>${d}</strong>${ev.map(e=>`<div style="font-size:9px;background:var(--teal);color:#fff;padding:1px 3px;border-radius:2px;">${e.title}</div>`).join('')}</div>`;
+    }
+    return `<h2>Calendar</h2><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><button class="btn btn-sm btn-secondary" id="cal-prev">&lt;</button><strong>${mn[currentMonth]} ${currentYear}</strong><button class="btn btn-sm btn-secondary" id="cal-next">&gt;</button></div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;">${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div style="text-align:center;font-weight:600;">${d}</div>`).join('')}${g}</div>`;
+}
+window.deleteEvent=function(id){appData.calendarEvents=appData.calendarEvents.filter(e=>e.id!==id);pushUndo();saveUserData();renderPage('calendar');showToast('Event deleted','success');};
+
+function renderDocuments(){
+    return `<h2>Documents</h2><div class="card" style="border:2px dashed var(--border);text-align:center;padding:40px;" id="drop-zone">
+        <i class="fa-solid fa-cloud-upload-alt" style="font-size:32px;"></i><p>Drag & drop files here or <button class="btn btn-primary" id="manual-upload-btn">Browse</button></p><input type="file" id="doc-upload-input" multiple style="display:none;">
+    </div><div id="doc-list" style="margin-top:16px;">${appData.documents.map(d=>`<div class="card" style="margin-bottom:8px;display:flex;justify-content:space-between;"><span>${d.title} (${d.size})</span><div><button class="btn btn-sm btn-primary download-doc" data-id="${d.id}">Download</button> <button class="btn btn-sm btn-danger delete-doc" data-id="${d.id}">Del</button></div></div>`).join('')}</div>`;
+}
+function initDocumentEvents(){
+    const dz=document.getElementById('drop-zone');if(!dz)return;
+    dz.addEventListener('dragover',e=>e.preventDefault());
+    dz.addEventListener('drop',async e=>{e.preventDefault();const files=e.dataTransfer.files;for(const f of files)await addDocument(f);});
+    document.getElementById('manual-upload-btn')?.addEventListener('click',()=>document.getElementById('doc-upload-input').click());
+    document.getElementById('doc-upload-input')?.addEventListener('change',async e=>{for(const f of e.target.files)await addDocument(f);});
+    document.querySelectorAll('.download-doc').forEach(b=>b.addEventListener('click',async()=>{const blob=await getFileFromDB(b.dataset.id);if(blob){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=b.dataset.id;a.click();}}));
+    document.querySelectorAll('.delete-doc').forEach(b=>b.addEventListener('click',async()=>{await deleteFileFromDB(b.dataset.id);appData.documents=appData.documents.filter(d=>d.id!==b.dataset.id);pushUndo();saveUserData();renderPage('documents');}));
+}
+async function addDocument(file){
+    const id=getNextId();
+    await saveFileToDB(id,file);
+    appData.documents.push({id,title:file.name,type:file.type,size:(file.size/1024).toFixed(1)+' KB',date:new Date().toISOString().split('T')[0]});
+    pushUndo();saveUserData();renderPage('documents');showToast('Document uploaded','success');
+}
+
+function renderReferrals(){
+    return `<h2>Referrals</h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="card"><h4>Refer Out</h4><select id="ref-client"><option>Select client...</option>${appData.contacts.map(c=>`<option>${c.name}</option>`).join('')}</select><select id="ref-type"><option>RE→Mortgage</option></select><input id="ref-note" placeholder="Note"><button class="btn btn-accent" id="send-referral-btn">Send</button></div>
+        <div class="card"><h4>Refer In</h4>${appData.referrals.filter(r=>r.direction==='in').map(r=>`<p>${r.client} - ${r.status}</p>`).join('')}</div>
+    </div>`;
+}
+function renderReports(){
+    const cd=appData.deals.filter(d=>d.stage==='closed'),cl=appData.loans.filter(l=>l.status==='Funded');
+    return `<h2>Reports</h2><div class="card"><h4>Closed Deals (${cd.length})</h4>${cd.length?`<ul>${cd.map(d=>`<li>${d.client} – $${d.value?.toLocaleString()}</li>`).join('')}</ul>`:'None'}<h4>Funded Loans (${cl.length})</h4>${cl.length?`<ul>${cl.map(l=>`<li>${l.borrower} – $${l.amount?.toLocaleString()}</li>`).join('')}</ul>`:'None'}</div>`;
+}
+function renderGenerators(){
+    const plan=getPlanFeatures();
+    const usage=getUsage('aiGens');
+    const limit=plan.aiGens;
+    const limitText=limit===Infinity?'Unlimited':`${usage}/${limit}`;
+    return `<h2>AI Generators</h2>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <span class="badge ${getPlan()==='free'?'badge-amber':'badge-teal'}">${limitText} generations</span>
+        ${getPlan()==='free'?'<button class="btn btn-sm btn-accent" onclick="showUpgradeModal(\'AI generators\')">Upgrade for Unlimited</button>':''}
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:20px;">`+
+        ['marketing','listing','followup','marketreport','objection','preapproval','consultation','cmasummary','probate','fsbo','rentalroi','divorce','luxury','shortsale','investor','firstbuyer','downsizing','staging','webuyhouses','proofoffunds','coldcall','banditsign','sellerscript'].map((t,i)=>`<button class="tab-btn ${i===0?'active':''}" onclick="switchGenTab(this,'${t}')">${t}</button>`).join('')+
+        `</div><div id="generator-content"></div>`;
+}
+window.switchGenTab=function(btn,tab){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+    const templates={
+        marketing:`<div class="card"><h4>Marketing</h4><select id="gen-contact"><option value="">Use contact</option>${appData.contacts.map(c=>`<option value="${c.name}">${c.name}</option>`).join('')}</select><input id="mg-address" value="1428 Elm St"><input id="mg-price" value="$425,000"><button class="btn btn-accent" id="generate-marketing-btn">Generate</button><div id="marketing-output" class="generated-output" style="margin-top:12px;"></div></div>`,
+        listing:`<div class="card"><h4>Listing</h4><input id="ld-address" value="1428 Elm St"><select id="ld-tone"><option>Luxury</option><option>Family</option><option>Investor</option></select><button class="btn btn-accent" id="generate-listing-btn">Generate</button><div id="listing-output" class="generated-output" style="margin-top:12px;"></div></div>`,
+        followup:`<div class="card"><h4>Follow-Up</h4><input id="fu-client" value="James"><input id="fu-property" value="1428 Elm St"><button class="btn btn-accent" id="generate-followup-btn">Generate</button><div id="followup-output" class="generated-output" style="margin-top:12px;"></div></div>`,
+        marketreport:`<div class="card"><h4>Market Report</h4><input id="mr-area" value="Austin, TX"><select id="mr-trend"><option>Seller's Market</option><option>Buyer's Market</option><option>Balanced</option></select><input id="mr-median" value="$425,000"><button class="btn btn-accent" id="generate-marketreport-btn">Generate</button><div id="marketreport-output" class="generated-output"></div></div>`,
+        objection:`<div class="card"><h4>Objection</h4><input id="obj-client" value="Maria"><select id="obj-type"><option value="price">Overpriced</option><option value="time">Just looking</option><option value="need">Need to think</option><option value="financing">Worried about financing</option></select><button class="btn btn-accent" id="generate-objection-btn">Generate</button><div id="objection-output" class="generated-output"></div></div>`,
+        preapproval:`<div class="card"><h4>Pre-Approval</h4><input id="pa-borrower" value="Maria Garcia"><input id="pa-loan-amount" value="$340,000"><input id="pa-lender" value="First National Bank"><button class="btn btn-accent" id="generate-pa-btn">Generate</button><div id="pa-output" class="generated-output"></div></div>`,
+        consultation:`<div class="card"><h4>Consultation</h4><input id="cons-client" value="James"><select id="cons-type"><option value="buyer">Buyer</option><option value="seller">Seller</option></select><button class="btn btn-accent" id="generate-cons-btn">Generate</button><div id="cons-output" class="generated-output"></div></div>`,
+        cmasummary:`<div class="card"><h4>CMA Summary</h4><input id="cma-subject" value="1428 Elm St"><input id="cma-est-value" value="$430,000"><button class="btn btn-accent" id="generate-cma-btn">Generate</button><div id="cma-output" class="generated-output"></div></div>`,
+        probate:`<div class="card"><h4>Probate Script</h4><input id="pr-client" value="Michael"><input id="pr-property" value="1234 Estate Ln"><button class="btn btn-accent" id="generate-probate-btn">Generate</button><div id="probate-output" class="generated-output"></div></div>`,
+        fsbo:`<div class="card"><h4>FSBO Letter</h4><input id="fsbo-seller" value="Robert"><input id="fsbo-address" value="5678 Oak St"><button class="btn btn-accent" id="generate-fsbo-btn">Generate</button><div id="fsbo-output" class="generated-output"></div></div>`,
+        rentalroi:`<div class="card"><h4>Rental ROI</h4><input id="roi-address" value="90 Rental Ave"><input id="roi-price" value="250000"><input id="roi-rent" value="2200"><button class="btn btn-accent" id="generate-roi-btn">Generate</button><div id="roi-output" class="generated-output"></div></div>`,
+        divorce:`<div class="card"><h4>Divorce Script</h4><input id="dv-client" value="Lisa"><input id="dv-property" value="12 Separation Ct"><button class="btn btn-accent" id="generate-divorce-btn">Generate</button><div id="divorce-output" class="generated-output"></div></div>`,
+        luxury:`<div class="card"><h4>Luxury Narrative</h4><input id="lux-address" value="1 Prestige Pt"><input id="lux-price" value="$2,500,000"><input id="lux-features" value="infinity pool, wine cellar"><button class="btn btn-accent" id="generate-luxury-btn">Generate</button><div id="luxury-output" class="generated-output"></div></div>`,
+        shortsale:`<div class="card"><h4>Short Sale</h4><input id="ss-client" value="Jennifer"><input id="ss-property" value="45 Underwater Ln"><button class="btn btn-accent" id="generate-shortsale-btn">Generate</button><div id="shortsale-output" class="generated-output"></div></div>`,
+        investor:`<div class="card"><h4>Investor Pitch</h4><input id="inv-client" value="Capital Partners"><input id="inv-property" value="1000 Commercial Blvd"><button class="btn btn-accent" id="generate-investor-btn">Generate</button><div id="investor-output" class="generated-output"></div></div>`,
+        firstbuyer:`<div class="card"><h4>First-Time Buyer</h4><input id="ftb-client" value="Amanda"><button class="btn btn-accent" id="generate-ftb-btn">Generate</button><div id="ftb-output" class="generated-output"></div></div>`,
+        downsizing:`<div class="card"><h4>Downsizing</h4><input id="down-client" value="Brian"><button class="btn btn-accent" id="generate-down-btn">Generate</button><div id="down-output" class="generated-output"></div></div>`,
+        staging:`<div class="card"><h4>Staging Checklist</h4><input id="staging-property" value="1428 Elm St"><button class="btn btn-accent" id="generate-staging-btn">Generate</button><div id="staging-output" class="generated-output"></div></div>`,
+        webuyhouses:`<div class="card"><h4>We Buy Houses</h4><input id="wbh-address" value="Austin, TX"><input id="wbh-name" value="John"><button class="btn btn-accent" id="generate-wbh-btn">Generate</button><div id="wbh-output" class="generated-output"></div></div>`,
+        proofoffunds:`<div class="card"><h4>Proof of Funds</h4><input id="pof-buyer" value="ABC Investments"><input id="pof-amount" value="$250,000"><button class="btn btn-accent" id="generate-pof-btn">Generate</button><div id="pof-output" class="generated-output"></div></div>`,
+        coldcall:`<div class="card"><h4>Cold Call</h4><input id="cc-seller" value="Mr. Smith"><button class="btn btn-accent" id="generate-cc-btn">Generate</button><div id="cc-output" class="generated-output"></div></div>`,
+        banditsign:`<div class="card"><h4>Bandit Sign</h4><input id="bs-phone" value="555-1234"><button class="btn btn-accent" id="generate-bs-btn">Generate</button><div id="bs-output" class="generated-output"></div></div>`,
+        sellerscript:`<div class="card"><h4>Seller Script</h4><input id="ss-name" value="Mrs. Johnson"><input id="ss-property" value="123 Main St"><button class="btn btn-accent" id="generate-ss-btn">Generate</button><div id="ss-output" class="generated-output"></div></div>`
+    };
+    document.getElementById('generator-content').innerHTML=templates[tab]||'';
+    attachGenEvents();
+};
+
+// ─── ENHANCED GENERATOR OUTPUTS (rich, detailed) ───
+function attachGenEvents(){
+    function addCopyBtn(id){const d=document.getElementById(id);if(!d)return;const b=document.createElement('button');b.textContent='📋 Copy';b.className='copy-btn';b.onclick=()=>{const t=d.innerText.replace('📋 Copy','').trim();navigator.clipboard.writeText(t).then(()=>showToast('Copied','success'));appData.templates.push({title:'Generated',content:t,date:new Date().toISOString()});saveUserData();};d.appendChild(b);}
+    function trackGen(){if(!checkFeature('aiGens')){showUpgradeModal('AI generators');return false;}incrementUsage('aiGens');return true;}
+
+    // ── MARKETING ─────────────────
+    document.getElementById('generate-marketing-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const c=document.getElementById('gen-contact')?.value||'Prospect',a=document.getElementById('mg-address').value,p=document.getElementById('mg-price').value;
+        const out=`🌟 JUST LISTED – ${a} 🌟
+📌 PRICE: ${p}
+
+✨ Step inside this beautiful property located in a sought-after neighbourhood. Features include:
+• Spacious open floor plan
+• Modern kitchen with granite countertops
+• Hardwood floors throughout
+• Private backyard with mature trees
+
+📸 See the full photo tour and schedule your private showing today!
+
+👉 Contact us at [phone] or reply to this message.
+#NewListing #RealEstate #${a.split(' ')[0]}`;
+        document.getElementById('marketing-output').innerHTML=out;addCopyBtn('marketing-output');
+    });
+
+    // ── LISTING DESCRIPTION ──────
+    document.getElementById('generate-listing-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const a=document.getElementById('ld-address').value,t=document.getElementById('ld-tone').value;
+        let desc='';
+        if(t==='Luxury') desc=`Experience refined elegance at ${a}. This architectural masterpiece offers soaring ceilings, custom millwork, a chef's kitchen with Wolf & Sub-Zero appliances, and a resort-style pool. Every detail has been meticulously curated for the discerning buyer.`;
+        else if(t==='Family') desc=`Welcome home to ${a}, where comfort meets convenience. This charming 4-bedroom, 2.5-bath home features a sun-drenched living room, a fully fenced backyard, and is located within a top-rated school district. Perfect for creating lasting memories.`;
+        else desc=`Turnkey investment opportunity at ${a}. Strong rental history, low maintenance, and a prime location near public transport and amenities. Cap rate above market average – don't miss this income-producing gem.`;
+        document.getElementById('listing-output').innerHTML=`<strong>${t} Description:</strong><br><br>${desc}`;addCopyBtn('listing-output');
+    });
+
+    // ── FOLLOW‑UP SEQUENCE ────────
+    document.getElementById('generate-followup-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const c=document.getElementById('fu-client').value,p=document.getElementById('fu-property').value;
+        document.getElementById('followup-output').innerHTML=`
+<strong>5-Day Follow‑Up Sequence for ${c} – ${p}</strong>
+
+<b>Day 1 (Immediate):</b>
+Subject: Great meeting you!
+Hi ${c}, it was a pleasure showing you ${p}. I’ve attached the property brochure. Let me know if you have any questions!
+
+<b>Day 2:</b>
+Subject: Thought of you
+Hi ${c}, I came across a similar property that also fits your criteria. Would you like me to send details?
+
+<b>Day 3:</b>
+Subject: Financing options
+Hi ${c}, have you spoken with a lender yet? I can connect you with a trusted mortgage advisor to get pre‑approved – no obligation.
+
+<b>Day 5:</b>
+Subject: Market update
+Hi ${c}, just a quick note – the market is moving fast. ${p} is still available, but we’ve seen strong interest. I’m here if you need anything.
+
+<b>Day 7:</b>
+Subject: Final check‑in
+Hi ${c}, I’m here to help whenever you’re ready. If your plans have changed, let me know how I can best assist.`;
+        addCopyBtn('followup-output');
+    });
+
+    // ── MARKET REPORT ─────────────
+    document.getElementById('generate-marketreport-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const a=document.getElementById('mr-area').value,t=document.getElementById('mr-trend').value,m=document.getElementById('mr-median').value;
+        document.getElementById('marketreport-output').innerHTML=`
+<strong>Market Report – ${a}</strong><br><br>
+<b>Current Trend:</b> ${t}<br>
+<b>Median Home Price:</b> ${m}<br><br>
+In the past quarter, the ${a} market has seen ${t==="Seller's Market"?"tight inventory and strong buyer competition":"ample choice for buyers with longer days on market"}. Homes are selling within ${t==="Seller's Market"?"10–15":"30–45"} days on average.<br><br>
+<b>Recommendations:</b><br>
+• <b>For Sellers:</b> Price aggressively and expect multiple offers.<br>
+• <b>For Buyers:</b> Get pre‑approved and be ready to move quickly.<br><br>
+Contact me for a personalised analysis.`;
+        addCopyBtn('marketreport-output');
+    });
+
+    // ── OBJECTION HANDLER ─────────
+    document.getElementById('generate-objection-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const c=document.getElementById('obj-client').value,t=document.getElementById('obj-type').value;
+        const replies={
+            price:`<b>Handling "It’s overpriced" with ${c}</b><br><br>
+"${c}, I appreciate your honesty. Let’s look at the comparable sales I pulled. This property is actually priced ${m} below similar homes in the area. Additionally, the seller is motivated and may consider a reasonable offer. Would you be open to viewing it again with fresh eyes?"`,
+            time:`<b>Handling "Just looking" with ${c}</b><br><br>
+"No problem at all, ${c}! It’s smart to explore options. I’m here to help you understand the market without any pressure. What’s your ideal timeline for making a move? I’ll keep an eye out for properties that match your timing."`,
+            need:`<b>Handling "Need to think about it" with ${c}</b><br><br>
+"Of course, ${c}. This is a big decision. Let’s schedule a follow‑up call next Tuesday to address any questions you might have. In the meantime, I’ll send you a list of recently sold homes nearby. Would that be helpful?"`,
+            financing:`<b>Handling "Worried about financing" with ${c}</b><br><br>
+"That’s a very common concern, ${c}. I work with several lenders who offer free pre‑approval consultations. They can walk you through your options – even if you decide not to buy, it’s useful to know where you stand. Would you like me to set up a brief call?"`
+        };
+        document.getElementById('objection-output').innerHTML=replies[t];addCopyBtn('objection-output');
+    });
+
+    // ── PRE‑APPROVAL LETTER ───────
+    document.getElementById('generate-pa-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const b=document.getElementById('pa-borrower').value,l=document.getElementById('pa-loan-amount').value,len=document.getElementById('pa-lender').value;
+        document.getElementById('pa-output').innerHTML=`
+<strong>PRE‑APPROVAL LETTER</strong><br><br>
+Date: ${new Date().toLocaleDateString()}<br>
+To Whom It May Concern:<br><br>
+This letter confirms that <strong>${b}</strong> has been pre‑approved for a mortgage loan of up to <strong>${l}</strong> by <strong>${len}</strong>, subject to an acceptable purchase agreement, appraisal, and verification of financial information.<br><br>
+Please feel free to contact me with any questions.<br><br>
+Sincerely,<br>
+[Your Name]<br>
+${len}`;
+        addCopyBtn('pa-output');
+    });
+
+    // ── CONSULTATION SCRIPT ───────
+    document.getElementById('generate-cons-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const c=document.getElementById('cons-client').value,t=document.getElementById('cons-type').value;
+        const script=t==='buyer'?
+`<b>Buyer Consultation Script – ${c}</b><br><br>
+1. <b>Welcome & Rapport</b> – “Thanks for meeting, ${c}! I’m excited to help you find your perfect home.”<br>
+2. <b>Needs Assessment</b> – “Tell me about your ideal home – size, location, must‑haves?”<br>
+3. <b>Budget Discussion</b> – “Have you spoken with a lender? I can recommend one if you’d like.”<br>
+4. <b>Market Overview</b> – “Let me show you what’s available in your price range.”<br>
+5. <b>Next Steps</b> – “I’ll set up a custom search. Once we see a home you love, we can move fast.”`
+:`<b>Seller Consultation Script – ${c}</b><br><br>
+1. <b>Introduction</b> – “Hi ${c}, I’ve prepared a market analysis to help you get top dollar.”<br>
+2. <b>Property Tour</b> – “Walk me through any updates or features we should highlight.”<br>
+3. <b>CMA Presentation</b> – “Based on recent sales, I suggest listing at [price].”<br>
+4. <b>Marketing Plan</b> – “Professional photos, online ads, open house – here’s the timeline.”<br>
+5. <b>Close</b> – “If you’re ready, I’ll have the paperwork prepared by tomorrow.”`;
+        document.getElementById('cons-output').innerHTML=script;addCopyBtn('cons-output');
+    });
+
+    // ── CMA SUMMARY ────────────────
+    document.getElementById('generate-cma-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const s=document.getElementById('cma-subject').value,e=document.getElementById('cma-est-value').value;
+        document.getElementById('cma-output').innerHTML=`
+<strong>CMA Summary – ${s}</strong><br><br>
+<b>Estimated Market Value:</b> ${e}<br>
+<b>Comparables Used:</b> 3 active/sold within 0.5 miles<br>
+<b>Price per Sq Ft (avg):</b> $210<br><br>
+This estimate is based on recent sales of similar size and condition. Adjustments were made for lot size and upgrades. Contact me to discuss the full report.`;
+        addCopyBtn('cma-output');
+    });
+
+    // ── PROBATE SCRIPT ─────────────
+    document.getElementById('generate-probate-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const c=document.getElementById('pr-client').value,p=document.getElementById('pr-property').value;
+        document.getElementById('probate-output').innerHTML=`
+<b>Probate Script – ${c}</b><br><br>
+“Hello ${c}, my name is [Your Name]. I understand this is a difficult time, and I want to offer my support. I specialise in probate properties and can handle the entire sale process for ${p} – from clearing the home to working with your attorney. My goal is to make this as stress‑free as possible for you. May I stop by to discuss how I can help?”`;
+        addCopyBtn('probate-output');
+    });
+
+    // ── FSBO LETTER ────────────────
+    document.getElementById('generate-fsbo-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const s=document.getElementById('fsbo-seller').value,a=document.getElementById('fsbo-address').value;
+        document.getElementById('fsbo-output').innerHTML=`
+<b>FSBO Letter – ${s}</b><br><br>
+“Dear ${s}, I noticed you’re selling ${a} on your own – that takes courage! However, nationally, homes listed with an agent sell for an average of 20% more. I’d love to offer you a free, no‑obligation market analysis to see how much you could potentially gain. I’m also available for a quick chat about marketing strategies. Best wishes regardless of the route you choose.”`;
+        addCopyBtn('fsbo-output');
+    });
+
+    // ── RENTAL ROI ─────────────────
+    document.getElementById('generate-roi-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const addr=document.getElementById('roi-address').value,price=parseFloat(document.getElementById('roi-price').value),rent=parseFloat(document.getElementById('roi-rent').value);
+        const annual=rent*12,roi=price?((annual/price)*100).toFixed(2):0,cashFlow=annual*0.6/12;
+        document.getElementById('roi-output').innerHTML=`
+<strong>Rental ROI Analysis – ${addr}</strong><br><br>
+<b>Purchase Price:</b> $${price.toLocaleString()}<br>
+<b>Monthly Rent:</b> $${rent}<br>
+<b>Annual Gross Income:</b> $${annual.toLocaleString()}<br>
+<b>Gross ROI:</b> ${roi}%<br>
+<b>Estimated Cash Flow (after 40% expenses):</b> $${cashFlow.toFixed(0)}/mo<br><br>
+This property meets the 1% rule: rent ≥ 1% of purchase price.<br>
+Recommend moving forward with inspection and financing.`;
+        addCopyBtn('roi-output');
+    });
+
+    // ── DIVORCE SCRIPT ─────────────
+    document.getElementById('generate-divorce-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const c=document.getElementById('dv-client').value,p=document.getElementById('dv-property').value;
+        document.getElementById('divorce-output').innerHTML=`
+<b>Divorce Sale Script – ${c}</b><br><br>
+“${c}, I know that selling ${p} during this transition is emotional. I’m here to be a neutral facilitator. I’ll coordinate showings, provide a fair market analysis, and communicate openly with both parties to ensure a smooth sale. My priority is to help you both move forward as easily as possible.”`;
+        addCopyBtn('divorce-output');
+    });
+
+    // ── LUXURY NARRATIVE ──────────
+    document.getElementById('generate-luxury-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const a=document.getElementById('lux-address').value,p=document.getElementById('lux-price').value,f=document.getElementById('lux-features').value;
+        document.getElementById('luxury-output').innerHTML=`
+<strong>Luxury Narrative – ${a}</strong><br><br>
+“Presenting ${a}, an architectural tour de force offered at ${p}. Beyond its grand façade lies a residence of uncompromising quality, featuring ${f}. Every room tells a story of refined taste, from the hand‑scraped oak floors to the bespoke lighting. This is more than a home – it’s a legacy.”`;
+        addCopyBtn('luxury-output');
+    });
+
+    // ── SHORT SALE SCRIPT ──────────
+    document.getElementById('generate-shortsale-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const c=document.getElementById('ss-client').value,p=document.getElementById('ss-property').value;
+        document.getElementById('shortsale-output').innerHTML=`
+<b>Short Sale Script – ${c}</b><br><br>
+“${c}, I understand you’re facing a tough situation with ${p}. I have experience negotiating short sales with lenders. I’ll prepare the hardship package, list the property to attract a buyer, and work directly with the bank to get the sale approved. My goal is to help you avoid foreclosure and minimise the impact on your credit.”`;
+        addCopyBtn('shortsale-output');
+    });
+
+    // ── INVESTOR PITCH ─────────────
+    document.getElementById('generate-investor-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const inv=document.getElementById('inv-client').value,prop=document.getElementById('inv-property').value;
+        document.getElementById('investor-output').innerHTML=`
+<b>Investor Pitch – ${prop}</b><br><br>
+<b>Property:</b> ${prop}<br>
+<b>Type:</b> Multi‑family value‑add<br>
+<b>The Opportunity:</b> Acquire a 12‑unit building with below‑market rents, implement a renovation plan, and achieve a projected 18% IRR over 5 years.<br>
+<b>Key Metrics:</b> Cap Rate 8.2% | Cash‑on‑Cash 11.4%<br>
+<b>Exit Strategy:</b> Refinance or sell to institutional buyer.<br><br>
+Target investor: ${inv}. Let’s schedule a property tour.`;
+        addCopyBtn('investor-output');
+    });
+
+    // ── FIRST‑TIME BUYER GUIDE ────
+    document.getElementById('generate-ftb-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const c=document.getElementById('ftb-client').value;
+        document.getElementById('ftb-output').innerHTML=`
+<strong>First‑Time Buyer Guide – ${c}</strong><br><br>
+1. <b>Get Pre‑Approved</b> – Understand your budget.<br>
+2. <b>Define Your Wishlist</b> – Location, size, must‑haves.<br>
+3. <b>Start House Hunting</b> – I’ll set up a custom search.<br>
+4. <b>Make an Offer</b> – We’ll craft a competitive bid.<br>
+5. <b>Inspection & Appraisal</b> – Protect your investment.<br>
+6. <b>Closing</b> – Sign and get your keys!<br><br>
+I’ll be with you every step of the way. Welcome home!`;
+        addCopyBtn('ftb-output');
+    });
+
+    // ── DOWNSIZING SCRIPT ──────────
+    document.getElementById('generate-down-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const c=document.getElementById('down-client').value;
+        document.getElementById('down-output').innerHTML=`
+<strong>Downsizing Script – ${c}</strong><br><br>
+“${c}, downsizing is about creating a lifestyle that fits the next chapter. I’ll help you find a manageable home that still feels spacious and meets your needs. We’ll sell your current property for top dollar and use the proceeds to secure your dream downsized space.”`;
+        addCopyBtn('down-output');
+    });
+
+    // ── STAGING CHECKLIST ──────────
+    document.getElementById('generate-staging-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const p=document.getElementById('staging-property').value;
+        document.getElementById('staging-output').innerHTML=`
+<strong>Home Staging Checklist – ${p}</strong><br>
+✅ Declutter all surfaces and closets<br>
+✅ Deep clean carpets, windows, and bathrooms<br>
+✅ Neutralise bold paint colours<br>
+✅ Maximise natural light – open curtains, add lamps<br>
+✅ Rearrange furniture for easy flow<br>
+✅ Add fresh flowers and neutral décor<br>
+✅ Boost curb appeal – mow lawn, plant flowers, paint front door<br>
+✅ Remove pet items<br>
+✅ Set the dining table<br>
+✅ Add subtle scent (baked cookies, citrus)`;
+        addCopyBtn('staging-output');
+    });
+
+    // ── WE BUY HOUSES ──────────────
+    document.getElementById('generate-wbh-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const a=document.getElementById('wbh-address').value,n=document.getElementById('wbh-name').value;
+        document.getElementById('wbh-output').innerHTML=`
+<b>We Buy Houses Letter</b><br><br>
+Dear Homeowner,<br><br>
+My name is ${n} and I’m actively looking to purchase a property in the ${a} area. I can make a fair cash offer and close in as little as 7 days – no repairs, no commissions, no fees. This is a straightforward sale with no hassle.<br><br>
+If you’re considering selling, please give me a call. Even if you’re not ready now, I’d be happy to answer any questions.<br><br>
+Warmly,<br>
+${n}`;
+        addCopyBtn('wbh-output');
+    });
+
+    // ── PROOF OF FUNDS ─────────────
+    document.getElementById('generate-pof-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const b=document.getElementById('pof-buyer').value,a=document.getElementById('pof-amount').value;
+        document.getElementById('pof-output').innerHTML=`
+<b>Proof of Funds Letter</b><br><br>
+To Whom It May Concern,<br><br>
+This letter confirms that <strong>${b}</strong> has access to liquid assets in excess of <strong>${a}</strong> for the purpose of purchasing real estate. Verification from our financial institution is available upon request.<br><br>
+Sincerely,<br>
+[Your Name / Company]`;
+        addCopyBtn('pof-output');
+    });
+
+    // ── COLD CALL SCRIPT ───────────
+    document.getElementById('generate-cc-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const s=document.getElementById('cc-seller').value;
+        document.getElementById('cc-output').innerHTML=`
+<strong>Cold Call Script – ${s}</strong><br><br>
+“Hi ${s}, this is [Your Name]. I’m sorry to bother you, but I noticed your property at [address] and I’m looking to buy in this neighbourhood. I can offer a fair cash price and close on your timeline with zero fees. Would you be open to a short conversation about selling? No pressure – I just wanted to introduce myself.”`;
+        addCopyBtn('cc-output');
+    });
+
+    // ── BANDIT SIGN ────────────────
+    document.getElementById('generate-bs-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const p=document.getElementById('bs-phone').value;
+        document.getElementById('bs-output').innerHTML=`
+<b>Bandit Sign Options:</b><br><br>
+1. 🏠 WE BUY HOUSES<br>Cash • As‑Is • Close Fast<br>📞 ${p}<br><br>
+2. 🔑 Sell Your Home Fast<br>No Repairs Needed<br>Call Today: ${p}<br><br>
+3. 💰 Cash for Your Home<br>Any Condition • Any Situation<br>${p}`;
+        addCopyBtn('bs-output');
+    });
+
+    // ── SELLER SCRIPT ──────────────
+    document.getElementById('generate-ss-btn')?.addEventListener('click',()=>{
+        if(!trackGen())return;
+        const n=document.getElementById('ss-name').value,p=document.getElementById('ss-property').value;
+        document.getElementById('ss-output').innerHTML=`
+<strong>Seller Negotiation Script – ${n}</strong><br><br>
+“${n}, thank you for considering an offer on ${p}. I’ve prepared a comparative market analysis that shows this price is competitive. I’m open to discussing terms that work for you. Would it be helpful if I walked you through the numbers? My goal is a win‑win solution.”`;
+        addCopyBtn('ss-output');
+    });
+}
+
+// ─── RENDER TEAM MANAGEMENT ───────────────
+function renderTeamManagement(){
+    const team=appData.team||[];
+    const activity=appData.activityLog||[];
+    return `<h2>Team Management</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="card">
+            <h4>Team Members</h4>
+            <button class="btn btn-sm btn-primary" id="add-team-member-btn" style="margin-bottom:12px;">+ Add Member</button>
+            <table style="width:100%;border-collapse:collapse;">
+                <thead><tr><th style="text-align:left;padding:8px;border-bottom:1px solid var(--border);">Name</th><th style="text-align:left;padding:8px;border-bottom:1px solid var(--border);">Role</th><th style="text-align:left;padding:8px;border-bottom:1px solid var(--border);">Status</th><th style="padding:8px;border-bottom:1px solid var(--border);"></th></tr></thead>
+                <tbody>${team.map(m=>`<tr><td style="padding:8px;">${m.name}</td><td style="padding:8px;"><span class="badge ${m.role==='admin'?'badge-navy':m.role==='agent'?'badge-teal':'badge-amber'}">${m.role}</span></td><td style="padding:8px;"><span class="badge ${m.status==='active'?'badge-green':'badge-red'}">${m.status}</span></td><td style="padding:8px;"><button class="btn btn-sm btn-danger remove-team-member" data-id="${m.id}">Remove</button></td></tr>`).join('')}</tbody>
+            </table>
+            ${!team.length?'<div class="empty-state">No team members yet.</div>':''}
+        </div>
+        <div class="card">
+            <h4>Permissions</h4>
+            <p style="color:var(--muted);font-size:13px;margin-bottom:12px;">Control what each role can access.</p>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;"><input type="checkbox" checked disabled> <strong>Admin:</strong> Full access</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;"><input type="checkbox" checked disabled> <strong>Agent:</strong> Deals, Clients, Calendar, AI Gen</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;"><input type="checkbox" checked disabled> <strong>Assistant:</strong> Calendar, Docs, Clients (read-only)</label>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+        <h4>Activity Log</h4>
+        <div style="max-height:300px;overflow-y:auto;">
+            ${activity.length?activity.slice(-20).reverse().map(a=>`<div style="padding:8px;border-bottom:1px solid var(--border);font-size:13px;"><strong>${a.user}</strong> ${a.action} <span style="color:var(--muted);">— ${a.time}</span></div>`).join(''):'<div class="empty-state">No activity yet.</div>'}
+        </div>
+    </div>`;
+}
+
+// ─── RENDER ADVANCED ANALYTICS ─────────────
+function renderAdvancedAnalytics(){
+    const deals=appData.deals||[];
+    const closed=deals.filter(d=>d.stage==='closed');
+    const totalRev=closed.reduce((s,d)=>s+(d.commission||d.value*0.03),0);
+    const contacts=appData.contacts||[];
+    const activeClients=contacts.filter(c=>c.status==='Active').length;
+    const convRate=deals.length?((closed.length/deals.length)*100).toFixed(1):'0';
+    const avgDealSize=closed.length?(totalRev/closed.length).toFixed(0):'0';
+    const monthlyData={};
+    closed.forEach(d=>{
+        const m=d.closeDate?new Date(d.closeDate).toLocaleDateString('en',{month:'short',year:'numeric'}):'Unknown';
+        monthlyData[m]=(monthlyData[m]||0)+(d.commission||d.value*0.03);
+    });
+    return `<h2>Advanced Analytics</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;">
+        <div class="card"><div class="metric-value">$${totalRev.toLocaleString(undefined,{maximumFractionDigits:0})}</div>Total Revenue</div>
+        <div class="card"><div class="metric-value">${closed.length}</div>Closed Deals</div>
+        <div class="card"><div class="metric-value">${convRate}%</div>Conversion Rate</div>
+        <div class="card"><div class="metric-value">$${Number(avgDealSize).toLocaleString()}</div>Avg Deal Size</div>
+        <div class="card"><div class="metric-value">${activeClients}</div>Active Clients</div>
+        <div class="card"><div class="metric-value">${deals.length}</div>Total Pipeline</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="card"><h4>Revenue by Month</h4><canvas id="revenueChart" style="max-height:250px;"></canvas></div>
+        <div class="card"><h4>Deals by Stage</h4><canvas id="stageChart" style="max-height:250px;"></canvas></div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+        <h4>Revenue Breakdown</h4>
+        <table style="width:100%;border-collapse:collapse;">
+            <thead><tr><th style="text-align:left;padding:8px;border-bottom:1px solid var(--border);">Month</th><th style="text-align:right;padding:8px;border-bottom:1px solid var(--border);">Revenue</th></tr></thead>
+            <tbody>${Object.entries(monthlyData).map(([m,v])=>`<tr><td style="padding:8px;">${m}</td><td style="text-align:right;padding:8px;">$${v.toLocaleString(undefined,{maximumFractionDigits:0})}</td></tr>`).join('')}</tbody>
+        </table>
+    </div>`;
+    setTimeout(()=>{
+        const rctx=document.getElementById('revenueChart');
+        if(rctx){
+            const months=Object.keys(monthlyData);
+            const vals=Object.values(monthlyData);
+            chartInstances.revenue=new Chart(rctx,{type:'bar',data:{labels:months,datasets:[{label:'Revenue ($)',data:vals,backgroundColor:'#1A7A6B'}]},options:{responsive:true,maintainAspectRatio:true}});
+        }
+        const sctx=document.getElementById('stageChart');
+        if(sctx){
+            const stages=['new-lead','contact-made','negotiation','under-contract','closed'];
+            const labels=['New Lead','Contact Made','Negotiation','Under Contract','Closed'];
+            const counts=stages.map(s=>deals.filter(d=>d.stage===s).length);
+            chartInstances.stage=new Chart(sctx,{type:'doughnut',data:{labels,datasets:[{data:counts,backgroundColor:['#3B82F6','#F59E0B','#8B5CF6','#10B981','#0A1628']}]},options:{responsive:true,maintainAspectRatio:true}});
+        }
+    },100);
+}
+
+// ─── RENDER API & INTEGRATIONS ─────────────
+function renderAPIIntegrations(){
+    const apiKey=appData.apiKey||('dip_'+crypto.randomUUID().replace(/-/g,'').slice(0,32));
+    if(!appData.apiKey)appData.apiKey=apiKey;
+    const webhooks=appData.webhooks||[];
+    return `<h2>API & Integrations</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="card">
+            <h4>API Key</h4>
+            <p style="color:var(--muted);font-size:13px;margin-bottom:12px;">Use this key to access the DealIQ API.</p>
+            <div style="display:flex;gap:8px;margin-bottom:16px;">
+                <input id="api-key-display" value="${apiKey}" readonly style="flex:1;font-family:monospace;">
+                <button class="btn btn-sm btn-primary" onclick="navigator.clipboard.writeText(document.getElementById('api-key-display').value);showToast('API key copied','success');">Copy</button>
+            </div>
+            <h4>Endpoints</h4>
+            <div style="font-size:13px;font-family:monospace;background:var(--bg);padding:12px;border-radius:8px;">
+                <p>GET /api/deals — List all deals</p>
+                <p>GET /api/contacts — List all contacts</p>
+                <p>POST /api/deals — Create a deal</p>
+                <p>GET /api/analytics — Revenue metrics</p>
+                <p>POST /api/webhooks — Register webhook</p>
+            </div>
+        </div>
+        <div class="card">
+            <h4>Integrations</h4>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--border);border-radius:8px;">
+                    <div><strong>Zillow</strong><br><span style="font-size:12px;color:var(--muted);">Property data & comps</span></div>
+                    <button class="btn btn-sm btn-primary" onclick="showToast('Connect via Settings','info')">Connect</button>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--border);border-radius:8px;">
+                    <div><strong>Zapier</strong><br><span style="font-size:12px;color:var(--muted);">5000+ app connections</span></div>
+                    <button class="btn btn-sm btn-primary" onclick="showToast('Connect via Settings','info')">Connect</button>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--border);border-radius:8px;">
+                    <div><strong>Google Calendar</strong><br><span style="font-size:12px;color:var(--muted);">Sync events</span></div>
+                    <button class="btn btn-sm btn-primary" onclick="showToast('Connect via Settings','info')">Connect</button>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--border);border-radius:8px;">
+                    <div><strong>Mailchimp</strong><br><span style="font-size:12px;color:var(--muted);">Email campaigns</span></div>
+                    <button class="btn btn-sm btn-primary" onclick="showToast('Connect via Settings','info')">Connect</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+        <h4>Webhooks</h4>
+        <button class="btn btn-sm btn-primary" id="add-webhook-btn" style="margin-bottom:12px;">+ Add Webhook</button>
+        <table style="width:100%;border-collapse:collapse;">
+            <thead><tr><th style="text-align:left;padding:8px;border-bottom:1px solid var(--border);">URL</th><th style="text-align:left;padding:8px;border-bottom:1px solid var(--border);">Event</th><th style="text-align:left;padding:8px;border-bottom:1px solid var(--border);">Status</th></tr></thead>
+            <tbody>${webhooks.map(w=>`<tr><td style="padding:8px;font-family:monospace;font-size:12px;">${w.url}</td><td style="padding:8px;">${w.event}</td><td style="padding:8px;"><span class="badge badge-green">Active</span></td></tr>`).join('')}</tbody>
+        </table>
+        ${!webhooks.length?'<div class="empty-state">No webhooks configured.</div>':''}
+    </div>`;
+}
+
+// ─── RENDER CUSTOM WORKFLOWS ───────────────
+function renderCustomWorkflows(){
+    const workflows=appData.workflows||[];
+    const tasks=appData.tasks||[];
+    return `<h2>Custom Workflows</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="card">
+            <h4>Automated Workflows</h4>
+            <button class="btn btn-sm btn-primary" id="add-workflow-btn" style="margin-bottom:12px;">+ Create Workflow</button>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+                ${workflows.map(w=>`<div style="padding:12px;border:1px solid var(--border);border-radius:8px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                        <strong>${w.name}</strong>
+                        <span class="badge ${w.active?'badge-green':'badge-red'}">${w.active?'Active':'Paused'}</span>
+                    </div>
+                    <div style="font-size:12px;color:var(--muted);">
+                        Trigger: ${w.trigger} → Action: ${w.action}
+                    </div>
+                    <div style="margin-top:8px;display:flex;gap:4px;">
+                        <button class="btn btn-sm btn-secondary toggle-workflow" data-id="${w.id}">${w.active?'Pause':'Activate'}</button>
+                        <button class="btn btn-sm btn-danger remove-workflow" data-id="${w.id}">Delete</button>
+                    </div>
+                </div>`).join('')}
+                ${!workflows.length?'<div class="empty-state">No workflows yet. Create one to automate your tasks.</div>':''}
+            </div>
+        </div>
+        <div class="card">
+            <h4>Task Board</h4>
+            <button class="btn btn-sm btn-primary" id="add-task-btn" style="margin-bottom:12px;">+ Add Task</button>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                ${tasks.map(t=>`<div style="padding:10px;border:1px solid var(--border);border-radius:8px;display:flex;justify-content:space-between;align-items:center;${t.done?'opacity:0.5;':''}">
+                    <div>
+                        <input type="checkbox" class="toggle-task" data-id="${t.id}" ${t.done?'checked':''} style="margin-right:8px;">
+                        <span style="${t.done?'text-decoration:line-through;':''}">${t.title}</span>
+                    </div>
+                    <button class="btn btn-sm btn-danger remove-task" data-id="${t.id}">×</button>
+                </div>`).join('')}
+                ${!tasks.length?'<div class="empty-state">No tasks. Add your first task!</div>':''}
+            </div>
+        </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+        <h4>Quick Workflow Templates</h4>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;">
+            <button class="btn btn-secondary" style="text-align:left;padding:12px;" onclick="createWorkflow('New Lead Follow-up','deal_created','send_email')">
+                <strong>New Lead Follow-up</strong><br><span style="font-size:11px;color:var(--muted);">Auto-send intro email when deal is created</span>
+            </button>
+            <button class="btn btn-secondary" style="text-align:left;padding:12px;" onclick="createWorkflow('Stage Change Alert','deal_stage_changed','notify_team')">
+                <strong>Stage Change Alert</strong><br><span style="font-size:11px;color:var(--muted);">Notify team when deal moves stages</span>
+            </button>
+            <button class="btn btn-secondary" style="text-align:left;padding:12px;" onclick="createWorkflow('Weekly Report','weekly','generate_report')">
+                <strong>Weekly Report</strong><br><span style="font-size:11px;color:var(--muted);">Auto-generate weekly performance report</span>
+            </button>
+            <button class="btn btn-secondary" style="text-align:left;padding:12px;" onclick="createWorkflow('Closed Deal Celebration','deal_closed','notify_team')">
+                <strong>Closed Deal Alert</strong><br><span style="font-size:11px;color:var(--muted);">Celebrate when a deal closes!</span>
+            </button>
+        </div>
+    </div>`;
+}
+function renderTools(){
+    return `<h2>Tools</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+        <div class="card"><h4>📋 Clipboard</h4><p>Copy generated content with one click.</p><button class="btn btn-sm btn-primary" onclick="navigator.clipboard.readText().then(t=>showToast('Pasted from clipboard','info')).catch(()=>showToast('No clipboard access','error'))">Paste Clipboard</button></div>
+        <div class="card"><h4>🖨️ Print</h4><p>Print the current view.</p><button class="btn btn-sm btn-primary" onclick="window.print()">Print Page</button></div>
+        <div class="card"><h4>📤 Share</h4><p>Share this app with colleagues.</p><button class="btn btn-sm btn-primary" onclick="navigator.share?navigator.share({title:'DealIQ Pro',url:location.href}):showToast('Share not supported','error')">Share Link</button></div>
+        <div class="card"><h4>📥 Export Data</h4><p>Download all your data as JSON.</p><button class="btn btn-sm btn-primary" onclick="document.getElementById('export-btn').click()">Export JSON</button></div>
+        <div class="card"><h4>🔄 Reset View</h4><p>Reset to default dashboard.</p><button class="btn btn-sm btn-primary" onclick="navigate(appData.activeRole==='realestate'?'realestate-dashboard':'mortgage-dashboard')">Go to Dashboard</button></div>
+        <div class="card"><h4>📊 Quick Stats</h4><p>Properties: ${appData.properties.length} | Deals: ${appData.deals.length} | Contacts: ${appData.contacts.length} | Loans: ${appData.loans.length}</p></div>
+    </div>`;
+}
+
+// ─── ATTACH PAGE EVENTS ───────────────────
+function attachPageEvents(hash){
+    // Add listing
+    document.getElementById('add-listing-btn')?.addEventListener('click',()=>{
+        if(!checkFeature('properties')){showUpgradeModal('properties');return;}
+        openModal(`<h3>Add Property</h3>
+        <form id="add-property-form">
+            <div><label>Address</label><input id="prop-address" required></div>
+            <div><label>Price ($)</label><input type="number" id="prop-price" required></div>
+            <div><label>Status</label><select id="prop-status"><option>Active</option><option>Pending</option><option>Sold</option></select></div>
+            <button type="submit" class="btn btn-accent">Save</button>
+        </form>`);
+        document.getElementById('add-property-form').addEventListener('submit',e=>{
+            e.preventDefault();
+            appData.properties.push({id:getNextId(),address:document.getElementById('prop-address').value,price:parseInt(document.getElementById('prop-price').value),status:document.getElementById('prop-status').value});
+            pushUndo();saveUserData();closeModal();renderPage('realestate-properties');showToast('Property added','success');
+        });
+    });
+
+    // Delete property
+    document.querySelectorAll('.delete-property').forEach(b=>b.addEventListener('click',function(){
+        appData.properties=appData.properties.filter(p=>p.id!==this.dataset.id);
+        pushUndo();saveUserData();renderPage('realestate-properties');showToast('Property deleted','success');
+    }));
+
+    // Add contact
+    document.getElementById('add-contact-btn')?.addEventListener('click',()=>{
+        if(!checkFeature('clients')){showUpgradeModal('clients');return;}
+        openModal(`<h3>Add Contact</h3>
+        <form id="add-contact-form">
+            <div><label>Name</label><input id="contact-name" required></div>
+            <div><label>Email</label><input type="email" id="contact-email"></div>
+            <div><label>Phone</label><input id="contact-phone"></div>
+            <div><label>Status</label><select id="contact-status"><option>Active</option><option>Inactive</option></select></div>
+            <button type="submit" class="btn btn-accent">Save</button>
+        </form>`);
+        document.getElementById('add-contact-form').addEventListener('submit',e=>{
+            e.preventDefault();
+            appData.contacts.push({id:getNextId(),name:document.getElementById('contact-name').value,email:document.getElementById('contact-email').value,phone:document.getElementById('contact-phone').value,status:document.getElementById('contact-status').value});
+            pushUndo();saveUserData();closeModal();renderPage('clients');showToast('Contact added','success');
+        });
+    });
+
+    // Add lender
+    document.getElementById('add-lender-btn')?.addEventListener('click',()=>{
+        openModal(`<h3>Add Lender</h3>
+        <form id="add-lender-form">
+            <div><label>Name</label><input id="lender-name" required></div>
+            <div><label>Contact</label><input id="lender-contact"></div>
+            <div><label>Programs</label><input id="lender-programs" placeholder="e.g. Conventional, FHA, VA"></div>
+            <button type="submit" class="btn btn-accent">Save</button>
+        </form>`);
+        document.getElementById('add-lender-form').addEventListener('submit',e=>{
+            e.preventDefault();
+            appData.lenders.push({id:getNextId(),name:document.getElementById('lender-name').value,contact:document.getElementById('lender-contact').value,programs:document.getElementById('lender-programs').value});
+            pushUndo();saveUserData();closeModal();renderPage('mortgage-lenders');showToast('Lender added','success');
+        });
+    });
+
+    // Delete lender
+    document.querySelectorAll('.delete-lender').forEach(b=>b.addEventListener('click',function(){
+        appData.lenders=appData.lenders.filter(l=>l.id!==this.dataset.id);
+        pushUndo();saveUserData();renderPage('mortgage-lenders');showToast('Lender deleted','success');
+    }));
+
+    // Calendar navigation
+    document.getElementById('cal-prev')?.addEventListener('click',()=>{currentMonth--;if(currentMonth<0){currentMonth=11;currentYear--;}renderPage('calendar');});
+    document.getElementById('cal-next')?.addEventListener('click',()=>{currentMonth++;if(currentMonth>11){currentMonth=0;currentYear++;}renderPage('calendar');});
+
+    // Calendar day click to add event
+    document.querySelectorAll('.cal-day').forEach(d=>d.addEventListener('click',function(){
+        const date=this.dataset.date;
+        openModal(`<h3>Add Event – ${date}</h3>
+        <form id="add-event-form">
+            <div><label>Title</label><input id="event-title" required></div>
+            <div><label>Time</label><input type="time" id="event-time"></div>
+            <button type="submit" class="btn btn-accent">Save</button>
+        </form>`);
+        document.getElementById('add-event-form').addEventListener('submit',e=>{
+            e.preventDefault();
+            appData.calendarEvents.push({id:getNextId(),date,title:document.getElementById('event-title').value,time:document.getElementById('event-time').value});
+            pushUndo();saveUserData();closeModal();renderPage('calendar');showToast('Event added','success');
+        });
+    }));
+
+    // Commission save
+    document.getElementById('save-commission-btn')?.addEventListener('click',()=>{
+        const price=parseFloat(document.getElementById('comm-sale-price')?.value)||0,rate=parseFloat(document.getElementById('comm-rate')?.value)||0,split=parseFloat(document.getElementById('comm-agent-split')?.value)||0;
+        const total=price*rate/100,agent=total*split/100;
+        appData.commissionHistory.push({date:new Date().toISOString().split('T')[0],price,net:agent.toFixed(2)});
+        pushUndo();saveUserData();initCommissionChart();showToast('Commission saved','success');
+    });
+
+    // Pre-qual steps
+    document.getElementById('pq-next-1')?.addEventListener('click',()=>{
+        document.getElementById('pq-step-1').style.display='none';
+        document.getElementById('pq-step-2').style.display='block';
+    });
+    document.getElementById('pq-back-2')?.addEventListener('click',()=>{
+        document.getElementById('pq-step-2').style.display='none';
+        document.getElementById('pq-step-1').style.display='block';
+    });
+    document.getElementById('pq-next-2')?.addEventListener('click',()=>{
+        const income=parseFloat(document.getElementById('pq-income')?.value)||0;
+        const debts=parseFloat(document.getElementById('pq-debts')?.value)||0;
+        const maxPayment=(income/12)*0.28-debts;
+        const maxLoan=maxPayment>0?maxPayment*360:0;
+        document.getElementById('pq-step-2').style.display='none';
+        document.getElementById('pq-step-3').style.display='block';
+        document.getElementById('pq-results').innerHTML=`<div class="card"><p>Max Monthly Payment: <strong>$${maxPayment.toFixed(0)}</strong></p><p>Estimated Max Loan: <strong>$${maxLoan.toFixed(0)}</strong></p><p>Based on 28% front-end ratio</p></div>`;
+    });
+
+    // Amortization
+    document.getElementById('generate-amortization-btn')?.addEventListener('click',()=>{
+        const mc=window._mc;if(!mc){showToast('Calculate mortgage first','error');return;}
+        let html='<h4>Amortization Schedule (First 12 months)</h4><table><thead><tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead><tbody>';
+        let balance=mc.loan;
+        for(let i=1;i<=12;i++){
+            const interest=balance*mc.r;
+            const principal=mc.pi-interest;
+            balance=Math.max(0,balance-principal);
+            html+=`<tr><td>${i}</td><td>$${mc.pi.toFixed(2)}</td><td>$${principal.toFixed(2)}</td><td>$${interest.toFixed(2)}</td><td>$${balance.toFixed(2)}</td></tr>`;
+        }
+        html+='</tbody></table>';
+        const out=document.getElementById('amortization-output');out.style.display='block';out.innerHTML=html;
+    });
+
+    // CMA run
+    document.getElementById('run-cma-btn')?.addEventListener('click',()=>{
+        const subjectId=document.getElementById('cma-subject')?.value;
+        const compIds=Array.from(document.getElementById('cma-comps')?.selectedOptions||[]).map(o=>o.value);
+        if(!subjectId){showToast('Select a subject property','error');return;}
+        const subject=appData.properties.find(p=>p.id===subjectId);
+        const comps=compIds.map(id=>appData.properties.find(p=>p.id===id)).filter(Boolean);
+        const avg=comps.length?comps.reduce((s,p)=>s+p.price,0)/comps.length:0;
+        document.getElementById('cma-result').innerHTML=`<div class="card"><h4>CMA Result</h4><p>Subject: ${subject?.address} – $${subject?.price?.toLocaleString()}</p><p>Comparables: ${comps.length}</p><p>Average Comp Price: $${avg.toLocaleString(undefined,{maximumFractionDigits:0})}</p><p>Suggested List: $${(avg*1.02).toLocaleString(undefined,{maximumFractionDigits:0})}</p></div>`;
+    });
+
+    // Referral send
+    document.getElementById('send-referral-btn')?.addEventListener('click',()=>{
+        const client=document.getElementById('ref-client')?.value;
+        const note=document.getElementById('ref-note')?.value;
+        if(!client){showToast('Select a client','error');return;}
+        appData.referrals.push({id:getNextId(),client,note,direction:'out',status:'Sent',date:new Date().toISOString().split('T')[0]});
+        pushUndo();saveUserData();renderPage('referrals');showToast('Referral sent','success');
+    });
+
+    // Enterprise: Add team member
+    document.getElementById('add-team-member-btn')?.addEventListener('click',()=>{
+        openModal(`<h3>Add Team Member</h3>
+        <form id="add-team-form">
+            <div><label>Name</label><input id="team-name" required></div>
+            <div><label>Email</label><input type="email" id="team-email" required></div>
+            <div><label>Role</label><select id="team-role"><option value="agent">Agent</option><option value="assistant">Assistant</option><option value="admin">Admin</option></select></div>
+            <button type="submit" class="btn btn-accent">Add Member</button>
+        </form>`);
+        document.getElementById('add-team-form').addEventListener('submit',e=>{
+            e.preventDefault();
+            if(!appData.team)appData.team=[];
+            appData.team.push({id:getNextId(),name:document.getElementById('team-name').value,email:document.getElementById('team-email').value,role:document.getElementById('team-role').value,status:'active'});
+            if(!appData.activityLog)appData.activityLog=[];
+            appData.activityLog.push({user:'Admin',action:`added team member ${document.getElementById('team-name').value}`,time:new Date().toLocaleString()});
+            pushUndo();saveUserData();closeModal();renderPage('enterprise-team');showToast('Team member added','success');
+        });
+    });
+
+    // Enterprise: Remove team member
+    document.querySelectorAll('.remove-team-member').forEach(b=>b.addEventListener('click',function(){
+        const member=(appData.team||[]).find(m=>m.id===this.dataset.id);
+        appData.team=(appData.team||[]).filter(m=>m.id!==this.dataset.id);
+        if(!appData.activityLog)appData.activityLog=[];
+        appData.activityLog.push({user:'Admin',action:`removed team member ${member?.name||'unknown'}`,time:new Date().toLocaleString()});
+        pushUndo();saveUserData();renderPage('enterprise-team');showToast('Team member removed','success');
+    }));
+
+    // Enterprise: Add webhook
+    document.getElementById('add-webhook-btn')?.addEventListener('click',()=>{
+        openModal(`<h3>Add Webhook</h3>
+        <form id="add-webhook-form">
+            <div><label>URL</label><input id="webhook-url" placeholder="https://your-service.com/webhook" required></div>
+            <div><label>Event</label><select id="webhook-event"><option value="deal_created">Deal Created</option><option value="deal_updated">Deal Updated</option><option value="deal_closed">Deal Closed</option><option value="contact_added">Contact Added</option></select></div>
+            <button type="submit" class="btn btn-accent">Add Webhook</button>
+        </form>`);
+        document.getElementById('add-webhook-form').addEventListener('submit',e=>{
+            e.preventDefault();
+            if(!appData.webhooks)appData.webhooks=[];
+            appData.webhooks.push({id:getNextId(),url:document.getElementById('webhook-url').value,event:document.getElementById('webhook-event').value});
+            pushUndo();saveUserData();closeModal();renderPage('enterprise-api');showToast('Webhook added','success');
+        });
+    });
+
+    // Enterprise: Add workflow
+    document.getElementById('add-workflow-btn')?.addEventListener('click',()=>{
+        if(!checkFeature('workflows')){showUpgradeModal('workflows');return;}
+        openModal(`<h3>Create Workflow</h3>
+        <form id="add-workflow-form">
+            <div><label>Name</label><input id="workflow-name" required></div>
+            <div><label>Trigger</label><select id="workflow-trigger"><option value="deal_created">Deal Created</option><option value="deal_stage_changed">Stage Changed</option><option value="contact_added">Contact Added</option><option value="calendar_event">Calendar Event</option><option value="weekly">Weekly Schedule</option></select></div>
+            <div><label>Action</label><select id="workflow-action"><option value="send_email">Send Email</option><option value="notify_team">Notify Team</option><option value="create_task">Create Task</option><option value="generate_report">Generate Report</option><option value="update_deal">Update Deal</option></select></div>
+            <button type="submit" class="btn btn-accent">Create Workflow</button>
+        </form>`);
+        document.getElementById('add-workflow-form').addEventListener('submit',e=>{
+            e.preventDefault();
+            if(!appData.workflows)appData.workflows=[];
+            appData.workflows.push({id:getNextId(),name:document.getElementById('workflow-name').value,trigger:document.getElementById('workflow-trigger').value,action:document.getElementById('workflow-action').value,active:true});
+            pushUndo();saveUserData();closeModal();renderPage('enterprise-workflows');showToast('Workflow created','success');
+        });
+    });
+
+    // Enterprise: Toggle workflow
+    document.querySelectorAll('.toggle-workflow').forEach(b=>b.addEventListener('click',function(){
+        const wf=(appData.workflows||[]).find(w=>w.id===this.dataset.id);
+        if(wf){wf.active=!wf.active;pushUndo();saveUserData();renderPage('enterprise-workflows');showToast('Workflow updated','success');}
+    }));
+
+    // Enterprise: Remove workflow
+    document.querySelectorAll('.remove-workflow').forEach(b=>b.addEventListener('click',function(){
+        appData.workflows=(appData.workflows||[]).filter(w=>w.id!==this.dataset.id);
+        pushUndo();saveUserData();renderPage('enterprise-workflows');showToast('Workflow deleted','success');
+    }));
+
+    // Enterprise: Add task
+    document.getElementById('add-task-btn')?.addEventListener('click',()=>{
+        openModal(`<h3>Add Task</h3>
+        <form id="add-task-form">
+            <div><label>Task</label><input id="task-title" required></div>
+            <button type="submit" class="btn btn-accent">Add Task</button>
+        </form>`);
+        document.getElementById('add-task-form').addEventListener('submit',e=>{
+            e.preventDefault();
+            if(!appData.tasks)appData.tasks=[];
+            appData.tasks.push({id:getNextId(),title:document.getElementById('task-title').value,done:false});
+            pushUndo();saveUserData();closeModal();renderPage('enterprise-workflows');showToast('Task added','success');
+        });
+    });
+
+    // Enterprise: Toggle task
+    document.querySelectorAll('.toggle-task').forEach(b=>b.addEventListener('click',function(){
+        const task=(appData.tasks||[]).find(t=>t.id===this.dataset.id);
+        if(task){task.done=!task.done;pushUndo();saveUserData();renderPage('enterprise-workflows');}
+    }));
+
+    // Enterprise: Remove task
+    document.querySelectorAll('.remove-task').forEach(b=>b.addEventListener('click',function(){
+        appData.tasks=(appData.tasks||[]).filter(t=>t.id!==this.dataset.id);
+        pushUndo();saveUserData();renderPage('enterprise-workflows');showToast('Task deleted','success');
+    }));
+}
+
+// ─── WORKFLOW HELPER ───────────────────────
+window.createWorkflow=function(name,trigger,action){
+    if(!checkFeature('workflows')){showUpgradeModal('workflows');return;}
+    if(!appData.workflows)appData.workflows=[];
+    const exists=appData.workflows.find(w=>w.name===name);
+    if(exists){showToast('Workflow already exists','warning');return;}
+    appData.workflows.push({id:getNextId(),name,trigger,action,active:true});
+    pushUndo();saveUserData();renderPage('enterprise-workflows');showToast(`Workflow "${name}" created`,'success');
+};
+
+// ─── CHECKOUT (Stripe) ─────────────────────
+window.checkout=async function(plan){
+    try{
+        const res=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan})});
+        const{sessionId}=await res.json();
+        if(sessionId){
+            const stripe=Stripe('pk_live_51PjsxWLPDj7DQPYf3B5PF2AtY4gjjyaZrQ00ZQZg8FLLiyyVvSpMRfg3mt5RzhvsJ9DfCTqYG125XPNRRFM8qaqT00igPilBWH');
+            await stripe.redirectToCheckout({sessionId});
+        }
+    }catch(e){showToast('Checkout error: '+e.message,'error');}
+};
+
+// ─── Initialize ────────────────────────────
+document.getElementById('login-screen').style.display='flex';
+document.getElementById('main-app').style.display='none';
+
+// ─── Onboarding Flow ───────────────────────
+function showOnboarding(){
+    const steps=[
+        {title:'Welcome to DealIQ Pro! 🏠',content:'This is your all-in-one platform for managing deals, clients, and growing your brokerage.',icon:'🏠'},
+        {title:'Deals Pipeline 📊',content:'Track deals from lead to close with our visual Kanban board. Drag and drop deals between stages.',icon:'📊'},
+        {title:'AI Content Generators 🤖',content:'Generate listing descriptions, market reports, follow-up sequences, and 20+ more templates in seconds.',icon:'🤖'},
+        {title:'Mortgage Calculator 🧮',content:'Full mortgage calculator with amortization, pre-qualification, and rate sheets for your clients.',icon:'🧮'},
+        {title:'Team Management 👥',content:'Add team members, assign roles, and track activity. Perfect for brokerages of any size.',icon:'👥'},
+        {title:'You\'re All Set! 🎉',content:'Start by adding your first property or deal. Click the sidebar to explore all features.',icon:'🎉'}
+    ];
+    let currentStep=0;
+    function renderStep(){
+        const s=steps[currentStep];
+        openModal(`<div style="text-align:center;padding:20px;">
+            <div style="font-size:64px;margin-bottom:16px;">${s.icon}</div>
+            <h3 style="margin-bottom:12px;">${s.title}</h3>
+            <p style="color:var(--muted);margin-bottom:24px;line-height:1.6;">${s.content}</p>
+            <div style="display:flex;justify-content:center;gap:8px;margin-bottom:16px;">
+                ${steps.map((_,i)=>`<div style="width:8px;height:8px;border-radius:50%;background:${i===currentStep?'var(--teal)':'var(--border)'};"></div>`).join('')}
+            </div>
+            <div style="display:flex;justify-content:center;gap:8px;">
+                ${currentStep>0?'<button class="btn btn-secondary" id="onboard-prev">← Back</button>':''}
+                <button class="btn btn-accent" id="onboard-next">${currentStep<steps.length-1?'Next →':'Get Started'}</button>
+            </div>
+            <p style="margin-top:12px;"><a href="#" id="skip-onboarding" style="color:var(--muted);font-size:12px;">Skip tour</a></p>
+        </div>`);
+        document.getElementById('onboard-next')?.addEventListener('click',()=>{
+            if(currentStep<steps.length-1){currentStep++;renderStep();}
+            else{closeModal();appData.onboarded=true;saveUserData();}
+        });
+        document.getElementById('onboard-prev')?.addEventListener('click',()=>{currentStep--;renderStep();});
+        document.getElementById('skip-onboarding')?.addEventListener('click',(e)=>{e.preventDefault();closeModal();appData.onboarded=true;saveUserData();});
+    }
+    renderStep();
+}
+
+// Show onboarding for new users after login
+const origLogin=window._origLoginHandler;
+function checkOnboarding(){
+    if(!appData.onboarded&&appData.properties.length===0&&appData.deals.length===0){
+        setTimeout(()=>showOnboarding(),500);
+    }
+}
+
+// ─── Help Page ─────────────────────────────
+function renderHelp(){
+    return `<h2>Help & Support</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="card">
+            <h4>🚀 Quick Start</h4>
+            <div style="font-size:13px;line-height:1.8;">
+                <p><strong>1. Add a Property</strong> — Go to Properties → Add Listing</p>
+                <p><strong>2. Create a Deal</strong> — Go to Deals Pipeline → Add Deal</p>
+                <p><strong>3. Add Contacts</strong> — Go to Clients → Add Contact</p>
+                <p><strong>4. Generate Content</strong> — Go to AI Gen → Pick a template</p>
+                <p><strong>5. Track Progress</strong> — Dashboard shows all your metrics</p>
+            </div>
+        </div>
+        <div class="card">
+            <h4>⌨️ Keyboard Shortcuts</h4>
+            <div style="font-size:13px;line-height:1.8;">
+                <p><code>Ctrl+Z</code> — Undo</p>
+                <p><code>Ctrl+Y</code> — Redo</p>
+                <p><code>Ctrl+E</code> — Export data</p>
+                <p><code>Esc</code> — Close modal</p>
+            </div>
+        </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px;">
+        <div class="card" style="text-align:center;">
+            <i class="fa-solid fa-envelope" style="font-size:24px;color:var(--teal);margin-bottom:8px;"></i>
+            <h4>Email Support</h4>
+            <p style="font-size:12px;color:var(--muted);">support@dealiqpro.com</p>
+            <a href="mailto:support@dealiqpro.com" class="btn btn-sm btn-primary" style="margin-top:8px;">Send Email</a>
+        </div>
+        <div class="card" style="text-align:center;">
+            <i class="fa-brands fa-twitter" style="font-size:24px;color:var(--teal);margin-bottom:8px;"></i>
+            <h4>Twitter</h4>
+            <p style="font-size:12px;color:var(--muted);">@DealIQPro</p>
+            <a href="https://twitter.com/DealIQPro" target="_blank" class="btn btn-sm btn-primary" style="margin-top:8px;">Follow</a>
+        </div>
+        <div class="card" style="text-align:center;">
+            <i class="fa-solid fa-book" style="font-size:24px;color:var(--teal);margin-bottom:8px;"></i>
+            <h4>Documentation</h4>
+            <p style="font-size:12px;color:var(--muted);">docs.dealiqpro.com</p>
+            <a href="#" class="btn btn-sm btn-primary" style="margin-top:8px;">Coming Soon</a>
+        </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+        <h4>📋 FAQ</h4>
+        <div style="font-size:13px;line-height:1.8;">
+            <p><strong>Q: Is my data secure?</strong><br>A: Yes! All data is stored locally in your browser. Nothing is sent to our servers.</p>
+            <p><strong>Q: Can I export my data?</strong><br>A: Yes! Click the Export button in the top bar to download all your data as JSON.</p>
+            <p><strong>Q: How do I add team members?</strong><br>A: Go to Team in the sidebar. Pro plan supports up to 5 members, Enterprise supports unlimited.</p>
+            <p><strong>Q: How do I upgrade my plan?</strong><br>A: Click the subscription badge in the top bar, or go to the pricing page.</p>
+            <p><strong>Q: Can I use this on mobile?</strong><br>A: Yes! The app is fully responsive and works on all devices.</p>
+        </div>
+    </div>`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "dealiq-pro",
+  "version": "1.0.0",
+  "description": "All-in-One Broker Platform for Real Estate and Mortgage Professionals",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "stripe": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

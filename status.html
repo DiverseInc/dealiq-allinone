@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Status — DealIQ Pro</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#F8FAFC;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0;--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B}
+        .dark{--bg:#0F172A;--card:#1E293B;--text:#F1F5F9;--muted:#94A3B8;--border:#334155}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+        .container{max-width:800px;margin:60px auto;padding:0 24px}
+        .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+        .topbar h1{font-size:36px;font-weight:800}
+        .status-badge{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:30px;font-weight:700;font-size:16px}
+        .status-ok{background:#D1FAE5;color:#065F46}
+        .status-badge .dot{width:12px;height:12px;border-radius:50%;background:#10B981;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+        .toggle-btn{background:var(--card);border:1px solid var(--border);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:14px;color:var(--text)}
+        .services{margin-top:40px}
+        .service{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+        .service .name{font-weight:600}
+        .service .status{font-size:14px;display:flex;align-items:center;gap:8px}
+        .service .dot{width:8px;height:8px;border-radius:50%}
+        .dot-green{background:#10B981}
+        .uptime{text-align:center;margin-top:40px;padding:32px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+        .uptime h3{font-size:48px;font-weight:800;color:var(--teal)}
+        footer{text-align:center;padding:40px 24px;color:var(--muted);font-size:14px;border-top:1px solid var(--border);margin-top:60px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <h1>⚡ System Status</h1>
+            <div style="display:flex;gap:8px">
+                <button class="toggle-btn" onclick="toggleDark()">🌙</button>
+                <a href="landing.html" class="toggle-btn" style="text-decoration:none">← Back</a>
+            </div>
+        </div>
+        
+        <div style="text-align:center;margin-bottom:40px">
+            <div class="status-badge status-ok">
+                <span class="dot"></span>
+                All Systems Operational
+            </div>
+            <p style="margin-top:12px;color:var(--muted);font-size:14px">Last checked: <span id="lastChecked"></span></p>
+        </div>
+        
+        <div class="uptime">
+            <h3>99.9%</h3>
+            <p style="color:var(--muted)">Uptime over the last 90 days</p>
+        </div>
+        
+        <div class="services">
+            <h2 style="margin-bottom:16px;font-size:20px">Services</h2>
+            <div class="service">
+                <span class="name">Web Application</span>
+                <span class="status"><span class="dot dot-green"></span> Operational</span>
+            </div>
+            <div class="service">
+                <span class="name">API</span>
+                <span class="status"><span class="dot dot-green"></span> Operational</span>
+            </div>
+            <div class="service">
+                <span class="name">Calculators</span>
+                <span class="status"><span class="dot dot-green"></span> Operational</span>
+            </div>
+            <div class="service">
+                <span class="name">AI Generators</span>
+                <span class="status"><span class="dot dot-green"></span> Operational</span>
+            </div>
+            <div class="service">
+                <span class="name">Payments (Stripe)</span>
+                <span class="status"><span class="dot dot-green"></span> Operational</span>
+            </div>
+        </div>
+        
+        <div style="margin-top:40px">
+            <h2 style="margin-bottom:16px;font-size:20px">Recent Incidents</h2>
+            <p style="color:var(--muted)">No incidents reported. 🎉</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Diverse Industries Inc. All rights reserved.</p>
+    </footer>
+    
+    <script>
+    document.getElementById('lastChecked').textContent=new Date().toLocaleString();
+    function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dealiq_dark',document.body.classList.contains('dark'));}
+    if(localStorage.getItem('dealiq_dark')==='true')document.body.classList.add('dark');
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator — DealIQ</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .calculator { max-width: 600px; margin: 40px auto; }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+        .input-group input, .input-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .results { background: #f8f9fa; padding: 24px; border-radius: 12px; margin-top: 24px; }
+        .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .result-row:last-child { border-bottom: none; }
+        .result-row.highlight { font-size: 20px; padding: 16px 0; border-top: 2px solid #0A1628; }
+        .result-row.highlight .value { color: #1A7A6B; font-size: 28px; font-weight: 800; }
+        .btn { background: #0A1628; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; }
+        .btn-accent { background: #C8963E; }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
+        th { background: #f8f9fa; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Mortgage Calculator</h1>
+        <p>Calculate monthly payments and total interest.</p>
+        
+        <div class="panel" style="margin-top: 24px;">
+            <div class="input-group">
+                <label>Home Price ($)</label>
+                <input type="number" id="price" value="350000" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Down Payment ($)</label>
+                <input type="number" id="down" value="70000" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Interest Rate (% per year)</label>
+                <input type="number" id="rate" value="6.5" step="0.1" oninput="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Loan Term</label>
+                <select id="term" onchange="calculate()">
+                    <option value="30" selected>30 years</option>
+                    <option value="20">20 years</option>
+                    <option value="15">15 years</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="results" id="results">
+            <div class="result-row"><span class="label">Home Price</span><span class="value" id="priceDisplay">$350,000</span></div>
+            <div class="result-row"><span class="label">Down Payment</span><span class="value" id="downDisplay">$70,000</span></div>
+            <div class="result-row"><span class="label">Loan Amount</span><span class="value" id="loanDisplay">$280,000</span></div>
+            <div class="result-row"><span class="label">Interest Rate</span><span class="value" id="rateDisplay">6.5%</span></div>
+            <div class="result-row highlight"><span class="label">Monthly Payment</span><span class="value" id="paymentDisplay">$1,772</span></div>
+            <div class="result-row"><span class="label">Total Interest Paid</span><span class="value" id="interestDisplay">$357,907</span></div>
+            <div class="result-row"><span class="label">Total Cost</span><span class="value" id="totalDisplay">$637,907</span></div>
+        </div>
+        
+        <button class="btn btn-accent" onclick="showAmortization()" style="margin-top:16px;">📊 Show Amortization Schedule</button>
+        
+        <div id="amortization" style="display:none;margin-top:24px;">
+            <h3>Amortization Schedule (First 12 Months)</h3>
+            <table>
+                <thead><tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
+                <tbody id="amortBody"></tbody>
+            </table>
+        </div>
+        
+        <div style="margin-top: 24px;">
+            <a href="landing.html">← Back to All Calculators</a>
+        </div>
+    </div>
+    
+    <script>
+    let currentLoan=0,currentRate=0,currentTerm=0,currentPayment=0;
+    
+    function calculate(){
+        const price=parseFloat(document.getElementById('price').value)||0;
+        const down=parseFloat(document.getElementById('down').value)||0;
+        const rate=parseFloat(document.getElementById('rate').value)||0;
+        const term=parseInt(document.getElementById('term').value)||30;
+        const loan=Math.max(0,price-down);
+        const mr=rate/100/12;
+        const n=term*12;
+        let payment=0;
+        if(mr>0&&loan>0)payment=loan*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1);
+        const totalPaid=payment*n;
+        const totalInterest=totalPaid-loan;
+        
+        currentLoan=loan;currentRate=mr;currentTerm=n;currentPayment=payment;
+        
+        document.getElementById('priceDisplay').textContent='$'+price.toLocaleString();
+        document.getElementById('downDisplay').textContent='$'+down.toLocaleString();
+        document.getElementById('loanDisplay').textContent='$'+loan.toLocaleString();
+        document.getElementById('rateDisplay').textContent=rate+'%';
+        document.getElementById('paymentDisplay').textContent='$'+payment.toLocaleString(undefined,{maximumFractionDigits:0});
+        document.getElementById('interestDisplay').textContent='$'+totalInterest.toLocaleString(undefined,{maximumFractionDigits:0});
+        document.getElementById('totalDisplay').textContent='$'+totalPaid.toLocaleString(undefined,{maximumFractionDigits:0});
+    }
+    
+    function showAmortization(){
+        if(currentLoan<=0||currentPayment<=0){alert('Calculate mortgage first.');return;}
+        let balance=currentLoan;
+        let html='';
+        for(let i=1;i<=12;i++){
+            const interest=balance*currentRate;
+            const principal=currentPayment-interest;
+            balance=Math.max(0,balance-principal);
+            html+=`<tr><td>${i}</td><td>$${currentPayment.toFixed(2)}</td><td>$${principal.toFixed(2)}</td><td>$${interest.toFixed(2)}</td><td>$${balance.toFixed(2)}</td></tr>`;
+        }
+        document.getElementById('amortBody').innerHTML=html;
+        document.getElementById('amortization').style.display='block';
+    }
+    
+    calculate();
+    </script>
+</body>
+</html>

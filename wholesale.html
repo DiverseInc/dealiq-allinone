@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wholesaler Analysis (Mock) | DealIQ</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="wholesale">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:14px; line-height:1.1;">DealIQ</div>
+            <div style="font-size:12px; color:var(--muted); font-weight:700;">Wholesaler Analysis (Mock)</div>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="./index.html" data-nav="home">Home</a>
+          <a href="./max-offer.html" data-nav="max-offer">Max Offer</a>
+          <a href="./wholesale.html" data-nav="wholesale">Wholesaler</a>
+          <a href="./flip.html" data-nav="flip">Rehab / Flip</a>
+          <a href="./rental.html" data-nav="rental">Rehab / Rent</a>
+          <a href="./brrrr.html" data-nav="brrrr">BRRRR</a>
+          <a href="./development.html" data-nav="development">New Dev</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>Deal Analysis for Wholesalers</h1>
+        <p>Mock logic to quickly estimate assignment offer and a “likely good” verdict. Replace with real comps later.</p>
+      </section>
+
+      <section style="margin-top:16px;">
+        <div class="grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Deal Inputs</h2>
+                <div class="subtitle">Estimate costs + target profit.</div>
+              </div>
+              <span class="badge">Instant • Frontend-only</span>
+            </div>
+
+            <div class="panel-body">
+              <div class="form">
+                <div class="row">
+                  <div class="field">
+                    <label for="ws_arv">ARV ($)</label>
+                    <input id="ws_arv" type="number" value="485000" min="0" step="1000" />
+                  </div>
+                  <div class="field">
+                    <label for="ws_repair">Estimated Repairs ($)</label>
+                    <input id="ws_repair" type="number" value="32000" min="0" step="1000" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="field">
+                    <label for="ws_closing">Closing Costs ($)</label>
+                    <input id="ws_closing" type="number" value="6000" min="0" step="500" />
+                  </div>
+                  <div class="field">
+                    <label for="ws_profit">Desired Profit ($)</label>
+                    <input id="ws_profit" type="number" value="15000" min="0" step="500" />
+                  </div>
+                </div>
+
+                <div class="actions">
+                  <button class="btn primary" type="button" onclick="initWholesale()">Calculate</button>
+                  <button
+                    class="btn"
+                    type="button"
+                    onclick="
+                      document.getElementById('ws_arv').value=485000;
+                      document.getElementById('ws_repair').value=32000;
+                      document.getElementById('ws_closing').value=6000;
+                      document.getElementById('ws_profit').value=15000;
+                      initWholesale();
+                    "
+                  >
+                    Reset
+                  </button>
+                </div>
+
+                <div class="small">
+                  Heuristic verdict: if <span class="mono">maxOffer / ARV ≤ 70%</span> => likely good (mock).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Results</h2>
+                <div class="subtitle">Offer + ratio + verdict.</div>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="results">
+                <div class="kpis" style="grid-template-columns: 1fr 1fr;">
+                  <div class="kpi">
+                    <div class="label">Suggested Offer</div>
+                    <div class="value" id="ws_result_offer">$0</div>
+                  </div>
+                  <div class="kpi" style="background: rgba(15,23,42,.45);">
+                    <div class="label">Offer vs ARV</div>
+                    <div class="value" id="ws_result_ratio">0%</div>
+                  </div>
+                </div>
+                <hr class="sep" />
+                <div class="kpi" style="border-color: var(--border); background: rgba(15,23,42,.35);">
+                  <div class="label">Verdict</div>
+                  <div class="value" id="ws_result_verdict">—</div>
+                </div>
+              </div>
+
+              <div class="small" style="margin-top:14px;">
+                Later: populate owner/property/comps via APIs and add buyer-fit logic.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        © <span id="year"></span> DealIQ
+      </footer>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms — DealIQ</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1628'/%3E%3Ctext x='50' y='68' font-size='50' text-anchor='middle' font-family='Arial' font-weight='bold' fill='%23C8963E'%3EDQ%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#F8FAFC;--card:#fff;--text:#1E293B;--muted:#64748B;--border:#E2E8F0;--navy:#0A1628;--gold:#C8963E;--teal:#1A7A6B}
+        .dark{--bg:#0F172A;--card:#1E293B;--text:#F1F5F9;--muted:#94A3B8;--border:#334155}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);transition:all .3s}
+        .container{max-width:1000px;margin:40px auto;padding:0 24px}
+        .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+        .topbar h1{font-size:32px;font-weight:800}
+        .toggle-btn{background:var(--card);border:1px solid var(--border);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:14px;color:var(--text)}
+        .forms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+        .form-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;cursor:pointer;transition:all .2s}
+        .form-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.1)}
+        .form-card .icon{font-size:48px;margin-bottom:12px}
+        .form-card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+        .form-card p{color:var(--muted);font-size:14px;line-height:1.5}
+        .form-viewer{display:none;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;margin-top:24px}
+        .form-viewer.active{display:block}
+        .form-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+        .form-header h2{font-size:24px;font-weight:700}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+        .input-group{margin-bottom:16px}
+        .input-group label{display:block;font-weight:600;margin-bottom:6px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+        .input-group input,.input-group select,.input-group textarea{width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:15px;background:var(--bg);color:var(--text);font-family:inherit}
+        .input-group textarea{min-height:100px;resize:vertical}
+        .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s}
+        .btn-primary{background:var(--navy);color:#fff}
+        .btn-accent{background:var(--gold);color:#fff}
+        .btn-secondary{background:var(--border);color:var(--text)}
+        .checklist{margin:8px 0}
+        .checklist label{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;cursor:pointer}
+        .checklist input[type="checkbox"]{width:18px;height:18px;accent-color:var(--teal)}
+        @media(max-width:768px){.form-row{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <h1>📋 Real Estate Forms</h1>
+            <div>
+                <button class="toggle-btn" onclick="toggleDark()">🌙 Dark Mode</button>
+                <a href="landing.html" class="toggle-btn" style="text-decoration:none;margin-left:8px">← Back</a>
+            </div>
+        </div>
+        <p style="color:var(--muted);margin-bottom:32px">Click a form to open, fill out, and print.</p>
+        
+        <div class="forms-grid">
+            <div class="form-card" onclick="showForm('intake')">
+                <div class="icon">📋</div>
+                <h3>Property Intake Form</h3>
+                <p>Collect property details from sellers or leads. Address, condition, pricing, motivation.</p>
+            </div>
+            <div class="form-card" onclick="showForm('offer')">
+                <div class="icon">💰</div>
+                <h3>Purchase Offer Letter</h3>
+                <p>Professional purchase offer template with terms, contingencies, and signatures.</p>
+            </div>
+            <div class="form-card" onclick="showForm('inspection')">
+                <div class="icon">🔍</div>
+                <h3>Inspection Checklist</h3>
+                <p>Complete property inspection walkthrough. Exterior, interior, systems.</p>
+            </div>
+            <div class="form-card" onclick="showForm('analysis')">
+                <div class="icon">📊</div>
+                <h3>Deal Analysis Sheet</h3>
+                <p>Full deal analysis worksheet with 70% rule calculator built in.</p>
+            </div>
+            <div class="form-card" onclick="showForm('rental-app')">
+                <div class="icon">🏠</div>
+                <h3>Tenant Application</h3>
+                <p>Rental application with income, employment, and references.</p>
+            </div>
+            <div class="form-card" onclick="showForm('repair')">
+                <div class="icon">🔧</div>
+                <h3>Repair Estimate</h3>
+                <p>Itemized repair cost estimate with totals.</p>
+            </div>
+            <div class="form-card" onclick="showForm('seller')">
+                <div class="icon">📞</div>
+                <h3>Seller Info Sheet</h3>
+                <p>Capture seller details during cold call or appointment.</p>
+            </div>
+            <div class="form-card" onclick="showForm('comps')">
+                <div class="icon">🏘️</div>
+                <h3>Comparable Sales Sheet</h3>
+                <p>Track 3-6 comparable sales for CMA analysis.</p>
+            </div>
+            <div class="form-card" onclick="showForm('wholesale')">
+                <div class="icon">📝</div>
+                <h3>Wholesale Assignment</h3>
+                <p>Assignment of contract template for wholesalers.</p>
+            </div>
+        </div>
+        
+        <!-- Property Intake Form -->
+        <div class="form-viewer" id="form-intake">
+            <div class="form-header">
+                <h2>📋 Property Intake Form</h2>
+                <div>
+                    <button class="btn btn-accent" onclick="window.print()">🖨️ Print</button>
+                    <button class="btn btn-secondary" onclick="hideForms()">✕ Close</button>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Seller Name</label><input type="text" placeholder="John Smith"></div>
+                <div class="input-group"><label>Phone</label><input type="tel" placeholder="(555) 123-4567"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Email</label><input type="email" placeholder="john@email.com"></div>
+                <div class="input-group"><label>Best Time to Call</label><input type="text" placeholder="Evenings"></div>
+            </div>
+            <div class="input-group"><label>Property Address</label><input type="text" placeholder="123 Main St, City, State ZIP"></div>
+            <div class="form-row">
+                <div class="input-group"><label>Property Type</label><select><option>Single Family</option><option>Multi-Family</option><option>Condo</option><option>Townhouse</option><option>Land</option><option>Commercial</option></select></div>
+                <div class="input-group"><label>Year Built</label><input type="number" placeholder="1990"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Square Footage</label><input type="number" placeholder="1500"></div>
+                <div class="input-group"><label>Lot Size</label><input type="text" placeholder="6,000 sqft"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Bedrooms</label><input type="number" placeholder="3"></div>
+                <div class="input-group"><label>Bathrooms</label><input type="number" placeholder="2"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Garage</label><select><option>None</option><option>1 Car</option><option>2 Car</option><option>3+ Car</option></select></div>
+                <div class="input-group"><label>Condition</label><select><option>Excellent</option><option>Good</option><option>Fair</option><option>Poor</option><option>Needs Major Repairs</option></select></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Current Mortgage Balance</label><input type="text" placeholder="$150,000"></div>
+                <div class="input-group"><label>Monthly Payment</label><input type="text" placeholder="$1,200"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Asking Price</label><input type="text" placeholder="$250,000"></div>
+                <div class="input-group"><label>Why Selling?</label><input type="text" placeholder="Job relocation"></div>
+            </div>
+            <div class="input-group"><label>Seller Motivation (1-10)</label><input type="number" min="1" max="10" placeholder="How motivated? 1=low, 10=very motivated"></div>
+            <div class="input-group"><label>Timeline to Sell</label><select><option>ASAP</option><option>1-2 weeks</option><option>1 month</option><option>3 months</option><option>6+ months</option><option>No rush</option></select></div>
+            <div class="input-group"><label>Known Issues / Repairs Needed</label><textarea placeholder="Roof needs replacing, foundation crack, etc."></textarea></div>
+            <div class="input-group"><label>Notes</label><textarea placeholder="Any additional notes..."></textarea></div>
+        </div>
+        
+        <!-- Offer Letter -->
+        <div class="form-viewer" id="form-offer">
+            <div class="form-header">
+                <h2>💰 Purchase Offer Letter</h2>
+                <div>
+                    <button class="btn btn-accent" onclick="window.print()">🖨️ Print</button>
+                    <button class="btn btn-secondary" onclick="hideForms()">✕ Close</button>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Date</label><input type="date"></div>
+                <div class="input-group"><label>Offer Expiration</label><input type="date"></div>
+            </div>
+            <div class="input-group"><label>Seller Name(s)</label><input type="text" placeholder="John and Jane Smith"></div>
+            <div class="input-group"><label>Property Address</label><input type="text" placeholder="123 Main St, City, State ZIP"></div>
+            <div class="form-row">
+                <div class="input-group"><label>Offer Price ($)</label><input type="number" placeholder="200000"></div>
+                <div class="input-group"><label>Earnest Money Deposit ($)</label><input type="number" placeholder="5000"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Down Payment ($)</label><input type="number" placeholder="40000"></div>
+                <div class="input-group"><label>Loan Amount ($)</label><input type="number" placeholder="160000"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Closing Date</label><input type="date"></div>
+                <div class="input-group"><label>Contingencies</label><select><option>Inspection (7 days)</option><option>Financing (21 days)</option><option>Appraisal</option><option>All of the above</option><option>None (Cash Offer)</option></select></div>
+            </div>
+            <div class="input-group"><label>Buyer Name(s)</label><input type="text" placeholder="Your name or LLC"></div>
+            <div class="input-group"><label>Buyer Signature</label><input type="text" placeholder="Signature" style="border-bottom:2px solid var(--text);border-top:none;border-left:none;border-right:none;border-radius:0"></div>
+            <div class="input-group"><label>Special Conditions</label><textarea placeholder="Property to be sold as-is, buyer to pay closing costs, etc."></textarea></div>
+        </div>
+        
+        <!-- Inspection Checklist -->
+        <div class="form-viewer" id="form-inspection">
+            <div class="form-header">
+                <h2>🔍 Inspection Checklist</h2>
+                <div>
+                    <button class="btn btn-accent" onclick="window.print()">🖨️ Print</button>
+                    <button class="btn btn-secondary" onclick="hideForms()">✕ Close</button>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Property Address</label><input type="text" placeholder="123 Main St"></div>
+                <div class="input-group"><label>Inspection Date</label><input type="date"></div>
+            </div>
+            <div class="input-group"><label>Inspector Name</label><input type="text" placeholder="Inspector name"></div>
+            
+            <h3 style="margin:24px 0 12px;font-size:16px;color:var(--gold)">🏠 Exterior</h3>
+            <div class="checklist">
+                <label><input type="checkbox"> Foundation — cracks, settling, water damage</label>
+                <label><input type="checkbox"> Roof — age, condition, missing shingles, leaks</label>
+                <label><input type="checkbox"> Gutters/Downspouts — clogged, damaged, drainage</label>
+                <label><input type="checkbox"> Siding/Brick — cracks, rot, damage</label>
+                <label><input type="checkbox"> Windows/Doors — seals, locks, operation</label>
+                <label><input type="checkbox"> Driveway/Walkways — cracks, settling</label>
+                <label><input type="checkbox"> Landscaping — drainage, tree roots, grading</label>
+                <label><input type="checkbox"> Deck/Porch — structural, railings, rot</label>
+            </div>
+            
+            <h3 style="margin:24px 0 12px;font-size:16px;color:var(--gold)">🔌 Systems</h3>
+            <div class="checklist">
+                <label><input type="checkbox"> Electrical — panel, wiring, outlets, GFCI</label>
+                <label><input type="checkbox"> Plumbing — pipes, water heater, pressure, leaks</label>
+                <label><input type="checkbox"> HVAC — age, operation, maintenance</label>
+                <label><input type="checkbox"> Insulation — attic, walls, energy efficiency</label>
+            </div>
+            
+            <h3 style="margin:24px 0 12px;font-size:16px;color:var(--gold)">🏗️ Interior</h3>
+            <div class="checklist">
+                <label><input type="checkbox"> Walls/Ceilings — cracks, water stains, mold</label>
+                <label><input type="checkbox"> Floors — level, squeaks, damage, hardwood</label>
+                <label><input type="checkbox"> Kitchen — appliances, cabinets, counters, sink</label>
+                <label><input type="checkbox"> Bathrooms — tiles, toilets, tubs, vanities</label>
+                <label><input type="checkbox"> Bedrooms — closets, windows, outlets</label>
+                <label><input type="checkbox"> Garage — door, opener, floor, storage</label>
+                <label><input type="checkbox"> Attic/Basement — moisture, pests, structure</label>
+            </div>
+            
+            <div class="input-group" style="margin-top:24px"><label>Issues Found</label><textarea placeholder="List all issues found during inspection..."></textarea></div>
+            <div class="input-group"><label>Estimated Repair Cost</label><input type="text" placeholder="$0"></div>
+            <div class="input-group"><label>Recommendation</label><select><option>Proceed with purchase</option><option>Proceed with repairs</option><option>Negotiate price reduction</option><option>Walk away</option></select></div>
+        </div>
+        
+        <!-- Deal Analysis Sheet -->
+        <div class="form-viewer" id="form-analysis">
+            <div class="form-header">
+                <h2>📊 Deal Analysis Worksheet</h2>
+                <div>
+                    <button class="btn btn-accent" onclick="window.print()">🖨️ Print</button>
+                    <button class="btn btn-secondary" onclick="hideForms()">✕ Close</button>
+                </div>
+            </div>
+            <div class="input-group"><label>Property Address</label><input type="text" placeholder="123 Main St"></div>
+            <div class="form-row">
+                <div class="input-group"><label>Asking Price ($)</label><input type="number" id="da-asking" oninput="calcAnalysis()"></div>
+                <div class="input-group"><label>ARV ($)</label><input type="number" id="da-arv" oninput="calcAnalysis()"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Repair Estimate ($)</label><input type="number" id="da-repairs" oninput="calcAnalysis()"></div>
+                <div class="input-group"><label>Holding Costs ($/mo)</label><input type="number" id="da-holding" oninput="calcAnalysis()"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>70% Rule Max Offer</label><input type="text" id="da-max" readonly style="background:var(--border);font-weight:700;font-size:18px;color:var(--teal)"></div>
+                <div class="input-group"><label>Profit if bought at asking</label><input type="text" id="da-profit" readonly style="background:var(--border);font-weight:700;font-size:18px"></div>
+            </div>
+            <div class="input-group"><label>Comparable Sales (3-6)</label><textarea rows="4" placeholder="1. 456 Oak Ave — Sold $310,000 — 1,600 sqft — 3/2&#10;2. 789 Pine St — Sold $295,000 — 1,450 sqft — 3/2&#10;3. 321 Elm Dr — Pending $320,000 — 1,700 sqft — 4/2"></textarea></div>
+            <div class="input-group"><label>Deal Notes</label><textarea placeholder="Pros, cons, concerns, opportunities..."></textarea></div>
+        </div>
+        
+        <!-- Seller Info Sheet -->
+        <div class="form-viewer" id="form-seller">
+            <div class="form-header">
+                <h2>📞 Seller Info Sheet</h2>
+                <div>
+                    <button class="btn btn-accent" onclick="window.print()">🖨️ Print</button>
+                    <button class="btn btn-secondary" onclick="hideForms()">✕ Close</button>
+                </div>
+            </div>
+            <p style="color:var(--muted);margin-bottom:16px;font-size:14px">Fill this out during cold calls or seller appointments.</p>
+            <div class="form-row">
+                <div class="input-group"><label>Seller Name</label><input type="text"></div>
+                <div class="input-group"><label>Phone</label><input type="tel"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Email</label><input type="email"></div>
+                <div class="input-group"><label>Best Contact Method</label><select><option>Phone Call</option><option>Text/SMS</option><option>Email</option></select></div>
+            </div>
+            <div class="input-group"><label>Property Address</label><input type="text"></div>
+            <div class="form-row">
+                <div class="input-group"><label>Owning Free & Clear?</label><select><option>Yes</option><option>No — has mortgage</option><option>Unknown</option></select></div>
+                <div class="input-group"><label>How long owned?</label><input type="text" placeholder="5 years"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Current Situation</label><select><option>Living in property</option><option>Vacant</option><option>Rented out</option><option>Inherited</option><option>Pre-foreclosure</option><option>Divorce</option><option>Relocating</option></select></div>
+                <div class="input-group"><label>Condition</label><select><option>Excellent</option><option>Good</option><option>Fair</option><option>Poor</option></select></div>
+            </div>
+            <div class="input-group"><label>Asking Price</label><input type="text" placeholder="What they want"></div>
+            <div class="input-group"><label>Our Offer Price</label><input type="text" placeholder="Our number"></div>
+            <div class="input-group"><label>Timeline</label><select><option>ASAP</option><option>1-2 weeks</option><option>1 month</option><option>3 months</option><option>No rush</option></select></div>
+            <div class="input-group"><label>Motivation Level</label><select><option>10 — Desperate</option><option>8-9 — Very motivated</option><option>6-7 — Somewhat motivated</option><option>4-5 — Neutral</option><option>1-3 — Not motivated</option></select></div>
+            <div class="input-group"><label>Objections / Concerns</label><textarea placeholder="What's holding them back?"></textarea></div>
+            <div class="input-group"><label>Follow-up Notes</label><textarea placeholder="Next steps, callback date, etc."></textarea></div>
+        </div>
+        
+        <!-- Comparable Sales Sheet -->
+        <div class="form-viewer" id="form-comps">
+            <div class="form-header">
+                <h2>🏘️ Comparable Sales Sheet</h2>
+                <div>
+                    <button class="btn btn-accent" onclick="window.print()">🖨️ Print</button>
+                    <button class="btn btn-secondary" onclick="hideForms()">✕ Close</button>
+                </div>
+            </div>
+            <div class="input-group"><label>Subject Property</label><input type="text" placeholder="123 Main St — 1,500 sqft — 3/2 — 1990"></div>
+            <div class="input-group"><label>Comp 1</label><input type="text" placeholder="Address — Sqft — Beds/Baths — Sale Price — Date"></div>
+            <div class="input-group"><label>Comp 2</label><input type="text" placeholder="Address — Sqft — Beds/Baths — Sale Price — Date"></div>
+            <div class="input-group"><label>Comp 3</label><input type="text" placeholder="Address — Sqft — Beds/Baths — Sale Price — Date"></div>
+            <div class="input-group"><label>Comp 4</label><input type="text" placeholder="Address — Sqft — Beds/Baths — Sale Price — Date"></div>
+            <div class="input-group"><label>Comp 5</label><input type="text" placeholder="Address — Sqft — Beds/Baths — Sale Price — Date"></div>
+            <div class="form-row">
+                <div class="input-group"><label>Average Price/Sqft</label><input type="text" id="comps-ppsf" readonly style="background:var(--border);font-weight:700"></div>
+                <div class="input-group"><label>Estimated ARV</label><input type="text" id="comps-arv" readonly style="background:var(--border);font-weight:700;color:var(--teal)"></div>
+            </div>
+            <div class="input-group"><label>Notes / Adjustments</label><textarea placeholder="Adjustments for size, condition, location, etc."></textarea></div>
+        </div>
+        
+        <!-- Wholesale Assignment -->
+        <div class="form-viewer" id="form-wholesale">
+            <div class="form-header">
+                <h2>📝 Wholesale Assignment Contract</h2>
+                <div>
+                    <button class="btn btn-accent" onclick="window.print()">🖨️ Print</button>
+                    <button class="btn btn-secondary" onclick="hideForms()">✕ Close</button>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Date</label><input type="date"></div>
+                <div class="input-group"><label>Assignment Fee ($)</label><input type="number" placeholder="10000"></div>
+            </div>
+            <div class="input-group"><label>Original Contract Date</label><input type="date"></div>
+            <div class="input-group"><label>Property Address</label><input type="text" placeholder="123 Main St, City, State ZIP"></div>
+            <div class="form-row">
+                <div class="input-group"><label>Original Seller</label><input type="text" placeholder="Seller name"></div>
+                <div class="input-group"><label>Original Contract Price</label><input type="text" placeholder="$200,000"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Assignee (Buyer)</label><input type="text" placeholder="End buyer name"></div>
+                <div class="input-group"><label>Assignment Price</label><input type="text" placeholder="$210,000"></div>
+            </div>
+            <div class="input-group"><label>Assignor (You)</label><input type="text" placeholder="Your name or LLC"></div>
+            <div style="margin-top:24px;padding:16px;background:var(--bg);border-radius:8px;border:1px solid var(--border)">
+                <p style="font-size:13px;color:var(--muted);line-height:1.6">
+                    <strong>Assignment of Contract</strong><br>
+                    For value received, the undersigned Assignor hereby assigns to Assignee all rights, title, and interest in and to the Purchase Agreement dated __________ between __________ (Seller) and __________ (Assignor) for the property located at __________.
+                </p>
+            </div>
+            <div class="form-row" style="margin-top:24px">
+                <div class="input-group"><label>Assignor Signature</label><input type="text" placeholder="Signature" style="border-bottom:2px solid var(--text);border-top:none;border-left:none;border-right:none;border-radius:0"></div>
+                <div class="input-group"><label>Assignee Signature</label><input type="text" placeholder="Signature" style="border-bottom:2px solid var(--text);border-top:none;border-left:none;border-right:none;border-radius:0"></div>
+            </div>
+        </div>
+        
+        <!-- Rental Application -->
+        <div class="form-viewer" id="form-rental-app">
+            <div class="form-header">
+                <h2>🏠 Tenant Rental Application</h2>
+                <div>
+                    <button class="btn btn-accent" onclick="window.print()">🖨️ Print</button>
+                    <button class="btn btn-secondary" onclick="hideForms()">✕ Close</button>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Applicant Name</label><input type="text"></div>
+                <div class="input-group"><label>Phone</label><input type="tel"></div>
+            </div>
+            <div class="input-group"><label>Email</label><input type="email"></div>
+            <div class="input-group"><label>Current Address</label><input type="text"></div>
+            <div class="form-row">
+                <div class="input-group"><label>Employer</label><input type="text"></div>
+                <div class="input-group"><label>Monthly Income ($)</label><input type="number"></div>
+            </div>
+            <div class="form-row">
+                <div class="input-group"><label>Move-in Date</label><input type="date"></div>
+                <div class="input-group"><label>Lease Term</label><select><option>6 months</option><option>12 months</option><option>18 months</option><option>24 months</option></select></div>
+            </div>
+            <div class="input-group"><label>Number of Occupants</label><input type="number" placeholder="2"></div>
+            <div class="input-group"><label>Pets</label><input type="text" placeholder="Type, breed, weight"></div>
+            <div class="input-group"><label>References</label><textarea placeholder="Previous landlord, employer, etc."></textarea></div>
+            <div class="input-group"><label>Why moving?</label><input type="text"></div>
+        </div>
+        
+        <!-- Repair Estimate -->
+        <div class="form-viewer" id="form-repair">
+            <div class="form-header">
+                <h2>🔧 Repair Estimate Form</h2>
+                <div>
+                    <button class="btn btn-accent" onclick="window.print()">🖨️ Print</button>
+                    <button class="btn btn-secondary" onclick="hideForms()">✕ Close</button>
+                </div>
+            </div>
+            <div class="input-group"><label>Property Address</label><input type="text"></div>
+            <div class="form-row">
+                <div class="input-group"><label>Contractor Name</label><input type="text"></div>
+                <div class="input-group"><label>Date</label><input type="date"></div>
+            </div>
+            <div id="repair-items" style="margin-top:16px">
+                <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:8px;font-weight:600;font-size:12px;color:var(--muted)">
+                    <span>ITEM</span><span>COST</span><span>NOTES</span>
+                </div>
+                <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:8px">
+                    <input type="text" placeholder="Kitchen remodel" class="ri-item"><input type="number" placeholder="0" class="ri-cost" oninput="calcRepair()"><input type="text" placeholder="Optional" class="ri-notes">
+                </div>
+                <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:8px">
+                    <input type="text" placeholder="Roof repair" class="ri-item"><input type="number" placeholder="0" class="ri-cost" oninput="calcRepair()"><input type="text" placeholder="Optional" class="ri-notes">
+                </div>
+                <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:8px">
+                    <input type="text" placeholder="Bathroom update" class="ri-item"><input type="number" placeholder="0" class="ri-cost" oninput="calcRepair()"><input type="text" placeholder="Optional" class="ri-notes">
+                </div>
+            </div>
+            <button class="btn btn-secondary" onclick="addRepairItem()" style="margin-top:8px">+ Add Item</button>
+            <div class="form-row" style="margin-top:24px;padding-top:16px;border-top:2px solid var(--border)">
+                <div class="input-group"><label>Total Repair Estimate</label><input type="text" id="repair-total" readonly style="background:var(--border);font-weight:700;font-size:24px;color:var(--teal)"></div>
+                <div class="input-group"><label>Contingency (10%)</label><input type="text" id="repair-contingency" readonly style="background:var(--border);font-weight:700;font-size:18px"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('dealiq_dark',document.body.classList.contains('dark'));}
+    if(localStorage.getItem('dealiq_dark')==='true')document.body.classList.add('dark');
+    
+    function showForm(id){
+        document.querySelectorAll('.form-viewer').forEach(f=>f.classList.remove('active'));
+        document.querySelectorAll('.forms-grid').forEach(g=>g.style.display='none');
+        document.getElementById('form-'+id).classList.add('active');
+        window.scrollTo(0,100);
+    }
+    function hideForms(){
+        document.querySelectorAll('.form-viewer').forEach(f=>f.classList.remove('active'));
+        document.querySelectorAll('.forms-grid').forEach(g=>g.style.display='grid');
+        window.scrollTo(0,0);
+    }
+    function calcAnalysis(){
+        const asking=parseFloat(document.getElementById('da-asking').value)||0;
+        const arv=parseFloat(document.getElementById('da-arv').value)||0;
+        const repairs=parseFloat(document.getElementById('da-repairs').value)||0;
+        const max=arv*0.7repairs;
+        const profit=arv-asking-repairs;
+        document.getElementById('da-max').value='$'+max.toLocaleString(undefined,{maximumFractionDigits:0});
+        document.getElementById('da-profit').value=(profit>=0?'+':'')+'$'+profit.toLocaleString(undefined,{maximumFractionDigits:0});
+        document.getElementById('da-profit').style.color=profit>=0?'var(--teal)':'#EF4444';
+    }
+    function addRepairItem(){
+        const d=document.createElement('div');
+        d.style.cssText='display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:8px';
+        d.innerHTML='<input type="text" placeholder="Item" class="ri-item"><input type="number" placeholder="0" class="ri-cost" oninput="calcRepair()"><input type="text" placeholder="Optional" class="ri-notes">';
+        document.getElementById('repair-items').appendChild(d);
+    }
+    function calcRepair(){
+        const costs=[...document.querySelectorAll('.ri-cost')].map(c=>parseFloat(c.value)||0);
+        const total=costs.reduce((s,c)=>s+c,0);
+        document.getElementById('repair-total').value='$'+total.toLocaleString();
+        document.getElementById('repair-contingency').value='$'+(total*0.1).toLocaleString(undefined,{maximumFractionDigits:0});
+    }
+    </script>
+</body>
+</html>
