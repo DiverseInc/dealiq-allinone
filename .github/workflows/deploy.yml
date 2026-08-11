@@ -2,7 +2,7 @@ name: Deploy DealIQ All-in-One
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
