@@ -1,12 +1,15 @@
-name: Deploy DealIQ All-in-One
+name: GitHub Pages (Fallback)
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'README.md'
+      - 'docs/**'
   workflow_dispatch:
 
 jobs:
-  deploy:
+  gh-pages:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -16,4 +19,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
-          cname: dealiq.com
+          cname: docs.dealiq.com
