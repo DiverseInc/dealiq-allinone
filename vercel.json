@@ -5,7 +5,7 @@
     { "source": "/app", "destination": "/broker.html" },
     { "source": "/index.html", "destination": "/landing.html" },
     { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/([^/]+)/?$", "destination": "/.html" }
+    { "source": "/([^/]+)/?$", "destination": "/$1.html" }
   ],
   "cleanUrls": true,
   "trailingSlash": false
