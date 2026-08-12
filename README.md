@@ -4,7 +4,7 @@
 
 ## 🚀 Quick Start
 
-**Live App:** https://app.dealiqpro.com
+**Live App:** https://dealiq.diverseindustriesinc.com/app
 
 **Demo Login:**
 - User: `admin`
@@ -102,10 +102,10 @@ vercel --prod
 
 ```bash
 # Add domain
-vercel domains add app.dealiqpro.com
+vercel domains add dealiq.diverseindustriesinc.com
 
 # Verify DNS
-vercel domains verify app.dealiqpro.com
+vercel domains verify dealiq.diverseindustriesinc.com
 ```
 
 ### DNS Configuration
@@ -114,7 +114,7 @@ Add this CNAME record at your registrar:
 
 | Type | Host | Value |
 |------|------|-------|
-| CNAME | `app` | `cname.vercel-dns.com` |
+| CNAME | `dealiq` | `cname.vercel-dns.com` |
 
 ## 💳 Stripe Setup
 
@@ -204,9 +204,9 @@ dealiq-allinone/
 
 ## 📞 Support
 
-- **Email:** support@dealiqpro.com
+- **Email:** support@diverseindustriesinc.com
 - **Twitter:** @DealIQPro
-- **Website:** https://dealiqpro.com
+- **Website:** https://diverseindustriesinc.com
 
 ## 📝 License
 
