@@ -226,7 +226,7 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         const STRIPE_PK='pk_live_51TxzMhPH3M1F0LEEUde2shYr3t2Zv2uPjZHGZsjVlrL4wkyRLdYJQi4UYgXQfLkf74b1fem5pLpwqPMHAJGT4IVB00OLxwIXuA';
-        async function checkout(plan){
+        async function checkout(){ window.location.href="https://diverseinc.gumroad.com/l/askpn"; return; 
             try{
                 const res=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan})});
                 const{sessionId}=await res.json();
