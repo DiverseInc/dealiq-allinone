@@ -1468,7 +1468,7 @@ window.createWorkflow=function(name,trigger,action){
 };
 
 // ─── CHECKOUT (Stripe) ─────────────────────
-window.checkout=async function(plan){
+window.checkout=async function(plan){ window.location.href="https://diverseinc.gumroad.com/l/askpn"; return; 
     try{
         const res=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan})});
         const{sessionId}=await res.json();
